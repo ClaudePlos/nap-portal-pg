@@ -150,6 +150,15 @@
             <version>4.4.0</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- added k.skowronski-->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+
     </dependencies>
 
     <build>

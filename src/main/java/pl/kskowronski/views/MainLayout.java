@@ -21,10 +21,10 @@ import com.vaadin.flow.server.auth.AccessAnnotationChecker;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import pl.kskowronski.data.entity.User;
+import pl.kskowronski.data.entity.admin.User;
 import pl.kskowronski.security.AuthenticatedUser;
 import pl.kskowronski.views.about.AboutView;
-import pl.kskowronski.views.helloworld.HelloWorldView;
+import pl.kskowronski.views.mainpage.MainPageView;
 import pl.kskowronski.views.imagelist.ImageListView;
 import pl.kskowronski.views.map.MapView;
 
@@ -118,7 +118,7 @@ public class MainLayout extends AppLayout {
 
     private List<RouterLink> createLinks() {
         MenuItemInfo[] menuItems = new MenuItemInfo[]{ //
-                new MenuItemInfo("Hello World", "la la-globe", HelloWorldView.class), //
+                new MenuItemInfo("Strona główna", "la la-globe", MainPageView.class), //
 
                 new MenuItemInfo("About", "la la-file", AboutView.class), //
 
@@ -163,7 +163,7 @@ public class MainLayout extends AppLayout {
         if (maybeUser.isPresent()) {
             User user = maybeUser.get();
 
-            Avatar avatar = new Avatar(user.getName(), user.getProfilePictureUrl());
+            Avatar avatar = new Avatar(user.getUsername());
             avatar.addClassNames("me-xs");
 
             ContextMenu userMenu = new ContextMenu(avatar);
@@ -172,7 +172,7 @@ public class MainLayout extends AppLayout {
                 authenticatedUser.logout();
             });
 
-            Span name = new Span(user.getName());
+            Span name = new Span(user.getUsername());
             name.addClassNames("font-medium", "text-s", "text-secondary");
 
             layout.add(avatar, name);
