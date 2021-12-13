@@ -27,3 +27,12 @@
       --lumo-line-height-xs: 1.1;
 
     }
+
+html {
+      --lumo-primary-color: #00b1a9;
+}
+
+#header {
+     background-color: aqua;
+     background: #3b9174;
+}

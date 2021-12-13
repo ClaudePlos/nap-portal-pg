@@ -8,16 +8,16 @@ public class WymiarEtatu {
 
     @Id
     @Column(name="id")
-    private Integer id;
+    private String id;
 
     private float etat;
     private String opis;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

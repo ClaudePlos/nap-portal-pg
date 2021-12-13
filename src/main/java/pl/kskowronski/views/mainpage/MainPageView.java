@@ -17,9 +17,9 @@ import pl.kskowronski.views.MainLayout;
 import java.util.Optional;
 
 @PageTitle("Strona główna")
-@Route(value = "hello", layout = MainLayout.class)
+@Route(value = "", layout = MainLayout.class)
 @RouteAlias(value = "", layout = MainLayout.class)
-//@RolesAllowed("user")
+@RolesAllowed("user")
 public class MainPageView extends HorizontalLayout {
 
     private UserService userService;

@@ -1,0 +1,6 @@
+[part='brand'] {
+    padding: var(--lumo-space-l) var(--lumo-space-xl) var(--lumo-space-l) var(--lumo-space-l);
+    background-color: aqua;
+    color: var(--lumo-primary-contrast-color);
+    min-height: calc(var(--lumo-size-m) * 5);
+}

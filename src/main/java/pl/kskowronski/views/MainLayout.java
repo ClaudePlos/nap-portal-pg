@@ -17,13 +17,23 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.html.UnorderedList;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
+import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.server.auth.AccessAnnotationChecker;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+
+import java.text.ParseException;
+import java.util.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import pl.kskowronski.data.MapperDate;
 import pl.kskowronski.data.entity.admin.User;
+import pl.kskowronski.data.entity.egeria.ek.Zatrudnienie;
+import pl.kskowronski.data.service.UserService;
+import pl.kskowronski.data.service.egeria.ek.ZatrudnienieService;
 import pl.kskowronski.security.AuthenticatedUser;
 import pl.kskowronski.views.about.AboutView;
+import pl.kskowronski.views.absences.AllAboutAbsencesView;
 import pl.kskowronski.views.mainpage.MainPageView;
 import pl.kskowronski.views.imagelist.ImageListView;
 import pl.kskowronski.views.map.MapView;
@@ -62,12 +72,23 @@ public class MainLayout extends AppLayout {
 
     private H1 viewTitle;
 
+    private VaadinSession session = VaadinSession.getCurrent();
     private AuthenticatedUser authenticatedUser;
     private AccessAnnotationChecker accessChecker;
 
-    public MainLayout(AuthenticatedUser authenticatedUser, AccessAnnotationChecker accessChecker) {
+    //k.skowronski beans
+    private transient ZatrudnienieService zatrudnienieService;
+    private transient UserService userService;
+    private transient User worker;
+    private transient MapperDate mapperDate = new MapperDate();
+
+    @Autowired
+    public MainLayout(UserService userService, ZatrudnienieService zatrudnienieService,
+                      AuthenticatedUser authenticatedUser, AccessAnnotationChecker accessChecker) {
         this.authenticatedUser = authenticatedUser;
         this.accessChecker = accessChecker;
+        this.zatrudnienieService = zatrudnienieService;
+        this.userService = userService;
 
         setPrimarySection(Section.DRAWER);
         addToNavbar(true, createHeaderContent());
@@ -117,13 +138,30 @@ public class MainLayout extends AppLayout {
     }
 
     private List<RouterLink> createLinks() {
+
+        // get info about sing in worker
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<User> workerOp = userService.findByUsername(userDetails.getUsername());
+        worker = workerOp.get();
+        session.setAttribute(User.class, worker);
+
+
+        //check actual agreement for worker
+        Optional<List<Zatrudnienie>> listContract = null;
+        Optional<List<Zatrudnienie>> listContractUz = null;
+        try {
+            listContract = zatrudnienieService.getActualContractForWorker(worker.getPrcId(), mapperDate.dtYYYYMM.format(new Date()));
+            listContractUz = zatrudnienieService.getActualContractUzForWorker(worker.getPrcId(), mapperDate.dtYYYYMM.format(new Date()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
         MenuItemInfo[] menuItems = new MenuItemInfo[]{ //
                 new MenuItemInfo("Strona główna", "la la-globe", MainPageView.class), //
-
+                new MenuItemInfo("Twój urlop", "la la-file", AllAboutAbsencesView.class), //
                 new MenuItemInfo("About", "la la-file", AboutView.class), //
-
                 new MenuItemInfo("Image List", "la la-th-list", ImageListView.class), //
-
                 new MenuItemInfo("Map", "la la-map", MapView.class), //
 
         };
