@@ -37,6 +37,7 @@ import pl.kskowronski.views.absences.AllAboutAbsencesView;
 import pl.kskowronski.views.mainpage.MainPageView;
 import pl.kskowronski.views.imagelist.ImageListView;
 import pl.kskowronski.views.map.MapView;
+import pl.kskowronski.views.payslips.PayslipsView;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -160,6 +161,7 @@ public class MainLayout extends AppLayout {
         MenuItemInfo[] menuItems = new MenuItemInfo[]{ //
                 new MenuItemInfo("Strona główna", "la la-globe", MainPageView.class), //
                 new MenuItemInfo("Twój urlop", "la la-file", AllAboutAbsencesView.class), //
+                new MenuItemInfo("Paski", "la la-file", PayslipsView.class), //
                 new MenuItemInfo("About", "la la-file", AboutView.class), //
                 new MenuItemInfo("Image List", "la la-th-list", ImageListView.class), //
                 new MenuItemInfo("Map", "la la-map", MapView.class), //
