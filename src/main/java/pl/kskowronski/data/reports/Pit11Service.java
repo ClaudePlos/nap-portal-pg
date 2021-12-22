@@ -9,6 +9,7 @@ import org.springframework.util.ResourceUtils;
 import org.xml.sax.InputSource;
 import pl.kskowronski.data.service.UserRepository;
 import java.io.StringReader;
+import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;

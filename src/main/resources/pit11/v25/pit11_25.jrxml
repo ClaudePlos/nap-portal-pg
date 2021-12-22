@@ -1,0 +1,1133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.15.0.final using JasperReports Library version 6.15.0-dd49bfb94918336b8321d5507193f0169ead4e95  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PIT11.25" pageWidth="595" pageHeight="842" whenNoDataType="NoPages" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f772ff1e-1782-44b0-8d86-1f951ac46326">
+    <property name="ireport.zoom" value="2.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="319"/>
+    <style name="table">
+        <box>
+            <pen lineWidth="1.0" lineColor="#FFFFFF"/>
+        </box>
+    </style>
+    <style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+        <box>
+            <pen lineWidth="0.5" lineColor="#FFFFFF"/>
+        </box>
+    </style>
+    <style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+        <box>
+            <pen lineWidth="0.5" lineColor="#FFFFFF"/>
+        </box>
+    </style>
+    <style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+        <box>
+            <pen lineWidth="0.5" lineColor="#FFFFFF"/>
+        </box>
+    </style>
+    <subDataset name="Table Dataset 1" uuid="ca1f5f81-d0fa-411c-be70-7eaa9276c1e4"/>
+    <queryString language="xPath">
+        <![CDATA[/Deklaracja]]>
+    </queryString>
+    <field name="CzyFizyczna" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot1/CzyFizyczna]]></fieldDescription>
+    </field>
+    <field name="NIP" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot1/OsobaNiefizyczna/NIP]]></fieldDescription>
+    </field>
+    <field name="NIP_F" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot1/OsobaFizyczna/NIP]]></fieldDescription>
+    </field>
+    <field name="PelnaNazwa" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot1/OsobaNiefizyczna/PelnaNazwa]]></fieldDescription>
+    </field>
+    <field name="NazwaFizyczna" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot1/OsobaFizyczna/NazwaFizyczna]]></fieldDescription>
+    </field>
+    <field name="Rok" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Naglowek/Rok]]></fieldDescription>
+    </field>
+    <field name="CelZlozenia" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Naglowek/CelZlozenia]]></fieldDescription>
+    </field>
+    <field name="ImiePierwsze" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot2/OsobaFizyczna/ImiePierwsze]]></fieldDescription>
+    </field>
+    <field name="Gmina" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot2/AdresZamieszkania/Gmina]]></fieldDescription>
+    </field>
+    <field name="PESEL" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot2/OsobaFizyczna/PESEL]]></fieldDescription>
+    </field>
+    <field name="Nazwisko" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot2/OsobaFizyczna/Nazwisko]]></fieldDescription>
+    </field>
+    <field name="DataUrodzenia" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot2/OsobaFizyczna/DataUrodzenia]]></fieldDescription>
+    </field>
+    <field name="Wojewodztwo" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot2/AdresZamieszkania/Wojewodztwo]]></fieldDescription>
+    </field>
+    <field name="Powiat" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot2/AdresZamieszkania/Powiat]]></fieldDescription>
+    </field>
+    <field name="Ulica" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot2/AdresZamieszkania/Ulica]]></fieldDescription>
+    </field>
+    <field name="NrDomu" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot2/AdresZamieszkania/NrDomu]]></fieldDescription>
+    </field>
+    <field name="NrLokalu" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot2/AdresZamieszkania/NrLokalu]]></fieldDescription>
+    </field>
+    <field name="Miejscowosc" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot2/AdresZamieszkania/Miejscowosc]]></fieldDescription>
+    </field>
+    <field name="KodPocztowy" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot2/AdresZamieszkania/KodPocztowy]]></fieldDescription>
+    </field>
+    <field name="NazwaUrzedu" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Naglowek/NazwaUrzedu]]></fieldDescription>
+    </field>
+    <field name="rodzajIdentyfikatora" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot2/OsobaFizyczna/rodzajIdentyfikatora]]></fieldDescription>
+    </field>
+    <field name="NIP2" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot2/OsobaFizyczna/NIP]]></fieldDescription>
+    </field>
+    <field name="P_5" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_5]]></fieldDescription>
+    </field>
+    <field name="P_10" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_10]]></fieldDescription>
+    </field>
+    <field name="P_13" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Zalaczniki/Zalacznik_ORD-ZU/PozycjeSzczegolowe/P_13]]></fieldDescription>
+    </field>
+    <field name="REGON" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot1/OsobaNiefizyczna/REGON]]></fieldDescription>
+    </field>
+    <field name="P_24" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_24]]></fieldDescription>
+    </field>
+    <field name="P_25" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_25]]></fieldDescription>
+    </field>
+    <field name="P_26" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_26]]></fieldDescription>
+    </field>
+    <field name="P_27" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_27]]></fieldDescription>
+    </field>
+    <field name="P_29" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_29]]></fieldDescription>
+    </field>
+    <field name="P_30" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_30]]></fieldDescription>
+    </field>
+    <field name="P_31" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_31]]></fieldDescription>
+    </field>
+    <field name="P_45" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_45]]></fieldDescription>
+    </field>
+    <field name="P_46" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_46]]></fieldDescription>
+    </field>
+    <field name="P_47" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_47]]></fieldDescription>
+    </field>
+    <field name="P_48" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_48]]></fieldDescription>
+    </field>
+    <field name="P_53" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_53]]></fieldDescription>
+    </field>
+    <field name="P_54" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_54]]></fieldDescription>
+    </field>
+    <field name="P_55" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_55]]></fieldDescription>
+    </field>
+    <field name="P_56" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_56]]></fieldDescription>
+    </field>
+    <field name="P_57" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_57]]></fieldDescription>
+    </field>
+    <field name="P_62" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_62]]></fieldDescription>
+    </field>
+    <field name="P_63" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_63]]></fieldDescription>
+    </field>
+    <field name="P_65" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_65]]></fieldDescription>
+    </field>
+    <field name="P_66" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_66]]></fieldDescription>
+    </field>
+    <field name="P_67" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_67]]></fieldDescription>
+    </field>
+    <field name="P_68" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_68]]></fieldDescription>
+    </field>
+    <field name="P_69" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_69]]></fieldDescription>
+    </field>
+    <field name="P_72" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_72]]></fieldDescription>
+    </field>
+    <field name="P_73" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_73]]></fieldDescription>
+    </field>
+    <field name="P_74" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_74]]></fieldDescription>
+    </field>
+    <field name="P_28" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_28]]></fieldDescription>
+    </field>
+    <field name="P_70" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_70]]></fieldDescription>
+    </field>
+    <field name="P_71" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_71]]></fieldDescription>
+    </field>
+    <field name="Kraj" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot2/AdresZamieszkania/Kraj]]></fieldDescription>
+    </field>
+    <field name="KodKraju" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot2/AdresZamieszkania/KodKraju]]></fieldDescription>
+    </field>
+    <field name="NumerReferencyjny" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/NumerReferencyjny]]></fieldDescription>
+    </field>
+    <field name="P_32" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_32]]></fieldDescription>
+    </field>
+    <field name="P_33" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_33]]></fieldDescription>
+    </field>
+    <field name="P_34" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_34]]></fieldDescription>
+    </field>
+    <field name="P_35" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_35]]></fieldDescription>
+    </field>
+    <field name="P_36" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_36]]></fieldDescription>
+    </field>
+    <field name="P_37" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_37]]></fieldDescription>
+    </field>
+    <field name="P_38" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_38]]></fieldDescription>
+    </field>
+    <field name="P_39" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_39]]></fieldDescription>
+    </field>
+    <field name="P_40" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_40]]></fieldDescription>
+    </field>
+    <field name="P_41" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_41]]></fieldDescription>
+    </field>
+    <field name="P_42" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_42]]></fieldDescription>
+    </field>
+    <field name="P_43" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_43]]></fieldDescription>
+    </field>
+    <field name="P_44" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_44]]></fieldDescription>
+    </field>
+    <field name="P_49" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_49]]></fieldDescription>
+    </field>
+    <field name="P_50" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_50]]></fieldDescription>
+    </field>
+    <field name="P_51" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_51]]></fieldDescription>
+    </field>
+    <field name="P_52" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_52]]></fieldDescription>
+    </field>
+    <field name="P_58" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_58]]></fieldDescription>
+    </field>
+    <field name="P_59" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_59]]></fieldDescription>
+    </field>
+    <field name="P_60" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_60]]></fieldDescription>
+    </field>
+    <field name="P_61" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_61]]></fieldDescription>
+    </field>
+    <field name="P_64" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_64]]></fieldDescription>
+    </field>
+    <field name="P_75" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_75]]></fieldDescription>
+    </field>
+    <field name="P_76" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_76]]></fieldDescription>
+    </field>
+    <field name="P_77" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_77]]></fieldDescription>
+    </field>
+    <field name="P_78" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_78]]></fieldDescription>
+    </field>
+    <field name="NrId" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot2/OsobaFizyczna/NrId]]></fieldDescription>
+    </field>
+    <field name="RodzajNrId" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot2/OsobaFizyczna/RodzajNrId]]></fieldDescription>
+    </field>
+    <field name="NazwaKrajuWydania" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/Podmiot2/OsobaFizyczna/NazwaKrajuWydania]]></fieldDescription>
+    </field>
+    <field name="P_79" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_79]]></fieldDescription>
+    </field>
+    <field name="P_80" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_80]]></fieldDescription>
+    </field>
+    <field name="P_81" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_81]]></fieldDescription>
+    </field>
+    <field name="P_82" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_82]]></fieldDescription>
+    </field>
+    <field name="P_83" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_83]]></fieldDescription>
+    </field>
+    <field name="P_84" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_84]]></fieldDescription>
+    </field>
+    <field name="P_85" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_85]]></fieldDescription>
+    </field>
+    <field name="P_86" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_86]]></fieldDescription>
+    </field>
+    <field name="P_87" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_87]]></fieldDescription>
+    </field>
+    <field name="P_88" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_88]]></fieldDescription>
+    </field>
+    <field name="P_89" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_89]]></fieldDescription>
+    </field>
+    <field name="P_90" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_90]]></fieldDescription>
+    </field>
+    <field name="P_91" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_91]]></fieldDescription>
+    </field>
+    <field name="P_11" class="java.lang.String">
+        <fieldDescription><![CDATA[/Deklaracja/PozycjeSzczegolowe/P_11]]></fieldDescription>
+    </field>
+    <detail>
+        <band height="802">
+            <image>
+                <reportElement isPrintRepeatedValues="false" x="0" y="0" width="555" height="802" uuid="ea49cf5e-ec3a-4c61-8aaa-e33761e6f0e4"/>
+                <imageExpression><![CDATA["pit-11-25-001.jpg"]]></imageExpression>
+            </image>
+            <textField isBlankWhenNull="true">
+                <reportElement x="93" y="47" width="152" height="14" uuid="1dd43378-4bf2-496d-8c4a-c8c2df71697f"/>
+                <textElement verticalAlignment="Bottom">
+                    <font fontName="SansSerif" size="11" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{NIP}.substring(0,1)+" "+
+$F{NIP}.substring(1,2)+" "+
+$F{NIP}.substring(2,3)+" "+
+$F{NIP}.substring(3,4)+" "+
+$F{NIP}.substring(4,5)+" "+
+$F{NIP}.substring(5,6)+" "+
+$F{NIP}.substring(6,7)+" "+
+$F{NIP}.substring(7,8)+" "+
+$F{NIP}.substring(8,9)+" "+
+$F{NIP}.substring(9,10)+" "]]></textFieldExpression>
+            </textField>
+            <line>
+                <reportElement x="133" y="43" width="43" height="1" uuid="495ecd57-fe3d-4a79-90bd-48887ed7dc4d"/>
+            </line>
+            <textField isBlankWhenNull="true">
+                <reportElement x="239" y="118" width="85" height="20" uuid="bbf64f3d-74b3-4f60-a4d6-760ed23c1f46"/>
+                <textElement textAlignment="Center" verticalAlignment="Bottom">
+                    <font fontName="SansSerif" size="11" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{Rok}]]></textFieldExpression>
+            </textField>
+            <elementGroup>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="299" y="319" width="17" height="20" uuid="7c9d752b-d620-40ee-b087-432f3eb69f06">
+                        <printWhenExpression><![CDATA[$F{CelZlozenia}.equals( "2" )]]></printWhenExpression>
+                    </reportElement>
+                    <textElement textAlignment="Center" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["x"]]></textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="193" y="319" width="17" height="20" uuid="7f9b93db-2454-46a2-881a-1d1c50f6d6bb">
+                        <printWhenExpression><![CDATA[$F{CelZlozenia}.equals( "1" )]]></printWhenExpression>
+                    </reportElement>
+                    <textElement textAlignment="Center" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["x"]]></textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="120" y="369" width="17" height="20" uuid="b97aeac2-45f5-44b9-b633-6941d93e0210">
+                        <printWhenExpression><![CDATA[$F{CzyFizyczna}.equals( "0" ) || $F{CzyFizyczna}.equals( null)]]></printWhenExpression>
+                    </reportElement>
+                    <textElement textAlignment="Center" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["x"]]></textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="86" y="466" width="17" height="20" uuid="57a281cd-9b68-43bb-8445-487c5740379f">
+                        <printWhenExpression><![CDATA[$F{P_11}.equals( "1" )]]></printWhenExpression>
+                    </reportElement>
+                    <textElement textAlignment="Center" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["x"]]></textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="321" y="466" width="17" height="20" uuid="93fe4d15-d94d-426a-9ecd-5f6a6684fcc1">
+                        <printWhenExpression><![CDATA[$F{P_11}.equals( "2" )]]></printWhenExpression>
+                    </reportElement>
+                    <textElement textAlignment="Center" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["x"]]></textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="355" y="369" width="17" height="20" uuid="f4bc0945-4f44-4532-8f64-dbfa953479ce">
+                        <printWhenExpression><![CDATA[$F{CzyFizyczna}.equals( "1" )]]></printWhenExpression>
+                    </reportElement>
+                    <textElement textAlignment="Center" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["x"]]></textFieldExpression>
+                </textField>
+            </elementGroup>
+            <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+                <reportElement x="51" y="399" width="475" height="18" uuid="9cd209b3-d2d8-4cb8-b170-834034e9970c"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1250" isPdfEmbedded="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{PelnaNazwa}]]></textFieldExpression>
+            </textField>
+            <line>
+                <reportElement x="137" y="492" width="12" height="1" uuid="cfbec417-6304-44b4-91c4-20ee0b062733">
+                    <printWhenExpression><![CDATA[$F{rodzajIdentyfikatora}.equals( new String("P") )]]></printWhenExpression>
+                </reportElement>
+            </line>
+            <line>
+                <reportElement x="153" y="492" width="43" height="1" uuid="164889da-021d-4591-8f65-a602ed1307e2">
+                    <printWhenExpression><![CDATA[$F{rodzajIdentyfikatora}.equals( new String("N") )]]></printWhenExpression>
+                </reportElement>
+            </line>
+            <elementGroup>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="193" y="492" width="208" height="16" uuid="c303009c-1dcf-48cd-9102-471e5247e526"/>
+                    <textElement textAlignment="Center" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="11"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{rodzajIdentyfikatora}.equals(new String("P"))? $F{PESEL}:(
+$F{rodzajIdentyfikatora}.equals(new String("N"))?$F{NIP2}:(new String("BRAK"))
+)]]></textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="54" y="584" width="173" height="14" uuid="f99afc5f-17d1-4864-a979-ecc9a877de4e"/>
+                    <textElement verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1250" isPdfEmbedded="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{Nazwisko}]]></textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="231" y="584" width="134" height="14" uuid="e3d9b9ac-1c91-4564-bea0-a92858891c55"/>
+                    <textElement verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1250" isPdfEmbedded="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{ImiePierwsze}]]></textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="393" y="582" width="127" height="16" uuid="33740c14-0503-4302-868d-f6cba8ad22c7"/>
+                    <textElement textAlignment="Center" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="9" isStrikeThrough="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{DataUrodzenia}.substring( 8, 10)
++"-"+
+$F{DataUrodzenia}.substring( 5, 7)
++"-"+
+$F{DataUrodzenia}.substring( 0, 4)]]></textFieldExpression>
+                </textField>
+                <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+                    <reportElement x="53" y="304" width="473" height="14" uuid="70b770fb-89fd-4cf7-ab19-aacdc54c13b1"/>
+                    <textElement verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1250" isPdfEmbedded="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{NazwaUrzedu}]]></textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="158" y="517" width="208" height="14" uuid="3c8cfeab-d8ec-4ee6-8696-d18c29070d50"/>
+                    <textElement verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="9"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{NrId}]]></textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="54" y="540" width="467" height="14" uuid="97e14721-b536-4e05-bfa3-f6da0cab44d3"/>
+                    <textElement verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1250" isPdfEmbedded="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{RodzajNrId}]]></textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="54" y="562" width="356" height="14" uuid="3aaf27ed-dd18-4e20-8316-4fd0f378faf4"/>
+                    <textElement verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1250" isPdfEmbedded="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{NazwaKrajuWydania}]]></textFieldExpression>
+                </textField>
+            </elementGroup>
+            <elementGroup>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="54" y="607" width="98" height="12" uuid="5cfd021f-de46-414a-ae90-30df848d2eba"/>
+                    <textElement verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1250" isPdfEmbedded="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{Kraj}]]></textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="154" y="607" width="209" height="13" uuid="4391f862-2d9e-455b-b2af-664795961f2d"/>
+                    <textElement verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1250" isPdfEmbedded="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{Wojewodztwo}]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement mode="Transparent" x="369" y="608" width="153" height="12" forecolor="#000000" backcolor="#FFFFFF" uuid="d5baae5f-58fa-4b56-a958-3b4c8febdf11"/>
+                    <textElement textAlignment="Left" verticalAlignment="Bottom" rotation="None" markup="none">
+                        <font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1250" isPdfEmbedded="false"/>
+                        <paragraph lineSpacing="Single"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{Powiat}]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement mode="Transparent" x="54" y="629" width="126" height="13" forecolor="#000000" backcolor="#FFFFFF" uuid="8f9f45d4-92f7-4ce9-b36e-7fc7342b3c23"/>
+                    <textElement textAlignment="Left" verticalAlignment="Bottom" rotation="None" markup="none">
+                        <font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1250" isPdfEmbedded="false"/>
+                        <paragraph lineSpacing="Single"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{Gmina}]]></textFieldExpression>
+                </textField>
+                <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+                    <reportElement x="178" y="629" width="231" height="13" uuid="475a7133-44a6-4e8d-8f56-b3e54a755b52"/>
+                    <textElement verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1250" isPdfEmbedded="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{Ulica}]]></textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="427" y="629" width="40" height="13" uuid="f95e4a49-7dd1-484d-818e-155288a3b867"/>
+                    <textElement verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="9"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{NrDomu}]]></textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="480" y="629" width="42" height="13" uuid="8bd410f5-41e4-49d3-aea5-3865eb45980c"/>
+                    <textElement verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="9"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{NrLokalu}]]></textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="54" y="651" width="289" height="14" uuid="dad3c84b-2e2b-4e5b-889e-d7d68f861814"/>
+                    <textElement verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="9" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1250" isPdfEmbedded="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{Miejscowosc}]]></textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="357" y="651" width="78" height="14" uuid="4fcf107c-38a2-4b21-b2d0-01a401660f18"/>
+                    <textElement verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="9"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{KodPocztowy}]]></textFieldExpression>
+                </textField>
+            </elementGroup>
+            <elementGroup>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="47" y="703" width="17" height="20" uuid="d3621113-905c-42b5-b22f-055629e66010">
+                        <printWhenExpression><![CDATA[$F{P_28}.equals( "1" )]]></printWhenExpression>
+                    </reportElement>
+                    <textElement textAlignment="Center" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["x"]]></textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="283" y="703" width="17" height="20" uuid="14e34c69-0c4c-4f35-8c4a-8be03b5e39ec">
+                        <printWhenExpression><![CDATA[$F{P_28}.equals( "2" )]]></printWhenExpression>
+                    </reportElement>
+                    <textElement textAlignment="Center" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["x"]]></textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="47" y="723" width="17" height="16" uuid="7b652da8-419d-45a0-90af-8626157556bc">
+                        <printWhenExpression><![CDATA[$F{P_28}.equals( "3" )]]></printWhenExpression>
+                    </reportElement>
+                    <textElement textAlignment="Center" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["x"]]></textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="283" y="723" width="17" height="16" uuid="8d99e048-9e4f-4ea6-9fae-da27ff82fcd7">
+                        <printWhenExpression><![CDATA[$F{P_28}.equals( "4" )]]></printWhenExpression>
+                    </reportElement>
+                    <textElement textAlignment="Center" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["x"]]></textFieldExpression>
+                </textField>
+            </elementGroup>
+            <break>
+                <reportElement x="0" y="801" width="100" height="1" uuid="d4c07b85-1eab-411a-979b-0665a381304d"/>
+            </break>
+            <textField isBlankWhenNull="true">
+                <reportElement x="319" y="42" width="93" height="14" uuid="133f93d8-f504-4a1c-bcc1-d3f3b8b92c14"/>
+                <textElement textAlignment="Center" verticalAlignment="Bottom">
+                    <font size="5"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{NumerReferencyjny}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="461" y="118" width="52" height="20" uuid="1c3cf7d9-c1fd-45c6-98d6-3df10be65ed6"/>
+                <textElement textAlignment="Center" verticalAlignment="Bottom">
+                    <font fontName="SansSerif" size="11" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{P_5}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="93" y="47" width="152" height="14" uuid="9d233fb6-d7ff-42a5-8226-f8d9fc3a65a3"/>
+                <textElement verticalAlignment="Bottom">
+                    <font fontName="SansSerif" size="11" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{NIP_F}.substring(0,1)+" "+
+$F{NIP_F}.substring(1,2)+" "+
+$F{NIP_F}.substring(2,3)+" "+
+$F{NIP_F}.substring(3,4)+" "+
+$F{NIP_F}.substring(4,5)+" "+
+$F{NIP_F}.substring(5,6)+" "+
+$F{NIP_F}.substring(6,7)+" "+
+$F{NIP_F}.substring(7,8)+" "+
+$F{NIP_F}.substring(8,9)+" "+
+$F{NIP_F}.substring(9,10)+" "]]></textFieldExpression>
+            </textField>
+            <textField textAdjust="StretchHeight" isBlankWhenNull="true">
+                <reportElement x="51" y="425" width="475" height="18" uuid="cbcf601e-f5c5-4143-9230-d1e85719fea7"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1250" isPdfEmbedded="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{NazwaFizyczna}]]></textFieldExpression>
+            </textField>
+        </band>
+        <band height="802">
+            <image>
+                <reportElement x="0" y="1" width="555" height="801" uuid="dee43814-c2e7-4952-9e43-06fc3821d9d7"/>
+                <imageExpression><![CDATA["pit-11-25-002.jpg"]]></imageExpression>
+            </image>
+            <elementGroup>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="339" y="266" width="55" height="19" uuid="f3595d1f-4f09-4ca5-a1d3-8f39dbf2b1de"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_49}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="466" y="266" width="55" height="19" uuid="7ee66535-0b17-4f49-ab4d-144232e03c77"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_50}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="205" y="308" width="55" height="20" uuid="2bfb57b8-54f0-4a84-8cdb-6bbcb13e8c2a"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_51}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="272" y="309" width="55" height="20" uuid="41ecc0c7-fe9d-4a5e-a70f-2c20585ec80e"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_52}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="339" y="340" width="55" height="20" uuid="491f7c84-86e7-4aab-9e92-036bf7f8010e"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_57}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="466" y="340" width="55" height="20" uuid="1d273f4b-ffaa-435d-994b-74ecd8c7c8de"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_58}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="205" y="366" width="55" height="20" uuid="cfbbc82c-f248-4cbf-87af-fe5f0784f79e"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_59}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="339" y="367" width="55" height="20" uuid="9f667b0f-b57e-471a-acf4-d7843d2aca60"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_60}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="466" y="367" width="55" height="20" uuid="5b7b53f1-7f73-4721-a7e7-f1da68409c68"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_61}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="339" y="412" width="55" height="20" uuid="69079e7a-cdff-4998-a36f-8d9377c8ca3f"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_66}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="406" y="412" width="55" height="20" uuid="2a7d074d-4b23-449d-9bbc-2f974e4d6ac2"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_67}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="450" y="440" width="71" height="15" uuid="066ef106-3efd-4ddc-b1c7-0b78c84fca56"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_69}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="406" y="194" width="55" height="20" uuid="04da1da3-610f-4d55-8b0e-0974b612826e"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_39}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="466" y="194" width="55" height="20" uuid="0a948911-ff0d-4ae4-980d-291a004b9b8b"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_40}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="205" y="204" width="55" height="20" uuid="1d17b343-a8da-4df0-a42b-6faddc2c1564"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_41}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="272" y="204" width="55" height="20" uuid="5b25c134-75ff-4071-bd89-2832eb346347"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_42}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="205" y="232" width="55" height="19" uuid="73f3c526-4e4f-4976-bca2-89148ba06ef5"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_43}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="339" y="231" width="55" height="19" uuid="3e1ad133-147f-4e5b-8b10-5347caf2694b"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_44}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="406" y="231" width="55" height="19" uuid="3c9329ca-caec-48f0-970c-658f909bbfed"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_45}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="466" y="231" width="55" height="19" uuid="f555ca24-df1d-4206-88de-57c3c541e8c2"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_46}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="205" y="266" width="55" height="19" uuid="ee6251e0-9b43-44a2-9a40-3b65245f7584"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_47}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="272" y="266" width="55" height="19" uuid="3acec0f4-d6de-4117-88b4-e9efafe08615"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_48}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="339" y="308" width="55" height="20" uuid="938f7075-c9be-46e7-96ea-4a8f00abe17c"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_53}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="466" y="309" width="55" height="20" uuid="99fb2ad4-aaa8-41ae-9914-e1f60941bb17"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_54}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="205" y="340" width="55" height="20" uuid="83957119-4b6a-4e58-b77e-04fedd0056e6"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_55}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="272" y="340" width="55" height="20" uuid="0c1e0cff-24a5-4444-a319-02aa484b8a36"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_56}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="205" y="390" width="55" height="19" uuid="02c693ea-8d8b-4bbe-a6d5-cf44062fd7c6"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_62}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="272" y="390" width="55" height="19" uuid="97b97be2-cb16-4b36-aba3-7c9f309ca8b7"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_63}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="205" y="412" width="55" height="19" uuid="c6af97d3-8dfd-4b6d-b391-a0dc863c506b"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_64}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="272" y="412" width="55" height="19" uuid="fc91807a-6038-43af-9e32-be86f30ec025"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_65}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="466" y="411" width="55" height="20" uuid="812117bd-98ad-480a-b54f-017b24d075be"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_68}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="205" y="114" width="55" height="20" uuid="5fe210c2-fc0a-434f-af63-6d9234720e85"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_29}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="272" y="114" width="55" height="20" uuid="689820bb-61be-4fe6-bc2b-58b698b369a9"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_30}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="339" y="127" width="55" height="20" uuid="f4bd6d7b-beba-4ce0-8f14-d61028ae7927"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_31}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="406" y="127" width="55" height="20" uuid="0a812ad7-cf23-477a-92e6-d26b573f5378"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_32}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="466" y="127" width="55" height="20" uuid="be0fb359-572c-4ce9-bfcd-7ea3153abac4"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_33}]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="205" y="150" width="55" height="20" uuid="f0847106-53f5-4932-882a-f46f51c54964"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_34}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="272" y="150" width="55" height="20" uuid="6961d117-eff2-45f0-97d7-ec28ce6e81ad"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_35}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="205" y="176" width="55" height="20" uuid="13864e83-6a53-4847-b4ca-40628ae353e6"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_36}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="272" y="176" width="55" height="20" uuid="b0c27282-e17f-4f4e-a473-137b366ef63b"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_37}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="339" y="194" width="55" height="20" uuid="81c7be44-bbb3-4ae1-a4ed-3ce19978f970"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_38}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+            </elementGroup>
+            <elementGroup>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="450" y="465" width="71" height="15" uuid="151f28d6-5388-4b19-a899-f5c82c259abc"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_70}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="450" y="488" width="71" height="15" uuid="5dd6d519-bfb1-4d53-809a-b029e6230ef9"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_71}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="450" y="513" width="71" height="15" uuid="6d082aa0-12a1-407f-8bca-289fdf7af9f6"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_72}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="450" y="538" width="71" height="15" uuid="6f0c96a0-529c-4997-a902-a5bceba7dfbd"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_73}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="450" y="559" width="71" height="15" uuid="f78bfa27-1b31-4acd-ac6e-183e15cf5333"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_74}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="64" y="660" width="301" height="15" uuid="540350b1-b5c6-4d2e-aa27-81b7a9821294"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_76}]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="60" y="582" width="307" height="14" uuid="ba33df30-d027-4d07-82dd-1d3e91516e2e"/>
+                    <textElement textAlignment="Left" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="9" isBold="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_75}]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="64" y="681" width="301" height="15" uuid="7ef61d5a-6716-4176-a522-2d6543218849"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_78}]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="66" y="706" width="299" height="15" uuid="f869f7c3-0ef3-445b-b25e-29f69abe604e"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_80}]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="432" y="706" width="89" height="15" uuid="1aeb5789-e8a5-43b5-b230-9c75fd84914d"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_81}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="432" y="638" width="89" height="15" uuid="b8f46467-1b1e-48bb-8781-dc94e85b21b1"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_75}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="432" y="660" width="89" height="15" uuid="b8921a8c-8b07-4862-85ba-a72f5aa64ba6"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_77}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="432" y="681" width="89" height="15" uuid="6a6d4504-d378-4c05-bf18-05a6419e0853"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_79}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="432" y="727" width="89" height="15" uuid="c258c1d1-9286-4c4f-b910-ac6e3bbef732"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_82}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+            </elementGroup>
+        </band>
+        <band height="802">
+            <image>
+                <reportElement x="0" y="0" width="555" height="802" uuid="0e924728-e3f5-4987-9932-5cf7e33c5de8"/>
+                <imageExpression><![CDATA["pit-11-25-003.jpg"]]></imageExpression>
+            </image>
+            <elementGroup>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="315" y="210" width="11" height="20" uuid="eae68335-bd05-4968-b227-d10e25f69985">
+                        <printWhenExpression><![CDATA[$F{P_89}.equals( "2" )]]></printWhenExpression>
+                    </reportElement>
+                    <textElement textAlignment="Center" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["x"]]></textFieldExpression>
+                </textField>
+                <textField isBlankWhenNull="true">
+                    <reportElement x="230" y="210" width="14" height="20" uuid="5e50d47b-a7b3-4188-84c7-8f5c3415a806">
+                        <printWhenExpression><![CDATA[$F{P_89}.equals( "1" )]]></printWhenExpression>
+                    </reportElement>
+                    <textElement textAlignment="Center" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["x"]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="53" y="275" width="449" height="14" uuid="0625026d-ccb3-4840-9549-9b22d1f6192b"/>
+                    <textElement textAlignment="Left" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="9" isBold="false" pdfEncoding="Cp1250" isPdfEmbedded="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_90}]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="428" y="76" width="93" height="15" uuid="fef4ad44-bcee-49f6-ad1c-d15b5620ca70"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_83}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="428" y="99" width="93" height="15" uuid="0fda3656-4a04-466a-8ae1-3d508cd060ce"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_84}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="54" y="339" width="448" height="14" uuid="2f2336fd-5f4d-4a37-8ca8-d5a1bc20379c"/>
+                    <textElement textAlignment="Left" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="9" isBold="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_91}]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="428" y="145" width="93" height="15" uuid="af21a44b-a4eb-4d19-9087-6f6841164641"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_86}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="428" y="122" width="93" height="15" uuid="e750df80-7b4a-470c-a81f-c98b27f24d87"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_85}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="428" y="169" width="93" height="15" uuid="d05d9de7-e456-402b-bc64-b3cd9cbfbe27"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_87}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+                <textField pattern="" isBlankWhenNull="true">
+                    <reportElement x="428" y="191" width="93" height="15" uuid="ce23b866-ec89-4bfd-a0a3-d60dba21fe37"/>
+                    <textElement textAlignment="Right" verticalAlignment="Bottom">
+                        <font fontName="SansSerif" size="10" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{P_88}.replace( ".", "," )]]></textFieldExpression>
+                </textField>
+            </elementGroup>
+        </band>
+        <band height="802">
+            <image>
+                <reportElement x="0" y="0" width="555" height="802" uuid="c5854fcc-7229-4fcd-b1ca-c04596a2173c"/>
+                <imageExpression><![CDATA["pit-11-25-004.jpg"]]></imageExpression>
+            </image>
+        </band>
+    </detail>
+</jasperReport>
