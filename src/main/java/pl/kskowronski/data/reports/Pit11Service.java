@@ -27,21 +27,22 @@ public class Pit11Service {
         String path = "C:\\tmp\\";
 
         //load file and compile it
-        ClassLoader cl = this.getClass().getClassLoader();
-        URL url =  cl.getResource(getPatternVersion(yearPit));
+        //ClassLoader cl = this.getClass().getClassLoader();
+        //URL url =  cl.getResource(getPatternVersion(yearPit));
 
 
         String nameOS = System.getProperty("os.name");
-        String absolutePath = url.getPath(); //+ "\\"
+        //String absolutePath = url.getPath(); //+ "\\"
 
-        if (!nameOS.toUpperCase().contains("WINDOWS")){
-            absolutePath = "/home/szeryf/kskowronski_projects/nap_emp_portal/pit11_pattern/pit11_26.jrxml";
-            path = "/home/szeryf/kskowronski_projects/nap_emp_portal/pit11_pdf/";
-        }
+        //if (!nameOS.toUpperCase().contains("WINDOWS")){
+            //absolutePath = "/home/szeryf/kskowronski_projects/nap_emp_portal/pit11_pdf/" + getPatternVersionDocker(yearPit);
+            //path = "/home/szeryf/kskowronski_projects/nap_emp_portal/pit11_pdf/";
+        //}
         //System.out.println(absolutePath);
         //File file = ResourceUtils.getFile("classpath:pit11_25.jrxml"); // only for windows
-        File filePattern = ResourceUtils.getFile(absolutePath);
-        JasperReport jasperReport = JasperCompileManager.compileReport(filePattern.getAbsolutePath());
+        //File filePattern = ResourceUtils.getFile(absolutePath);
+        InputStream employeeReportStream = getClass().getResourceAsStream(getPatternVersion(yearPit)); //update ks 2021-12-23 much better
+        JasperReport jasperReport = JasperCompileManager.compileReport(employeeReportStream);
         //JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(listUsers);
         //Map<String, Object> parameters = new HashMap<>();
         //parameters.put("createdBy", "Java Techie");
@@ -97,11 +98,11 @@ public class Pit11Service {
     private String getPatternVersion( String year ) {
 
         if (year.equals("2019"))
-            return "pit11/v25/pit11_25.jrxml";
+            return "/pit11/v25/pit11_25.jrxml";
         if (year.equals("2020"))
-            return "pit11/v26/pit11_26.jrxml";
+            return "/pit11/v26/pit11_26.jrxml";
         if (year.equals("2021"))
-            return "pit11/v27/pit11_27.jrxml";
+            return "/pit11/v27/pit11_27.jrxml";
         return "-";
 
     }

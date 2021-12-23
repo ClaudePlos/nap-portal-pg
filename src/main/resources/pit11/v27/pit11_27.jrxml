@@ -356,7 +356,7 @@
         <band height="802">
             <image>
                 <reportElement isPrintRepeatedValues="false" x="0" y="0" width="555" height="802" uuid="ea49cf5e-ec3a-4c61-8aaa-e33761e6f0e4"/>
-                <imageExpression><![CDATA["\\pit11\\v27\\pit-11-27-001.png"]]></imageExpression>
+                <imageExpression><![CDATA["/pit11/v27/pit-11-27-001.png"]]></imageExpression>
             </image>
             <textField isBlankWhenNull="true">
                 <reportElement x="93" y="47" width="152" height="14" uuid="1dd43378-4bf2-496d-8c4a-c8c2df71697f"/>
@@ -670,7 +670,7 @@ $F{NIP_F}.substring(9,10)+" "]]></textFieldExpression>
         <band height="802">
             <image>
                 <reportElement x="0" y="1" width="555" height="801" uuid="dee43814-c2e7-4952-9e43-06fc3821d9d7"/>
-                <imageExpression><![CDATA["\\pit11\\v27\\pit-11-27-002.png"]]></imageExpression>
+                <imageExpression><![CDATA["/pit11/v27/pit-11-27-002.png"]]></imageExpression>
             </image>
             <elementGroup>
                 <textField pattern="" isBlankWhenNull="true">
@@ -1065,7 +1065,7 @@ $F{NIP_F}.substring(9,10)+" "]]></textFieldExpression>
         <band height="802">
             <image>
                 <reportElement x="0" y="0" width="555" height="802" uuid="0e924728-e3f5-4987-9932-5cf7e33c5de8"/>
-                <imageExpression><![CDATA["\\pit11\\v27\\pit-11-27-003.png"]]></imageExpression>
+                <imageExpression><![CDATA["/pit11/v27/pit-11-27-003.png"]]></imageExpression>
             </image>
             <elementGroup>
                 <textField isBlankWhenNull="true">
@@ -1189,7 +1189,7 @@ $F{NIP_F}.substring(9,10)+" "]]></textFieldExpression>
         <band height="802">
             <image>
                 <reportElement x="0" y="0" width="555" height="802" uuid="c5854fcc-7229-4fcd-b1ca-c04596a2173c"/>
-                <imageExpression><![CDATA["\\pit11\\v27\\pit-11-27-004.png"]]></imageExpression>
+                <imageExpression><![CDATA["/pit11/v27/pit-11-27-004.png"]]></imageExpression>
             </image>
         </band>
     </detail>
