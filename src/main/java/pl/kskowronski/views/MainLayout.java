@@ -27,6 +27,7 @@ import pl.kskowronski.data.service.egeria.ek.ZatrudnienieService;
 import pl.kskowronski.security.AuthenticatedUser;
 import pl.kskowronski.views.about.AboutView;
 import pl.kskowronski.views.absences.AllAboutAbsencesView;
+import pl.kskowronski.views.logout.Logout;
 import pl.kskowronski.views.mainpage.MainPageView;
 import pl.kskowronski.views.imagelist.ImageListView;
 import pl.kskowronski.views.map.MapView;
@@ -159,13 +160,15 @@ public class MainLayout extends AppLayout {
 
         MenuItemInfo[] menuItems = new MenuItemInfo[]{ //
                 new MenuItemInfo("Strona główna", "la la-globe", MainPageView.class), //
-                new MenuItemInfo("Twój urlop", "la la-file", AllAboutAbsencesView.class), //
-                new MenuItemInfo("Pit11", "la la-file", Pit11View.class), //
-                new MenuItemInfo("Paski", "la la-file", PayslipsView.class), //
-                new MenuItemInfo("Paski UZ", "la la-file", PayslipsContractView.class),
-                new MenuItemInfo("About", "la la-file", AboutView.class), //
-                new MenuItemInfo("Image List", "la la-th-list", ImageListView.class), //
+                new MenuItemInfo("Twój urlop", "la la-circle-thin", AllAboutAbsencesView.class), //
+                new MenuItemInfo("Pit11", "la la-circle-thin", Pit11View.class), //
+                new MenuItemInfo("Paski", "la la-circle-thin", PayslipsView.class), //
+                new MenuItemInfo("Paski UZ", "la la-circle-thin", PayslipsContractView.class), //
                 new MenuItemInfo("Map", "la la-map", MapView.class), //
+                new MenuItemInfo("Wyloguj", "la la-circle-thin", Logout.class), //
+
+                //new MenuItemInfo("About", "la la-file", AboutView.class), //
+                //new MenuItemInfo("Image List", "la la-th-list", ImageListView.class), //
 
         };
         List<RouterLink> links = new ArrayList<>();
@@ -203,17 +206,19 @@ public class MainLayout extends AppLayout {
         Optional<User> maybeUser = authenticatedUser.get();
         if (maybeUser.isPresent()) {
             User user = maybeUser.get();
-
-            Avatar avatar = new Avatar(user.getUsername());
+            int colorIndex = (int) ((Math.random() * (20 - 1)) + 1);
+            Avatar avatar = new Avatar(!user.getPrcImie().isEmpty()? user.getPrcImie() + ' ' + user.getPrcNazwisko() : user.getUsername());
+            avatar.setColorIndex(colorIndex);
             avatar.addClassNames("me-xs");
 
             ContextMenu userMenu = new ContextMenu(avatar);
             userMenu.setOpenOnClick(true);
-            userMenu.addItem("Logout", e -> {
+            userMenu.addItem("Wyloguj", e -> {
                 authenticatedUser.logout();
             });
 
-            Span name = new Span(user.getUsername());
+
+            Span name = new Span(!user.getPrcImie().isEmpty()? user.getPrcImie() + ' ' + user.getPrcNazwisko() : user.getUsername());
             name.addClassNames("font-medium", "text-s", "text-secondary");
 
             layout.add(avatar, name);

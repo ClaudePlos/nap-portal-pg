@@ -57,7 +57,7 @@ public class PayslipsView extends VerticalLayout {
 
     private Button butPlus = new Button("+");
     private Button butMinus = new Button("-");
-    private TextField textPeriod = new TextField();
+    private TextField textPeriod = new TextField("Okres");
 
     private User worker;
 
@@ -158,7 +158,10 @@ public class PayslipsView extends VerticalLayout {
             }
         });
 
-        add(butMinus, textPeriod, butPlus);
+        HorizontalLayout hPeriod = new HorizontalLayout();
+        hPeriod.add(butMinus, textPeriod, butPlus);
+        hPeriod.setClassName("hPeriod");
+        add(hPeriod);
 
 
         add(gridContracts);

@@ -49,3 +49,21 @@ img.logoCompany {
       height: 32px;
       width: 32px;
 }
+
+vaadin-grid.gridFirma {
+      white-space: normal;
+      word-wrap: break-word;
+      width: 100%;
+}
+
+vaadin-horizontal-layout.hPeriod {
+ display: inline;
+}
+
+vaadin-button.butPlus {
+      width: 2px;
+}
+
+vaadin-button.butMinus {
+      width: 2px;
+}

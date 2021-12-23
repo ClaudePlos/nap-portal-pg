@@ -8,6 +8,7 @@ import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.page.Page;
 import com.vaadin.flow.component.textfield.TextField;
@@ -40,7 +41,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-@Route(value = "payslipscontract", layout = MainLayout.class)
+@Route(value = "contract-payslips", layout = MainLayout.class)
 @PageTitle("Paski UZ")
 @RolesAllowed("user")
 public class PayslipsContractView extends VerticalLayout {
@@ -122,7 +123,11 @@ public class PayslipsContractView extends VerticalLayout {
                 e.printStackTrace();
             }
         });
-        add(butMinus, textPeriod, butPlus);
+
+        HorizontalLayout hPeriod = new HorizontalLayout();
+        hPeriod.add(butMinus, textPeriod, butPlus);
+        hPeriod.setClassName("hPeriod");
+        add(hPeriod);
 
 
         add(gridContracts);

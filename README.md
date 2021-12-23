@@ -46,7 +46,7 @@ Once the JAR file is built, you can run it using
 - Report issues, create pull requests in [GitHub](https://github.com/vaadin/platform).
 
 
-## Deploying using Docker
+## Deploying using Docker Local
 
 To build the Dockerized version of the project, run
 
@@ -59,3 +59,19 @@ Once the Docker image is correctly built, you can test it locally using
 ```
 docker run -p 8181:8181 nap-portal-pg:latest
 ```
+
+## Deploying using Docker Production
+<pre>
+1. mvn clean package -Pproduction
+2. Send from target to 0.97 (tender machine)
+
+On production machine:
+1. If you want add adn build new image:
+sudo docker build -t nap-portal-pg . << dot is important
+
+2. docker run -p 8182:8181 nap-portal-pg:latest
+
+3. docker container start ID (id from docker ps -a)
+
+
+</pre>
