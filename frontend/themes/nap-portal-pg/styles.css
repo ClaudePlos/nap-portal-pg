@@ -39,3 +39,13 @@ html {
      background-color: aqua;
      background: #3b9174;
 }
+
+img.titleComponent {
+      height: 32px;
+      width: 32px;
+}
+
+img.logoCompany {
+      height: 32px;
+      width: 32px;
+}

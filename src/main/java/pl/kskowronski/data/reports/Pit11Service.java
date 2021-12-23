@@ -96,6 +96,8 @@ public class Pit11Service {
 
     private String getPatternVersion( String year ) {
 
+        if (year.equals("2019"))
+            return "pit11/v25/pit11_25.jrxml";
         if (year.equals("2020"))
             return "pit11/v26/pit11_26.jrxml";
         if (year.equals("2021"))
