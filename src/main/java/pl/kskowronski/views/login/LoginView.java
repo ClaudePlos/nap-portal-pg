@@ -15,13 +15,13 @@ public class LoginView extends LoginOverlay {
     public LoginView() {
         setAction("login");
 
-        Image titleComponent = new Image("icons/icon.png", "");
-        titleComponent.setClassName("titleComponent");
-        this.setTitle(titleComponent);
-        this.addForgotPasswordListener(e->{
-            Notification.show("Forgot password not yet handled", 30,
-                    Notification.Position.TOP_CENTER);
-        });
+        //Image titleComponent = new Image(); //new Image("/icons/icon.png", "alt text");
+        //titleComponent.setClassName("titleComponent");
+//        this.setTitle(titleComponent);
+//        this.addForgotPasswordListener(e->{
+//            Notification.show("Forgot password not yet handled", 30,
+//                    Notification.Position.TOP_CENTER);
+//        });
 
 
 
