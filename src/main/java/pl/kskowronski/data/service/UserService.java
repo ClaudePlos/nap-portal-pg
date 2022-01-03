@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.vaadin.artur.helpers.CrudService;
 import pl.kskowronski.data.entity.admin.User;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,5 +25,9 @@ public class UserService extends CrudService<User, Integer> {
     public Optional<User> findById(Integer prcId){ return repository.findById(prcId); }
 
     public Optional<User> findByUsername(String username){ return Optional.ofNullable(repository.findByUsername(username));}
+
+    public List<User> findByPrcDgKodEk(String dgKod) {
+        return repository.findByPrcDgKodEkOrderByPrcNazwisko(dgKod).get();
+    }
 
 }

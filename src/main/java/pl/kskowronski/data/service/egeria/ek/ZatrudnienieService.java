@@ -299,8 +299,8 @@ public class ZatrudnienieService extends CrudService<Zatrudnienie, Integer> {
         // todo KS usunąć stanowiska kosztow administracji
         String sql = "select distinct prc_id, prc_numer, prc_nazwisko, prc_imie, prc_pesel \n" +
                 "from ek_zatrudnienie, ek_pracownicy\n";
-        sql += "where (NVL(zat_data_do, to_date('2099', 'YYYY')) >= to_date('" + year + "'||'01-01', 'YYYY-MM-DD')\n" +
-                "and zat_data_zmiany <= last_day(to_date('" + year + "'||'12-31', 'YYYY-MM-DD')))\n" +
+        sql += "where (COALESCE(zat_data_do, to_date('2099', 'YYYY')) >= to_date('" + year + "'||'-01-01', 'YYYY-MM-DD')\n" +
+                "and zat_data_zmiany <= last_day(to_date('" + year + "'||'-12-31', 'YYYY-MM-DD')))\n" +
                 "and zat_typ_umowy in (0,2)\n" +
                 "and zat_sk_id = " + skId + "\n" +
                 "and zat_prc_id = prc_id\n";
@@ -311,10 +311,10 @@ public class ZatrudnienieService extends CrudService<Zatrudnienie, Integer> {
         {
             Object[] ob = (Object[]) iter.next();
             User prac = new User();
-            Integer prcId = (Integer) ob[0];
-            Integer prcNumer = (Integer) ob[1];
-            prac.setPrcId(prcId);
-            prac.setPrcNumer(prcNumer);
+            BigDecimal prcId = (BigDecimal) ob[0];
+            BigDecimal prcNumer = (BigDecimal) ob[1];
+            prac.setPrcId(Integer.valueOf(prcId.toString()));
+            prac.setPrcNumer(Integer.valueOf(prcNumer.toString()));
             prac.setPrcNazwisko((String) ob[2]);
             prac.setPrcImie((String) ob[3]);
             prac.setPrcPesel((String) ob[4]);
