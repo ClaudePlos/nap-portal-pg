@@ -100,10 +100,10 @@ public class PayslipsView extends VerticalLayout {
 
                     if ( periodParam.before(periodNow) ) {
 
-//                        if (mapperDate.dtYYYYMM.format(periodNow).equals(textPeriod.getValue()) && Long.parseLong(mapperDate.dtDD.format(periodNow)) < 10L){
-//                            Notification.show("Pasek jeszcze niedostępny. Pasek za ostatni miesiąc będzie dostępny po 10 danego miesiąca.", 5000, Notification.Position.MIDDLE);
-//                            return;
-//                        }
+                        if (mapperDate.dtYYYYMM.format(periodNow).equals(textPeriod.getValue()) && Long.parseLong(mapperDate.dtDD.format(periodNow)) < 10L){
+                            Notification.show("Pasek jeszcze niedostępny. Pasek za ostatni miesiąc będzie dostępny po 10 danego miesiąca.", 5000, Notification.Position.MIDDLE);
+                            return;
+                        }
 
                         try {
                             GeneratePayslipiPDF(item.getZatPrcId(), item.getFrmId());
