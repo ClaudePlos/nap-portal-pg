@@ -46,9 +46,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-@Route(value = "Pit11list", layout = MainLayout.class)
+@Route(value = "listPit11", layout = MainLayout.class)
 @PageTitle("Pit11 lista")
-@RolesAllowed("user")
+@RolesAllowed({"admin","supervisor"})
 public class Pit11listView extends VerticalLayout {
 
     MapperDate mapperDate = new MapperDate();
@@ -87,6 +87,7 @@ public class Pit11listView extends VerticalLayout {
 
         add(hTop);
         Button buttonRun = new Button("Pobierz");
+        buttonRun.setClassName("buttonRun");
         buttonRun.addClickListener(clickEvent -> {
             onUserChangedYear(String.valueOf(yearField.getValue().intValue()));
         });
@@ -130,6 +131,7 @@ public class Pit11listView extends VerticalLayout {
     }
 
     private void addYearField() {
+        yearField.setClassName("yearField");
         yearField.setLabel("Rok");
         yearField.getElement().setProperty("title", "Test");
         yearField.setHasControls(true);
@@ -146,6 +148,7 @@ public class Pit11listView extends VerticalLayout {
 
     private void addSelectSK() {
         List<SK> listSK = skService.findSkForSupervisor( worker.get().getPrcId() );
+        selectSK.setClassName("selectSK");
         selectSK.setItems(listSK);
         selectSK.setItemLabelGenerator(SK::getSkKod);
         selectSK.setEmptySelectionCaption(listSK.get(0).getSkKod());

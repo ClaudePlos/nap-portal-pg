@@ -45,7 +45,7 @@ import java.util.Optional;
 
 @Route(value = "payslips", layout = MainLayout.class)
 @PageTitle("Paski")
-@RolesAllowed("user")
+@RolesAllowed({"admin","supervisor","user"})
 public class PayslipsView extends VerticalLayout {
 
     private ZatrudnienieService zatrudnienieService;

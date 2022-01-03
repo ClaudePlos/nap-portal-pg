@@ -26,7 +26,7 @@ import java.util.List;
 
 @Route(value = "sk-for-supervisor", layout = MainLayout.class)
 @PageTitle("SkForSupervisorView")
-@RolesAllowed("user")
+@RolesAllowed("admin")
 public class SkForSupervisorView extends Div {
 
 

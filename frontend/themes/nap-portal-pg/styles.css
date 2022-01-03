@@ -66,3 +66,11 @@ vaadin-button.butPlus {
 vaadin-button.butMinus {
       width: 2px;
 }
+
+vaadin-horizontal-layout.hTop {
+      display: block;
+}
+
+vaadin-button.buttonRun, vaadin-select.selectSK {
+      margin: 5px;
+}

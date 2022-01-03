@@ -48,7 +48,7 @@ import java.util.stream.Collectors;
 
 @Route(value = "Pit11", layout = MainLayout.class)
 @PageTitle("Pit11")
-@RolesAllowed("user")
+@RolesAllowed({"admin","supervisor","user"})
 public class Pit11View extends VerticalLayout {
 
     private Grid<EdktDeklaracjeDTO> grid;

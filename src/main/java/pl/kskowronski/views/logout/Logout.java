@@ -11,7 +11,7 @@ import javax.annotation.security.RolesAllowed;
 
 @PageTitle("Logout")
 @Route(value = "logout", layout = MainLayout.class)
-@RolesAllowed("user")
+@RolesAllowed({"admin","supervisor","user"})
 public class Logout extends VerticalLayout {
 
     private AuthenticatedUser authenticatedUser;

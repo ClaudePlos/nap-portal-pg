@@ -50,6 +50,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("Could not find user with this username and pass");
         }
         user.get().setRoles(Collections.singleton(Role.USER));
+
+        if (user.get().getPrcId() == 115442 || user.get().getPrcId() == 279069) {
+            user.get().setRoles(Collections.singleton(Role.ADMIN));
+        }
+
         //return new MyUserDetails(user.get());
 
         return new org.springframework.security.core.userdetails.User(user.get().getUsername(), user.get().getPassword(),

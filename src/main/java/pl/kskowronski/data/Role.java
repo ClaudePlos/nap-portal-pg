@@ -1,7 +1,7 @@
 package pl.kskowronski.data;
 
 public enum Role {
-    USER("user"), ADMIN("admin");
+    USER("user"), ADMIN("admin"), SUPERVISOR("supervisor");
 
     private String roleName;
 
