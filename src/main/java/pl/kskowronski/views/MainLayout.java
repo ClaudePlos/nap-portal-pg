@@ -171,6 +171,10 @@ public class MainLayout extends AppLayout {
                 //new MenuItemInfo("Image List", "la la-th-list", ImageListView.class), //
 
         };
+
+
+
+
         List<RouterLink> links = new ArrayList<>();
         for (MenuItemInfo menuItemInfo : menuItems) {
             if (accessChecker.hasAccess(menuItemInfo.getView())) {

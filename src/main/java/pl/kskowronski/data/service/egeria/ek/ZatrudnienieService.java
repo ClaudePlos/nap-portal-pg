@@ -294,4 +294,34 @@ public class ZatrudnienieService extends CrudService<Zatrudnienie, Integer> {
         return lWartKolumny;
     }
 
+    public List<User> getListWorkerOnSKinYear(Integer skId, String year ){
+        List<User> listaAktPracNaSk = new ArrayList<User>();
+        // todo KS usunąć stanowiska kosztow administracji
+        String sql = "select distinct prc_id, prc_numer, prc_nazwisko, prc_imie, prc_pesel \n" +
+                "from ek_zatrudnienie, ek_pracownicy\n";
+        sql += "where (NVL(zat_data_do, to_date('2099', 'YYYY')) >= to_date('" + year + "'||'01-01', 'YYYY-MM-DD')\n" +
+                "and zat_data_zmiany <= last_day(to_date('" + year + "'||'12-31', 'YYYY-MM-DD')))\n" +
+                "and zat_typ_umowy in (0,2)\n" +
+                "and zat_sk_id = " + skId + "\n" +
+                "and zat_prc_id = prc_id\n";
+        sql += "order by prc_nazwisko, prc_imie";
+
+        List result = em.createNativeQuery(sql).getResultList();
+        for (Iterator iter = result.iterator(); iter.hasNext();)
+        {
+            Object[] ob = (Object[]) iter.next();
+            User prac = new User();
+            Integer prcId = (Integer) ob[0];
+            Integer prcNumer = (Integer) ob[1];
+            prac.setPrcId(prcId);
+            prac.setPrcNumer(prcNumer);
+            prac.setPrcNazwisko((String) ob[2]);
+            prac.setPrcImie((String) ob[3]);
+            prac.setPrcPesel((String) ob[4]);
+
+            listaAktPracNaSk.add(prac);
+        }
+        return listaAktPracNaSk;
+    }
+
 }
