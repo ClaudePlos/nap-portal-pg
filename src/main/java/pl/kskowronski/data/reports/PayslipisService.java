@@ -612,13 +612,15 @@ public class PayslipisService {
                     if (dg.getDgKod().equals("UB_ZD_SKL1") ){
                         for ( EkGroupCode dk : dg.getEkGrupyKodow() ){
                             dk.setWartosc( skladnikService.getValueFromPayroll( p.getPrcId(), periodYYYYMM, dk.getGkDskId(), frmId, typeContract) );
-                            cellZdrowSkl1.addElement(new Phrase(" " + dk.getWartosc().toString(),  helvFont10));
+                            if (dk.getWartosc() != 0.0)
+                                cellZdrowSkl1.addElement(new Phrase(" " + dk.getWartosc().toString(),  helvFont10));
                         }
                     }
                     if (dg.getDgKod().equals("UB_ZD_SKL2") ){
                         for ( EkGroupCode dk : dg.getEkGrupyKodow() ){
                             dk.setWartosc( skladnikService.getValueFromPayroll( p.getPrcId(), periodYYYYMM, dk.getGkDskId(), frmId, typeContract) );
-                            cellZdrowSkl2.addElement(new Phrase(" " + dk.getWartosc().toString(),  helvFont10));
+                            if (dk.getWartosc() != 0.0)
+                                cellZdrowSkl2.addElement(new Phrase(" " + dk.getWartosc().toString(),  helvFont10));
                         }
                     }
 
@@ -731,8 +733,21 @@ public class PayslipisService {
                 cellZdNag.setVerticalAlignment(1);
                 tabZdrowNagl.addCell(cellZdNag);
                 tabZdrowNagl.addCell(new Phrase("Podstawa",helvFont10));
-                tabZdrowNagl.addCell(new Phrase("Sk\u0142adka 7,75%",helvFont10));
-                tabZdrowNagl.addCell(new Phrase("Sk\u0142adka 1,25%",helvFont10));
+
+                if (Integer.valueOf(okres.replace("-","")) > 202111 ) {
+                    tabZdrowNagl.addCell(new Phrase("_",helvFont10));
+                } else {
+                    tabZdrowNagl.addCell(new Phrase("Sk\u0142adka 7,75%",helvFont10));
+                }
+
+                if (Integer.valueOf(okres.replace("-","")) > 202111 ) {
+                    tabZdrowNagl.addCell(new Phrase("Sk\u0142adka 9%",helvFont10));
+                } else {
+                    tabZdrowNagl.addCell(new Phrase("Sk\u0142adka 7,75%",helvFont10));
+                }
+
+
+
 
 
                 // dodanie elementow do tabeli tabPotrac - wiersz 1

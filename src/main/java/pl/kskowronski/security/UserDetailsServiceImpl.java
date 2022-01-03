@@ -51,9 +51,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         user.get().setRoles(Collections.singleton(Role.USER));
 
+        //TODO chack supervisor
+        if (user.get().getPrcDgKodEk().equals("EK04")) {
+            user.get().setRoles(Collections.singleton(Role.SUPERVISOR));
+        }
+
         if (user.get().getPrcId() == 115442 || user.get().getPrcId() == 279069) {
             user.get().setRoles(Collections.singleton(Role.ADMIN));
         }
+
+
 
         //return new MyUserDetails(user.get());
 

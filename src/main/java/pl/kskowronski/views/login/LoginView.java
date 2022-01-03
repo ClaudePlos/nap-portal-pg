@@ -28,7 +28,8 @@ public class LoginView extends LoginOverlay {
 
         LoginI18n i18n = LoginI18n.createDefault();
         i18n.setHeader(new LoginI18n.Header());
-        i18n.getHeader().setDescription("Rekeep Portal");
+        i18n.getHeader().setDescription("Portal pracowniczy");
+        i18n.getHeader().setTitle("Rekeep Polska");
         i18n.getForm().setSubmit("Zaloguj");
         i18n.getForm().setUsername("Login");
         i18n.getForm().setPassword("Hasło");

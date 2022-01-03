@@ -43,7 +43,7 @@ import java.util.Optional;
 
 @Route(value = "contract-payslips", layout = MainLayout.class)
 @PageTitle("Paski UZ")
-@RolesAllowed("user")
+@RolesAllowed({"admin","supervisor","user"})
 public class PayslipsContractView extends VerticalLayout {
 
     private transient ZatrudnienieService zatrudnienieService;
