@@ -1,5 +1,7 @@
 package pl.kskowronski.data.service;
 
+import com.vaadin.flow.server.VaadinSession;
+import com.vaadin.flow.server.WebBrowser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.vaadin.artur.helpers.CrudService;
@@ -28,6 +30,13 @@ public class UserService extends CrudService<User, Integer> {
 
     public List<User> findByPrcDgKodEk(String dgKod) {
         return repository.findByPrcDgKodEkOrderByPrcNazwisko(dgKod).get();
+    }
+
+
+
+    public  boolean isMobileDevice() {
+        WebBrowser webBrowser = VaadinSession.getCurrent().getBrowser();
+        return webBrowser.isAndroid() || webBrowser.isIPhone() || webBrowser.isWindowsPhone();
     }
 
 }

@@ -17,6 +17,8 @@ import com.vaadin.flow.data.renderer.NativeButtonRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.StreamResource;
+import com.vaadin.flow.server.VaadinSession;
+import com.vaadin.flow.server.WebBrowser;
 import net.sf.jasperreports.engine.JRException;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -164,7 +166,7 @@ public class Pit11View extends VerticalLayout {
         String reportName = "reportPit11";
         Anchor a = new Anchor(res, "kliknij tu by pobrać pit11");
         a.setId(reportName);
-        a.getElement().getStyle().set("display", "none");
+        //a.getElement().getStyle().set("display", "none");
         a.setTarget( "_blank" );
         a.getElement().addEventListener("click", event -> {
             new Thread(() -> { // asynchronous
@@ -177,8 +179,11 @@ public class Pit11View extends VerticalLayout {
             dialog.close();
         });
 
-        Page page = UI.getCurrent().getPage();
-        page.executeJavaScript("document.getElementById('"+reportName+"').click();");
+        if (!userService.isMobileDevice()) {
+            Page page = UI.getCurrent().getPage();
+            page.executeJavaScript("document.getElementById('"+reportName+"').click();");
+        }
+
 
         dialog.add(a, new Html("<div><br><div>"), new Button("Zamknij", e -> dialog.close()));
         add(dialog);
