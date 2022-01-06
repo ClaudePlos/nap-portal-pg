@@ -18,7 +18,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     List<User> findByPrcDgKodEk(String dgKod, PageRequest req);
 
-    @Query("SELECT u FROM User u WHERE u.prcDgKodEk = :dgKod")
-    Page<User> findByPrcDgKodEk2(String dgKod, Pageable pageable);
+    @Query("SELECT u FROM User u WHERE u.prcDgKodEk = :dgKod and upper(u.prcNazwisko) like upper(:likeFilter)")
+    Page<User> findByPrcDgKodEk2(String dgKod, String likeFilter, Pageable pageable);
 
 }

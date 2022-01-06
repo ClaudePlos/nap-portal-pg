@@ -30,9 +30,10 @@ public class UserService extends CrudService<User, Integer> {
 
     public Optional<User> findByUsername(String username){ return Optional.ofNullable(repository.findByUsername(username));}
 
-    public Stream<User> findByPrcDgKodEk(String dgKod, int page, int pageSize) {
-        Stream<User> list = repository.findByPrcDgKodEk2( dgKod, PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "prcNazwisko") ) ).stream();
-        System.out.println("ok" + page);
+    public Stream<User> findByPrcDgKodEk(String dgKod, String filterString, int page, int pageSize) {
+        String likeFilter = "%" + filterString + "%";
+        Stream<User> list = repository.findByPrcDgKodEk2( dgKod, likeFilter
+                , PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "prcNazwisko") ) ).stream();
         return list;
     }
 

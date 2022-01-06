@@ -130,7 +130,7 @@ public class SkForSupervisorView extends Div {
         ComboBox<User> selectUser = new ComboBox<>();
         //List<User> listUser = userService.findByPrcDgKodEk("EK04");
         selectUser.setItems(query ->
-                userService.findByPrcDgKodEk("EK04", query.getPage(), query.getPageSize() )
+                userService.findByPrcDgKodEk("EK04", "%" + query.getFilter().orElse("") + "%", query.getPage(), query.getPageSize() )
         );
         selectUser.setItemLabelGenerator(User::getNazwImie);
         //selectSK.setEmptySelectionCaption(listSK.get(0).getSkKod());
