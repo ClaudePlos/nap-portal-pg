@@ -27,6 +27,7 @@ import pl.kskowronski.data.MapperDate;
 import pl.kskowronski.data.entity.admin.User;
 import pl.kskowronski.data.entity.egeria.ek.Zatrudnienie;
 import pl.kskowronski.data.reports.PayslipisService;
+import pl.kskowronski.data.service.UserService;
 import pl.kskowronski.data.service.admin.PdfService;
 import pl.kskowronski.data.service.egeria.ek.ZatrudnienieService;
 import pl.kskowronski.views.MainLayout;
@@ -52,6 +53,7 @@ public class PayslipsView extends VerticalLayout {
     private PayslipisService payslipisService;
     private MapperDate mapperDate = new MapperDate();
     private PdfService pdfService;
+    private UserService userService;
 
     private Grid<Zatrudnienie> gridContracts;
 
@@ -63,12 +65,13 @@ public class PayslipsView extends VerticalLayout {
 
 
     @Autowired
-    public PayslipsView( ZatrudnienieService zatrudnienieService, PayslipisService payslipisService, PdfService pdfService) throws ParseException {
+    public PayslipsView(ZatrudnienieService zatrudnienieService, PayslipisService payslipisService, PdfService pdfService, UserService userService) throws ParseException {
         setId("payslips-view");
         setHeight("80%");
         this.zatrudnienieService = zatrudnienieService;
         this.payslipisService = payslipisService;
         this.pdfService = pdfService;
+        this.userService = userService;
         VaadinSession session = VaadinSession.getCurrent();
         worker = session.getAttribute(User.class);
         textPeriod.setWidth("100px");
@@ -209,8 +212,10 @@ public class PayslipsView extends VerticalLayout {
         });
         a.setTarget( "_blank" ) ;
 
-        Page page = UI.getCurrent().getPage();
-        page.executeJavaScript("document.getElementById('"+reportName+"').click();");
+        if (!userService.isMobileDevice()) {
+            Page page = UI.getCurrent().getPage();
+            page.executeJavaScript("document.getElementById('"+reportName+"').click();");
+        }
 
         dialog.add(a, new Html("<div><br><div>"), new Button("Zamknij", e -> dialog.close()));
         add(dialog);
