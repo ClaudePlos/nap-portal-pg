@@ -1,5 +1,6 @@
 package pl.kskowronski.views.admin;
 
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.crud.BinderCrudEditor;
 import com.vaadin.flow.component.crud.Crud;
 import com.vaadin.flow.component.crud.CrudEditor;
@@ -8,9 +9,13 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.provider.CallbackDataProvider;
+import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import pl.kskowronski.data.entity.admin.NppSkForSupervisor;
 import pl.kskowronski.data.entity.admin.User;
 import pl.kskowronski.data.entity.egeria.css.SK;
@@ -62,7 +67,7 @@ public class SkForSupervisorView extends Div {
     private CrudEditor<NppSkForSupervisor> createEditor() {
 
         Select<User> selectUser = getSelectUser();
-        Select<SK> selectSkKod = getSelectSK();
+        ComboBox<SK> selectSkKod = getSelectSK();
 
         FormLayout form = new FormLayout(selectUser, selectSkKod);
 
@@ -111,14 +116,15 @@ public class SkForSupervisorView extends Div {
 
 
 
-    private Select<SK> getSelectSK() {
-        Select<SK> selectSK = new Select<>();
-        List<SK> listSK = skService.findAll();
-        selectSK.setItems(listSK);
-        selectSK.setItemLabelGenerator(SK::getSkKod);
-        //selectSK.setEmptySelectionCaption(listSK.get(0).getSkKod());
-        selectSK.setLabel("Obiekt");
-        return selectSK;
+    private ComboBox<SK> getSelectSK() {
+
+        ComboBox<SK> comboSK = new ComboBox<>();
+        comboSK.setItems( query ->
+                skService.findAll(query.getPage(),query.getPageSize())
+        );
+        comboSK.setItemLabelGenerator(SK::getSkKod);
+        comboSK.setLabel("Obiekt");
+        return comboSK;
     }
 
     private Select<User> getSelectUser() {
