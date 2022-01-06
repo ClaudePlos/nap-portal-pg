@@ -3,12 +3,14 @@ package pl.kskowronski.data.service;
 import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.server.WebBrowser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.vaadin.artur.helpers.CrudService;
 import pl.kskowronski.data.entity.admin.User;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Service
 public class UserService extends CrudService<User, Integer> {
@@ -28,8 +30,10 @@ public class UserService extends CrudService<User, Integer> {
 
     public Optional<User> findByUsername(String username){ return Optional.ofNullable(repository.findByUsername(username));}
 
-    public List<User> findByPrcDgKodEk(String dgKod) {
-        return repository.findByPrcDgKodEkOrderByPrcNazwisko(dgKod).get();
+    public Stream<User> findByPrcDgKodEk(String dgKod, int page, int pageSize) {
+        Stream<User> list = repository.findByPrcDgKodEk2( dgKod, PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "prcNazwisko") ) ).stream();
+        System.out.println("ok" + page);
+        return list;
     }
 
 

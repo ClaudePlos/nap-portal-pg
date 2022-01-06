@@ -66,7 +66,7 @@ public class SkForSupervisorView extends Div {
 
     private CrudEditor<NppSkForSupervisor> createEditor() {
 
-        Select<User> selectUser = getSelectUser();
+        ComboBox<User> selectUser = getSelectUser();
         ComboBox<SK> selectSkKod = getSelectSK();
 
         FormLayout form = new FormLayout(selectUser, selectSkKod);
@@ -117,7 +117,6 @@ public class SkForSupervisorView extends Div {
 
 
     private ComboBox<SK> getSelectSK() {
-
         ComboBox<SK> comboSK = new ComboBox<>();
         comboSK.setItems( query ->
                 skService.findAll(query.getPage(),query.getPageSize())
@@ -127,10 +126,12 @@ public class SkForSupervisorView extends Div {
         return comboSK;
     }
 
-    private Select<User> getSelectUser() {
-        Select<User> selectUser = new Select<>();
-        List<User> listUser = userService.findByPrcDgKodEk("EK04");
-        selectUser.setItems(listUser);
+    private ComboBox<User> getSelectUser() {
+        ComboBox<User> selectUser = new ComboBox<>();
+        //List<User> listUser = userService.findByPrcDgKodEk("EK04");
+        selectUser.setItems(query ->
+                userService.findByPrcDgKodEk("EK04", query.getPage(), query.getPageSize() )
+        );
         selectUser.setItemLabelGenerator(User::getNazwImie);
         //selectSK.setEmptySelectionCaption(listSK.get(0).getSkKod());
         selectUser.setLabel("Kierownik");
