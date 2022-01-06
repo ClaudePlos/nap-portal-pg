@@ -119,7 +119,7 @@ public class SkForSupervisorView extends Div {
     private ComboBox<SK> getSelectSK() {
         ComboBox<SK> comboSK = new ComboBox<>();
         comboSK.setItems( query ->
-                skService.findAll(query.getPage(),query.getPageSize())
+                skService.findAll("%" + query.getFilter().orElse("") + "%",query.getPage(),query.getPageSize())
         );
         comboSK.setItemLabelGenerator(SK::getSkKod);
         comboSK.setLabel("Obiekt");

@@ -71,8 +71,9 @@ public class SKService extends CrudService<SK, Integer> {
     }
 
 
-    public Stream<SK> findAll(int page, int pageSize){
-        Stream<SK> list = repo.findAll(PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "skKod"))).stream();
+    public Stream<SK> findAll(String filterString, int page, int pageSize){
+        String likeFilter = "%" + filterString + "%";
+        Stream<SK> list = repo.findAllWithPagination(likeFilter, PageRequest.of(page, pageSize, Sort.by(Sort.Direction.ASC, "skKod"))).stream();
         return list;
     }
     public SK findBySkKod( String skKod){
