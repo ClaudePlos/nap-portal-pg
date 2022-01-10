@@ -74,3 +74,8 @@ vaadin-horizontal-layout.hTop {
 vaadin-button.buttonRun, vaadin-select.selectSK {
       margin: 5px;
 }
+
+
+vaadin-grid.gridContracts {
+
+}

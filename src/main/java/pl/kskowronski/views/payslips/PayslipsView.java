@@ -1,6 +1,8 @@
 package pl.kskowronski.views.payslips;
 
 
+import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.DetachEvent;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -43,11 +45,15 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import com.vaadin.flow.shared.Registration;
 
 @Route(value = "payslips", layout = MainLayout.class)
 @PageTitle("Paski")
 @RolesAllowed({"admin","supervisor","user"})
 public class PayslipsView extends VerticalLayout {
+
+    private Registration listener;
+    private int breakpointPx = 1000;
 
     private ZatrudnienieService zatrudnienieService;
     private PayslipisService payslipisService;
@@ -62,6 +68,27 @@ public class PayslipsView extends VerticalLayout {
     private TextField textPeriod = new TextField("Okres");
 
     private User worker;
+
+    @Override
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
+        // Add browser window listener to observe width change
+        getUI().ifPresent(ui -> listener = ui.getPage().addBrowserWindowResizeListener(event -> {
+            adjustVisibleGridColumns(gridContracts, event.getWidth());
+        }));
+        // Adjust Grid according to initial width of the screen
+        getUI().ifPresent(ui -> ui.getPage().retrieveExtendedClientDetails(receiver -> {
+            int browserWidth = receiver.getBodyClientWidth();
+            adjustVisibleGridColumns(gridContracts, browserWidth);
+        }));
+    }
+
+    @Override
+    protected void onDetach(DetachEvent detachEvent) {
+        // Listener needs to be eventually removed in order to avoid resource leak
+        listener.remove();
+        super.onDetach(detachEvent);
+    }
 
 
     @Autowired
@@ -79,7 +106,22 @@ public class PayslipsView extends VerticalLayout {
         this.gridContracts = new Grid<>(Zatrudnienie.class);
         gridContracts.setClassName("gridContracts");
         gridContracts.setColumns();
-        //gridContracts.addColumn("frmNazwa");
+
+        // For mobile
+        gridContracts.addComponentColumn(item -> {
+            VerticalLayout vl = new VerticalLayout();
+            vl.add(new Html("<div>"+item.getFrmNazwa() +"</div>"));
+            vl.add(new Html("<div><b>Data przy.:</b> "+item.getZatDataPrzyj()+"</div>"));
+            vl.add(new Html("<div><b>Data zmiany:</b> "+item.getZatDataZmiany()+"</div>"));
+            String dataDo = "";
+            if (item.getZatDataDo() != null) {
+               dataDo =  item.getZatDataDo().toString();
+            }
+            vl.add(new Html("<div><b>Data do:</b> "+ dataDo +"</div>"));
+            return vl;
+        }).setHeader("Pasek").setVisible(false);
+
+        // For Browser
         gridContracts.addColumn(TemplateRenderer.<Zatrudnienie> of(
                 "<div class=\"gridFirma\">[[item.firma]]</div>")
                 .withProperty("firma", Zatrudnienie::getFrmNazwa))
@@ -220,6 +262,20 @@ public class PayslipsView extends VerticalLayout {
         dialog.add(a, new Html("<div><br><div>"), new Button("Zamknij", e -> dialog.close()));
         add(dialog);
         dialog.open();
+    }
+
+
+    private void adjustVisibleGridColumns(Grid<Zatrudnienie> grid, int width) {
+        boolean[] visibleCols;
+        // Change which columns are visible depending on browser width
+        if (width > breakpointPx) {
+            visibleCols = new boolean[]{false, true, true, true, true};
+        } else {
+            visibleCols = new boolean[]{true, false, false, false, false};
+        }
+        for (int c = 0; c < visibleCols.length; c++) {
+            grid.getColumns().get(c).setVisible(visibleCols[c]);
+        }
     }
 
 
