@@ -1,5 +1,7 @@
 package pl.kskowronski.views.pit11list;
 
+import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.DetachEvent;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -15,6 +17,7 @@ import com.vaadin.flow.data.renderer.NativeButtonRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.StreamResource;
+import com.vaadin.flow.shared.Registration;
 import net.sf.jasperreports.engine.JRException;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,7 @@ import pl.kskowronski.data.MapperDate;
 import pl.kskowronski.data.entity.admin.User;
 import pl.kskowronski.data.entity.egeria.css.SK;
 import pl.kskowronski.data.entity.egeria.eDek.EdktDeklaracjeDTO;
+import pl.kskowronski.data.entity.egeria.ek.Zatrudnienie;
 import pl.kskowronski.data.entity.log.LogEvent;
 import pl.kskowronski.data.entity.log.LogPit11;
 import pl.kskowronski.data.reports.Pit11Service;
@@ -95,6 +99,17 @@ public class Pit11listView extends VerticalLayout {
 
         this.grid = new Grid<>(EdktDeklaracjeDTO.class);
         grid.setColumns("dklTdlKod", "dklFrmNazwa", "dklPrcNazwisko", "dklPrcImie", "dklYear"); //, "dklXmlVisual"
+
+        // For mobile
+        grid.addComponentColumn(item -> {
+            VerticalLayout vl = new VerticalLayout();
+            vl.add(new Html("<div><b>"+item.getDklFrmNazwa() +"</b></div>"));
+            vl.add(new Html("<div><b></b> "+item.getDklPrcNazwisko()+ " " +item.getDklPrcImie()+ "</div>"));
+            vl.add(new Html("<div><b>Rok:</b> "+ item.getDklYear() +"</div>"));
+            return vl;
+        }).setHeader("Pit").setVisible(false);
+
+        // For Browser
         grid.getColumnByKey("dklTdlKod").setWidth("100px").setHeader("Dek");
         grid.getColumnByKey("dklYear").setWidth("100px").setHeader("Rok");
         //grid.getColumnByKey("dklXmlVisual").setWidth("100px").setHeader("Xml");
@@ -207,4 +222,46 @@ public class Pit11listView extends VerticalLayout {
         logPit11Service.save(logPit11);
     }
 
+
+
+
+    // Functions for mobile version
+    private Registration listener;
+    private int breakpointPx = 1000;
+
+    @Override
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
+        // Add browser window listener to observe width change
+        getUI().ifPresent(ui -> listener = ui.getPage().addBrowserWindowResizeListener(event -> {
+            adjustVisibleGridColumns(grid, event.getWidth());
+        }));
+        // Adjust Grid according to initial width of the screen
+        getUI().ifPresent(ui -> ui.getPage().retrieveExtendedClientDetails(receiver -> {
+            int browserWidth = receiver.getBodyClientWidth();
+            adjustVisibleGridColumns(grid, browserWidth);
+        }));
+    }
+
+    @Override
+    protected void onDetach(DetachEvent detachEvent) {
+        // Listener needs to be eventually removed in order to avoid resource leak
+        listener.remove();
+        super.onDetach(detachEvent);
+    }
+
+
+    private void adjustVisibleGridColumns(Grid<EdktDeklaracjeDTO> grid, int width) {
+        boolean[] visibleCols;
+        // Change which columns are visible depending on browser width
+        if (width > breakpointPx) {
+            visibleCols = new boolean[]{true, true, true, true, true, false};
+        } else {
+            visibleCols = new boolean[]{false, false, false, false, false, true};
+        }
+        for (int c = 0; c < visibleCols.length; c++) {
+            grid.getColumns().get(c).setVisible(visibleCols[c]);
+        }
+    }
+    // End function form mobile version
 }

@@ -52,9 +52,6 @@ import com.vaadin.flow.shared.Registration;
 @RolesAllowed({"admin","supervisor","user"})
 public class PayslipsView extends VerticalLayout {
 
-    private Registration listener;
-    private int breakpointPx = 1000;
-
     private ZatrudnienieService zatrudnienieService;
     private PayslipisService payslipisService;
     private MapperDate mapperDate = new MapperDate();
@@ -68,28 +65,6 @@ public class PayslipsView extends VerticalLayout {
     private TextField textPeriod = new TextField("Okres");
 
     private User worker;
-
-    @Override
-    protected void onAttach(AttachEvent attachEvent) {
-        super.onAttach(attachEvent);
-        // Add browser window listener to observe width change
-        getUI().ifPresent(ui -> listener = ui.getPage().addBrowserWindowResizeListener(event -> {
-            adjustVisibleGridColumns(gridContracts, event.getWidth());
-        }));
-        // Adjust Grid according to initial width of the screen
-        getUI().ifPresent(ui -> ui.getPage().retrieveExtendedClientDetails(receiver -> {
-            int browserWidth = receiver.getBodyClientWidth();
-            adjustVisibleGridColumns(gridContracts, browserWidth);
-        }));
-    }
-
-    @Override
-    protected void onDetach(DetachEvent detachEvent) {
-        // Listener needs to be eventually removed in order to avoid resource leak
-        listener.remove();
-        super.onDetach(detachEvent);
-    }
-
 
     @Autowired
     public PayslipsView(ZatrudnienieService zatrudnienieService, PayslipisService payslipisService, PdfService pdfService, UserService userService) throws ParseException {
@@ -265,6 +240,32 @@ public class PayslipsView extends VerticalLayout {
     }
 
 
+    // Functions for mobile version
+    private Registration listener;
+    private int breakpointPx = 1000;
+
+    @Override
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
+        // Add browser window listener to observe width change
+        getUI().ifPresent(ui -> listener = ui.getPage().addBrowserWindowResizeListener(event -> {
+            adjustVisibleGridColumns(gridContracts, event.getWidth());
+        }));
+        // Adjust Grid according to initial width of the screen
+        getUI().ifPresent(ui -> ui.getPage().retrieveExtendedClientDetails(receiver -> {
+            int browserWidth = receiver.getBodyClientWidth();
+            adjustVisibleGridColumns(gridContracts, browserWidth);
+        }));
+    }
+
+    @Override
+    protected void onDetach(DetachEvent detachEvent) {
+        // Listener needs to be eventually removed in order to avoid resource leak
+        listener.remove();
+        super.onDetach(detachEvent);
+    }
+
+
     private void adjustVisibleGridColumns(Grid<Zatrudnienie> grid, int width) {
         boolean[] visibleCols;
         // Change which columns are visible depending on browser width
@@ -277,6 +278,7 @@ public class PayslipsView extends VerticalLayout {
             grid.getColumns().get(c).setVisible(visibleCols[c]);
         }
     }
+    // End function form mobile version
 
 
 

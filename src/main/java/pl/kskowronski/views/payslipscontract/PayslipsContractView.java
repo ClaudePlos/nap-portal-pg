@@ -1,5 +1,7 @@
 package pl.kskowronski.views.payslipscontract;
 
+import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.DetachEvent;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -18,6 +20,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.StreamResource;
 import com.vaadin.flow.server.VaadinSession;
+import com.vaadin.flow.shared.Registration;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ResourceUtils;
@@ -78,6 +81,23 @@ public class PayslipsContractView extends VerticalLayout {
         this.gridContracts = new Grid<>(Zatrudnienie.class);
         gridContracts.setClassName("gridContracts");
         gridContracts.setColumns();
+
+        // For mobile
+        gridContracts.addComponentColumn(item -> {
+            VerticalLayout vl = new VerticalLayout();
+            vl.add(new Html("<div>"+item.getFrmNazwa() +"</div>"));
+            vl.add(new Html("<div><b>Data przy.:</b> "+item.getZatDataPrzyj()+"</div>"));
+            vl.add(new Html("<div><b>Data zmiany:</b> "+item.getZatDataZmiany()+"</div>"));
+            String dataDo = "";
+            if (item.getZatDataDo() != null) {
+                dataDo =  item.getZatDataDo().toString();
+            }
+            vl.add(new Html("<div><b>Data do:</b> "+ dataDo +"</div>"));
+            vl.add(new Html("<div><b>Umowa:</b> "+item.getZatNrUmowy()+"</div>"));
+            return vl;
+        }).setHeader("Pasek").setVisible(false);
+
+        // For Browser
         gridContracts.addColumn(TemplateRenderer.<Zatrudnienie> of(
                 "<div class=\"gridFirma\">[[item.firma]]</div>")
                 .withProperty("firma", Zatrudnienie::getFrmNazwa))
@@ -223,5 +243,45 @@ public class PayslipsContractView extends VerticalLayout {
         dialog.open();
     }
 
+
+    // Functions for mobile version
+    private Registration listener;
+    private int breakpointPx = 1000;
+
+    @Override
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
+        // Add browser window listener to observe width change
+        getUI().ifPresent(ui -> listener = ui.getPage().addBrowserWindowResizeListener(event -> {
+            adjustVisibleGridColumns(gridContracts, event.getWidth());
+        }));
+        // Adjust Grid according to initial width of the screen
+        getUI().ifPresent(ui -> ui.getPage().retrieveExtendedClientDetails(receiver -> {
+            int browserWidth = receiver.getBodyClientWidth();
+            adjustVisibleGridColumns(gridContracts, browserWidth);
+        }));
+    }
+
+    @Override
+    protected void onDetach(DetachEvent detachEvent) {
+        // Listener needs to be eventually removed in order to avoid resource leak
+        listener.remove();
+        super.onDetach(detachEvent);
+    }
+
+
+    private void adjustVisibleGridColumns(Grid<Zatrudnienie> grid, int width) {
+        boolean[] visibleCols;
+        // Change which columns are visible depending on browser width
+        if (width > breakpointPx) {
+            visibleCols = new boolean[]{false, true, true, true, true, true};
+        } else {
+            visibleCols = new boolean[]{true, false, false, false, false, false};
+        }
+        for (int c = 0; c < visibleCols.length; c++) {
+            grid.getColumns().get(c).setVisible(visibleCols[c]);
+        }
+    }
+    // End function form mobile version
 
 }
