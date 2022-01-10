@@ -18,6 +18,7 @@ import pl.kskowronski.data.Role;
 import pl.kskowronski.data.entity.admin.User;
 import pl.kskowronski.data.entity.egeria.global.NapUser;
 import pl.kskowronski.data.service.UserRepository;
+import pl.kskowronski.data.service.egeria.css.SKService;
 import pl.kskowronski.data.service.egeria.global.NapUserRepo;
 
 @Service
@@ -28,6 +29,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private NapUserRepo napUserRepo;
+
+    @Autowired
+    private SKService skService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -52,11 +56,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         user.get().setRoles(Collections.singleton(Role.USER));
 
         //TODO chack supervisor
-        if (user.get().getPrcDgKodEk().equals("EK04")) {
+        if (user.get().getPrcDgKodEk().equals("EK04") && skService.findSkForSupervisor(user.get().getPrcId()).size() > 0 ) {
             user.get().setRoles(Collections.singleton(Role.SUPERVISOR));
         }
 
-        if (user.get().getPrcId() == 115442 || user.get().getPrcId() == 279069) {
+        if (user.get().getPrcId() == 115442 || user.get().getPrcId() == 279069  || user.get().getPrcId() == 340372 ) {
             user.get().setRoles(Collections.singleton(Role.ADMIN));
         }
 
