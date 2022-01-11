@@ -1,5 +1,8 @@
 package pl.kskowronski.views.absences;
 
+import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.DetachEvent;
+import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Label;
@@ -9,9 +12,11 @@ import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinSession;
+import com.vaadin.flow.shared.Registration;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.kskowronski.data.MapperDate;
 import pl.kskowronski.data.entity.admin.User;
+import pl.kskowronski.data.entity.egeria.eDek.EdktDeklaracjeDTO;
 import pl.kskowronski.data.entity.egeria.ek.AbsenceDTO;
 import pl.kskowronski.data.entity.egeria.ek.AbsenceLimitDTO;
 import pl.kskowronski.data.service.egeria.ek.AbsenceLimitService;
@@ -56,6 +61,18 @@ public class AllAboutAbsencesView extends VerticalLayout {
         add(labTitleGridLimit);
         this.gridAbLimit = new Grid<>(AbsenceLimitDTO.class);
         gridAbLimit.setColumns("nazwaWymiaru", "kodUrlopu", "ldOd", "ldDo", "pozostaloUrlopu", "frmNazwa");
+
+        // For mobile
+        gridAbLimit.addComponentColumn(item -> {
+            VerticalLayout vl = new VerticalLayout();
+            vl.add(new Html("<div><b>"+item.getFrmNazwa() +"</b></div>"));
+            vl.add(new Html("<div><b>"+item.getNazwaWymiaru() +"</b></div>"));
+            vl.add(new Html("<div><b>Od:</b> "+item.getLdOd()+ " <b>Od:</b> " +item.getLdDo()+ "</div>"));
+            vl.add(new Html("<div><b>Pozostało:</b> "+ item.getPozostaloUrlopu() +"</div>"));
+            return vl;
+        }).setHeader("Urlop zostało").setVisible(false);
+
+        // For Browser
         gridAbLimit.getColumnByKey("nazwaWymiaru").setWidth("200px").setHeader("Nazwa");
         gridAbLimit.getColumnByKey("kodUrlopu").setWidth("80px").setHeader("Kod");
         gridAbLimit.getColumnByKey("ldOd").setWidth(width130).setHeader("Od");
@@ -89,6 +106,18 @@ public class AllAboutAbsencesView extends VerticalLayout {
 
         this.grid = new Grid<>(AbsenceDTO.class);
         grid.setColumns("abTypeOfAbsence", "abDataOd", "abDataDo", "abDniWykorzystane", "abGodzinyWykorzystane", "abFrmName");
+
+        // For mobile
+        grid.addComponentColumn(item -> {
+            VerticalLayout vl = new VerticalLayout();
+            vl.add(new Html("<div><b>"+item.getAbFrmName() +"</b></div>"));
+            vl.add(new Html("<div>"+item.getAbTypeOfAbsence() +"</div>"));
+            vl.add(new Html("<div><b>Od:</b> "+item.getAbDataOd()+ " <b>Od:</b> " +item.getAbDataDo() + "</div>"));
+            vl.add(new Html("<div><b>Dni:</b> "+ item.getAbDniWykorzystane() + "<b> Godz:</b> "+ item.getAbGodzinyWykorzystane() +"</div>"));
+            return vl;
+        }).setHeader("Urlop wykorzystano").setVisible(false);
+
+        // For Browser
         grid.getColumnByKey("abTypeOfAbsence").setWidth("200px").setHeader("Rodzaj");
         grid.getColumnByKey("abDataOd").setWidth(width130).setHeader("Data Od");
         grid.getColumnByKey("abDataDo").setWidth(width130).setHeader("Data Do");
@@ -112,5 +141,59 @@ public class AllAboutAbsencesView extends VerticalLayout {
     }
 
 
+    // Functions for mobile version
+    private Registration listener;
+    private int breakpointPx = 1000;
+
+    @Override
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
+        // Add browser window listener to observe width change
+        getUI().ifPresent(ui -> listener = ui.getPage().addBrowserWindowResizeListener(event -> {
+            adjustVisibleGridColumns(gridAbLimit, event.getWidth());
+            adjustVisibleGridColumns2(grid, event.getWidth());
+        }));
+        // Adjust Grid according to initial width of the screen
+        getUI().ifPresent(ui -> ui.getPage().retrieveExtendedClientDetails(receiver -> {
+            int browserWidth = receiver.getBodyClientWidth();
+            adjustVisibleGridColumns(gridAbLimit, browserWidth);
+            adjustVisibleGridColumns2(grid, browserWidth);
+        }));
+    }
+
+    @Override
+    protected void onDetach(DetachEvent detachEvent) {
+        // Listener needs to be eventually removed in order to avoid resource leak
+        listener.remove();
+        super.onDetach(detachEvent);
+    }
+
+
+    private void adjustVisibleGridColumns(Grid<AbsenceLimitDTO> grid, int width) {
+        boolean[] visibleCols;
+        // Change which columns are visible depending on browser width
+        if (width > breakpointPx) {
+            visibleCols = new boolean[]{true, true, true, true, true, true, false};
+        } else {
+            visibleCols = new boolean[]{false, false, false, false, false, false, true};
+        }
+        for (int c = 0; c < visibleCols.length; c++) {
+            grid.getColumns().get(c).setVisible(visibleCols[c]);
+        }
+    }
+
+    private void adjustVisibleGridColumns2(Grid<AbsenceDTO> grid, int width) {
+        boolean[] visibleCols;
+        // Change which columns are visible depending on browser width
+        if (width > breakpointPx) {
+            visibleCols = new boolean[]{true, true, true, true, true, true, false};
+        } else {
+            visibleCols = new boolean[]{false, false, false, false, false, false, true};
+        }
+        for (int c = 0; c < visibleCols.length; c++) {
+            grid.getColumns().get(c).setVisible(visibleCols[c]);
+        }
+    }
+    // End function form mobile version
 
 }
