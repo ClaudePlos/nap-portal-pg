@@ -11,8 +11,8 @@ public class AbsenceDTO {
     private Date abDataOd;
     private Date abDataDo;
     private String abKodFunduszu;
-    private Integer abDniWykorzystane;
-    private Integer abGodzinyWykorzystane;
+    private Double abDniWykorzystane;
+    private Double abGodzinyWykorzystane;
     private String abFanulowana;
     private String abFrmName;
     private String abTypeOfAbsence;
@@ -73,19 +73,19 @@ public class AbsenceDTO {
         this.abKodFunduszu = abKodFunduszu;
     }
 
-    public Integer getAbDniWykorzystane() {
+    public Double getAbDniWykorzystane() {
         return abDniWykorzystane;
     }
 
-    public void setAbDniWykorzystane(Integer abDniWykorzystane) {
+    public void setAbDniWykorzystane(Double abDniWykorzystane) {
         this.abDniWykorzystane = abDniWykorzystane;
     }
 
-    public Integer getAbGodzinyWykorzystane() {
+    public Double getAbGodzinyWykorzystane() {
         return abGodzinyWykorzystane;
     }
 
-    public void setAbGodzinyWykorzystane(Integer abGodzinyWykorzystane) {
+    public void setAbGodzinyWykorzystane(Double abGodzinyWykorzystane) {
         this.abGodzinyWykorzystane = abGodzinyWykorzystane;
     }
 

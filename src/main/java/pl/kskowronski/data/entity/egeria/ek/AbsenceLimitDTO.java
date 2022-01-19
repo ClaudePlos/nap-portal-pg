@@ -6,7 +6,7 @@ public class AbsenceLimitDTO {
     private Integer rok;
     private String ldOd;
     private String ldDo;
-    private Integer pozostaloUrlopu;
+    private Double pozostaloUrlopu;
     private String kodUrlopu;
     private String nazwaWymiaru;
     private Integer frmId;
@@ -47,11 +47,11 @@ public class AbsenceLimitDTO {
         this.ldDo = ldDo;
     }
 
-    public Integer getPozostaloUrlopu() {
+    public Double getPozostaloUrlopu() {
         return pozostaloUrlopu;
     }
 
-    public void setPozostaloUrlopu(Integer pozostaloUrlopu) {
+    public void setPozostaloUrlopu(Double pozostaloUrlopu) {
         this.pozostaloUrlopu = pozostaloUrlopu;
     }
 

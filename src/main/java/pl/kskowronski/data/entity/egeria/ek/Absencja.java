@@ -32,10 +32,10 @@ public class Absencja {
     private String abKodFunduszu;
 
     @Column(name = "ab_dni_wykorzystane")
-    private Integer abDniWykorzystane;
+    private Double abDniWykorzystane;
 
     @Column(name = "ab_godziny_wykorzystane")
-    private Integer abGodzinyWykorzystane;
+    private Double abGodzinyWykorzystane;
 
     @Column(name = "ab_f_anulowana")
     private String abFanulowana;
@@ -99,19 +99,19 @@ public class Absencja {
         this.abKodFunduszu = abKodFunduszu;
     }
 
-    public Integer getAbDniWykorzystane() {
+    public Double getAbDniWykorzystane() {
         return abDniWykorzystane;
     }
 
-    public void setAbDniWykorzystane(Integer abDniWykorzystane) {
+    public void setAbDniWykorzystane(Double abDniWykorzystane) {
         this.abDniWykorzystane = abDniWykorzystane;
     }
 
-    public Integer getAbGodzinyWykorzystane() {
+    public Double getAbGodzinyWykorzystane() {
         return abGodzinyWykorzystane;
     }
 
-    public void setAbGodzinyWykorzystane(Integer abGodzinyWykorzystane) {
+    public void setAbGodzinyWykorzystane(Double abGodzinyWykorzystane) {
         this.abGodzinyWykorzystane = abGodzinyWykorzystane;
     }
 

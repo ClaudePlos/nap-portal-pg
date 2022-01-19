@@ -163,11 +163,11 @@ public class MainLayout extends AppLayout {
         MenuItemInfo[] menuItems = new MenuItemInfo[]{ //
                 new MenuItemInfo("Strona główna", "la la-globe", MainPageView.class), //
                 new MenuItemInfo("Twój urlop", "la la-circle-thin", AllAboutAbsencesView.class), //
-                new MenuItemInfo("Pit11", "la la-circle-thin", Pit11View.class), //
+                new MenuItemInfo("Pit 11", "la la-circle-thin", Pit11View.class), //
                 new MenuItemInfo("Paski", "la la-circle-thin", PayslipsView.class), //
                 new MenuItemInfo("Paski UZ", "la la-circle-thin", PayslipsContractView.class), //
                 new MenuItemInfo("Map", "la la-map", MapView.class), //
-                new MenuItemInfo("Pit11 lista", "la la-list", Pit11listView.class), //
+                new MenuItemInfo("Pit 11 lista", "la la-list", Pit11listView.class), //
                 new MenuItemInfo("Admin(sk)", "la la-cog", SkForSupervisorView.class), //
                 new MenuItemInfo("Wyloguj", "la la-circle-thin", Logout.class), //
 

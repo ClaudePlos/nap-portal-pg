@@ -52,7 +52,7 @@ public class AbsenceLimitService {
         absenceLimit.setRok( ((BigDecimal) ob[1]).intValue() );
         absenceLimit.setLdOd(mapperDate.dtYYYYMMDD.format((Date) ob[2]));
         absenceLimit.setLdDo(mapperDate.dtYYYYMMDD.format((Date) ob[3]));
-        absenceLimit.setPozostaloUrlopu( ((BigDecimal) ob[4]).intValue() );
+        absenceLimit.setPozostaloUrlopu( ((BigDecimal) ob[4]).doubleValue() );
         absenceLimit.setKodUrlopu((String) ob[5]);
         absenceLimit.setFrmNazwa(eatFirmaRepo.findById( ((BigDecimal) ob[6]).intValue() ).get().getFrmNazwa());
         absenceLimit.setNazwaWymiaru(rodzajWymiaruRepo.findByRwyDgKod((String) ob[5]).get().getRwyNazwa());
