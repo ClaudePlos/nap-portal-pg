@@ -40,6 +40,7 @@ import pl.kskowronski.data.service.admin.PdfService;
 import pl.kskowronski.data.service.egeria.edek.EdktDeklaracjeService;
 import pl.kskowronski.data.service.log.LogPit11Service;
 import pl.kskowronski.views.MainLayout;
+import pl.kskowronski.views.components.EmbeddedPdfDocument;
 
 import javax.annotation.security.RolesAllowed;
 import java.io.ByteArrayInputStream;
@@ -126,23 +127,17 @@ public class Pit11View extends VerticalLayout {
         grid.setHeightFull();
 
 
-
+        // run generate pit pdf inside web
+        grid.addColumn(new NativeButtonRenderer<EdktDeklaracjeDTO>("✉",
+                item -> { getAndDisplayPdf(item, "2");}
+        ));
 
         // run generate pit pdf
-        grid.addColumn(new NativeButtonRenderer<EdktDeklaracjeDTO>("Pit11",
-                item -> {
-                    try {
-                        String path = pit11Service.exportPit11Report("pdf", worker.get().getPassword(), dtYYYY.format(item.getDklDataOd()),  item.getDklXmlVisual());
-                        displayPitPDFonBrowser(path, "Company:" + item.getDklFrmNazwa());
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (JRException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+        grid.addColumn(new NativeButtonRenderer<EdktDeklaracjeDTO>("Pit 11",
+                item -> { getAndDisplayPdf(item, "1");}
         ));
+
+
 
         SplitLayout splitLayout = new SplitLayout();
         splitLayout.setSizeFull();
@@ -160,6 +155,22 @@ public class Pit11View extends VerticalLayout {
 
         onUserChangedYear(Long.parseLong(mapperDate.getCurrentlyYear())-1L + "");
 
+    }
+
+    private void getAndDisplayPdf( EdktDeklaracjeDTO item, String version ) {
+        try {
+            String path = pit11Service.exportPit11Report("pdf", worker.get().getPassword(), dtYYYY.format(item.getDklDataOd()),  item.getDklXmlVisual());
+            if (version.equals("1"))
+                displayPitPDFonBrowser(path, "Company:" + item.getDklFrmNazwa());
+            else
+                displayPitPDFonBrowser2(path, "Company:" + item.getDklFrmNazwa());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (JRException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void generateDateInGrid(EdktDeklaracjeDTO item){
@@ -201,6 +212,25 @@ public class Pit11View extends VerticalLayout {
 
         dialog.add(a, new Html("<div><br><div>"), new Button("Zamknij", e -> dialog.close()));
         add(dialog);
+        dialog.open();
+
+        saveLog(description);
+    }
+
+    private void displayPitPDFonBrowser2(String path, String description) throws FileNotFoundException, IOException {
+        File filePdf = ResourceUtils.getFile(path);
+
+        byte[] pdfBytes = FileUtils.readFileToByteArray(filePdf);
+
+        Dialog dialog = new Dialog();
+        dialog.setWidth("800px");
+        dialog.setHeight("650px");
+
+        StreamResource resource = new StreamResource("file.pdf", () -> new ByteArrayInputStream(pdfBytes));
+
+        EmbeddedPdfDocument pdf = new EmbeddedPdfDocument(resource);
+
+        dialog.add(new Button("X", e -> dialog.close()), pdf);
         dialog.open();
 
         saveLog(description);
@@ -282,9 +312,9 @@ public class Pit11View extends VerticalLayout {
         boolean[] visibleCols;
         // Change which columns are visible depending on browser width
         if (width > breakpointPx) {
-            visibleCols = new boolean[]{true, true, true, false};
+            visibleCols = new boolean[]{true, true, true, false, true};
         } else {
-            visibleCols = new boolean[]{false, false, false, true};
+            visibleCols = new boolean[]{false, false, false, true, false};
         }
         for (int c = 0; c < visibleCols.length; c++) {
             grid.getColumns().get(c).setVisible(visibleCols[c]);
