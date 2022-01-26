@@ -7887,6 +7887,7 @@ packages:
     resolution:
       integrity: sha512-uBHU3L3czsIyYXKX88fdrGovxdSCoTGDRZ6SYXtSRxLZUzHg5P/66Ht6uoUlHu9EZod+inXhKo3qQgwXUT/y1w==
   /source-map-url/0.4.1:
+    deprecated: See https://github.com/lydell/source-map-url#deprecated
     dev: true
     resolution:
       integrity: sha512-cPiFOTLUKvJFIg4SKVScy4ilPPW6rFgMgfuZJPNoDuMs3nC1HbMUycBoJw77xFIp6z1UJQJOfx6C9GMH80DiTw==
@@ -8834,7 +8835,7 @@ packages:
       integrity: sha512-viyejlCtlKsbJCBHwhSBbWc57MwPXvUrc8P7d+87AxBGPU+JuWkT6nvBANgVgFz6FUhCvRC8aYt+B1helo166g==
   /workbox-precaching/6.2.0:
     dependencies:
-      workbox-core: 6.2.0
+      workbox-core: 6.4.2
       workbox-routing: 6.4.2
       workbox-strategies: 6.4.2
     dev: true

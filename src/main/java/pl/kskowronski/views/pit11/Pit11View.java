@@ -9,6 +9,7 @@ import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Input;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -16,11 +17,10 @@ import com.vaadin.flow.component.page.Page;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.data.renderer.NativeButtonRenderer;
+import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.StreamResource;
-import com.vaadin.flow.server.VaadinSession;
-import com.vaadin.flow.server.WebBrowser;
 import com.vaadin.flow.shared.Registration;
 import net.sf.jasperreports.engine.JRException;
 import org.apache.commons.io.FileUtils;
@@ -31,7 +31,6 @@ import org.springframework.util.ResourceUtils;
 import pl.kskowronski.data.MapperDate;
 import pl.kskowronski.data.entity.admin.User;
 import pl.kskowronski.data.entity.egeria.eDek.EdktDeklaracjeDTO;
-import pl.kskowronski.data.entity.egeria.ek.Zatrudnienie;
 import pl.kskowronski.data.entity.log.LogEvent;
 import pl.kskowronski.data.entity.log.LogPit11;
 import pl.kskowronski.data.reports.Pit11Service;
@@ -128,9 +127,9 @@ public class Pit11View extends VerticalLayout {
 
 
         // run generate pit pdf inside web
-        grid.addColumn(new NativeButtonRenderer<EdktDeklaracjeDTO>("✉",
-                item -> { getAndDisplayPdf(item, "2");}
-        ));
+//        grid.addColumn(new NativeButtonRenderer<EdktDeklaracjeDTO>("✉",
+//                item -> { getAndDisplayPdf(item, "2");}
+//        ));
 
         // run generate pit pdf
         grid.addColumn(new NativeButtonRenderer<EdktDeklaracjeDTO>("Pit 11",
@@ -166,9 +165,9 @@ public class Pit11View extends VerticalLayout {
                 displayPitPDFonBrowser2(path, "Company:" + item.getDklFrmNazwa());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (JRException e) {
+        }  catch (IOException e) {
             e.printStackTrace();
-        } catch (IOException e) {
+        } catch (JRException e) {
             e.printStackTrace();
         }
     }
@@ -177,7 +176,7 @@ public class Pit11View extends VerticalLayout {
         grid.setItems(item);
     }
 
-    private void displayPitPDFonBrowser(String path, String description) throws FileNotFoundException, IOException {
+    private void displayPitPDFonBrowser(String path, String description) throws IOException {
 
         File filePdf = ResourceUtils.getFile(path);
 
@@ -217,20 +216,20 @@ public class Pit11View extends VerticalLayout {
         saveLog(description);
     }
 
-    private void displayPitPDFonBrowser2(String path, String description) throws FileNotFoundException, IOException {
-        File filePdf = ResourceUtils.getFile(path);
+    private void displayPitPDFonBrowser2(String path, String description) throws IOException {
+        File filePdf = ResourceUtils.getFile("C:\\tmp\\115442_0.pdf");
 
         byte[] pdfBytes = FileUtils.readFileToByteArray(filePdf);
 
         Dialog dialog = new Dialog();
         dialog.setWidth("800px");
-        dialog.setHeight("650px");
+        dialog.setHeight("600px");
 
-        StreamResource resource = new StreamResource("file.pdf", () -> new ByteArrayInputStream(pdfBytes));
+        var resource = new StreamResource("file.pdf", () -> new ByteArrayInputStream(pdfBytes));
 
-        EmbeddedPdfDocument pdf = new EmbeddedPdfDocument(resource);
+        var pdf = new EmbeddedPdfDocument(resource);
 
-        dialog.add(new Button("X", e -> dialog.close()), pdf);
+        dialog.add( pdf, new Button("Zamknij", e -> dialog.close()) );
         dialog.open();
 
         saveLog(description);
@@ -281,7 +280,6 @@ public class Pit11View extends VerticalLayout {
 
 
 
-
     // Functions for mobile version
     private Registration listener;
     private int breakpointPx = 1000;
@@ -312,9 +310,9 @@ public class Pit11View extends VerticalLayout {
         boolean[] visibleCols;
         // Change which columns are visible depending on browser width
         if (width > breakpointPx) {
-            visibleCols = new boolean[]{true, true, true, false, true};
+            visibleCols = new boolean[]{true, true, true, false};
         } else {
-            visibleCols = new boolean[]{false, false, false, true, false};
+            visibleCols = new boolean[]{false, false, false, true};
         }
         for (int c = 0; c < visibleCols.length; c++) {
             grid.getColumns().get(c).setVisible(visibleCols[c]);
