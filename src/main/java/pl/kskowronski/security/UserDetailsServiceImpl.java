@@ -56,7 +56,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         user.get().setRoles(Collections.singleton(Role.USER));
 
         //TODO chack supervisor
-        if (user.get().getPrcDgKodEk().equals("EK04") && skService.findSkForSupervisor(user.get().getPrcId()).size() > 0 ) {
+        if (  skService.findSkForSupervisor(user.get().getPrcId()).size() > 0 ) {
             user.get().setRoles(Collections.singleton(Role.SUPERVISOR));
         }
 

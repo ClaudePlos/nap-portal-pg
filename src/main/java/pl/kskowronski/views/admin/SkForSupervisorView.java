@@ -46,11 +46,12 @@ public class SkForSupervisorView extends Div {
         this.nppSkForSupervisorService = nppSkForSupervisorService;
         this.skService = skService;
         this.napUserService = napUserService;
-        setHeightFull();
+        setHeight("100%");
         crud = new Crud<>(
                 NppSkForSupervisor.class,
                 createEditor()
         );
+        crud.setHeightFull();
 
 
 

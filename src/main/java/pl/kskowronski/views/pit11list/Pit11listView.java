@@ -166,9 +166,11 @@ public class Pit11listView extends VerticalLayout {
         selectSK.setClassName("selectSK");
         selectSK.setItems(listSK);
         selectSK.setItemLabelGenerator(SK::getSkKod);
-        selectSK.setEmptySelectionCaption(listSK.get(0).getSkKod());
+        if (listSK.size() > 0 )
+            selectSK.setEmptySelectionCaption(listSK.get(0).getSkKod());
         selectSK.setLabel("Obiekt");
-        selectSK.setValue(listSK.get(0));
+        if (listSK.size() > 0 )
+            selectSK.setValue(listSK.get(0));
         hTop.add(selectSK);
     }
 
