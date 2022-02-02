@@ -1,6 +1,7 @@
 package pl.kskowronski.data.entity.admin;
 
 import pl.kskowronski.data.entity.egeria.css.SK;
+import pl.kskowronski.data.entity.egeria.global.NapUser;
 
 import javax.persistence.*;
 
@@ -28,7 +29,7 @@ public class NppSkForSupervisor {
     private SK sk;
 
     @Transient
-    private User user;
+    private NapUser napUser;
 
     public NppSkForSupervisor() {
     }
@@ -83,15 +84,15 @@ public class NppSkForSupervisor {
         this.skKod = sk.getSkKod();
     }
 
-    public User getUser() {
-        return user;
+    public NapUser getNapUser() {
+        return napUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-        this.prcId = user.getPrcId();
+    public void setNapUser(NapUser napUser) {
+        this.napUser = napUser;
+        this.prcId = napUser.getPrcId();
         if (this.nazwImie == null) {
-            this.nazwImie = user.getNazwImie();
+            this.nazwImie = napUser.getUsername();
         }
     }
 }

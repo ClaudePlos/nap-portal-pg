@@ -9,6 +9,7 @@ import com.vaadin.flow.data.provider.SortDirection;
 import pl.kskowronski.data.service.UserService;
 import pl.kskowronski.data.service.admin.NppSkForSupervisorService;
 import pl.kskowronski.data.service.egeria.css.SKService;
+import pl.kskowronski.data.service.egeria.global.NapUserService;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
@@ -30,11 +31,11 @@ public class SkForSupervisorDataProvider extends AbstractBackEndDataProvider<Npp
     private Consumer<Long> sizeChangeListener;
 
 
-    public SkForSupervisorDataProvider(NppSkForSupervisorService nppSkForSupervisorService, SKService skService, UserService userService) {
+    public SkForSupervisorDataProvider(NppSkForSupervisorService nppSkForSupervisorService, SKService skService, NapUserService napUserService) {
         this.nppSkForSupervisorService = nppSkForSupervisorService;
         DATABASE = new ArrayList<>(nppSkForSupervisorService.findAll());
         DATABASE.stream().forEach( item -> {
-            item.setUser(userService.findById(item.getPrcId()).get());
+            item.setNapUser(napUserService.findById(item.getPrcId()).get());
             item.setSk(skService.findBySkKod(item.getSkKod()));
         });
     }
