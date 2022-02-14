@@ -120,7 +120,7 @@ public class Pit11listView extends VerticalLayout {
                 item -> {
                     try {
                         String path = pit11Service.exportPit11Report("pdf", worker.get().getPassword(), dtYYYY.format(item.getDklDataOd()),  item.getDklXmlVisual());
-                        displayPitPDFonBrowser(path, "Company:" + item.getDklFrmNazwa());
+                        displayPitPDFonBrowser(path, "Company:" + item.getDklFrmNazwa(), item.getDklPrcId());
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     } catch (JRException e) {
@@ -176,7 +176,7 @@ public class Pit11listView extends VerticalLayout {
 
 
 
-    private void displayPitPDFonBrowser(String path, String description) throws FileNotFoundException, IOException {
+    private void displayPitPDFonBrowser(String path, String description, Integer prcIdFromTheList ) throws FileNotFoundException, IOException {
 
         File filePdf = ResourceUtils.getFile(path);
 
@@ -211,12 +211,12 @@ public class Pit11listView extends VerticalLayout {
         add(dialog);
         dialog.open();
 
-        saveLog(description);
+        saveLog(description, prcIdFromTheList);
     }
 
-    private void saveLog(String description){
+    private void saveLog(String description, Integer prcIdFromTheList){
         LogPit11 logPit11 = new LogPit11();
-        logPit11.setPrcId(worker.get().getPrcId());
+        logPit11.setPrcId(prcIdFromTheList);
         logPit11.setEvent(LogEvent.DOWNLOAD_THE_DECLARATION_PIT11.toString());
         logPit11.setYear( Integer.valueOf(yearField.getValue().toString().substring(0,4)) );
         logPit11.setAuditDc(new Date());
