@@ -22,7 +22,6 @@ import pl.kskowronski.views.MainLayout;
 import javax.annotation.security.RolesAllowed;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 
 @Route(value = "sk-for-supervisor", layout = MainLayout.class)

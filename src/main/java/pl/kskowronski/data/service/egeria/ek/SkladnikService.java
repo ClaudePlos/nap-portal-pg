@@ -122,7 +122,7 @@ public class SkladnikService  {
                     " FROM EK_DANE_MIESIECZNE\n" +
                     " WHERE dnm_prc_id = " + prcId + "\n" +
                     " AND dnm_rok = cast(substr('" + periodYYYYMM + "',1,4) as integer)\n" +
-                    " AND dnm_miesiac =  cast(substr('" + periodYYYYMM + "',6,2) as integer)";
+                    " AND dnm_miesiac =  cast(substr('" + periodYYYYMM + "',6,2) as integer) + 1 and dnm_frm_id = " + frmId;
 
             List result = em.createNativeQuery(sql).getResultList();
             for (Iterator iter = result.iterator() ; iter.hasNext();)
