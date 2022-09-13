@@ -25,17 +25,16 @@ import pl.kskowronski.data.entity.egeria.ek.Zatrudnienie;
 import pl.kskowronski.data.service.UserService;
 import pl.kskowronski.data.service.egeria.ek.ZatrudnienieService;
 import pl.kskowronski.security.AuthenticatedUser;
-import pl.kskowronski.views.about.AboutView;
 import pl.kskowronski.views.absences.AllAboutAbsencesView;
 import pl.kskowronski.views.admin.SkForSupervisorView;
 import pl.kskowronski.views.logout.Logout;
 import pl.kskowronski.views.mainpage.MainPageView;
-import pl.kskowronski.views.imagelist.ImageListView;
 import pl.kskowronski.views.map.MapView;
 import pl.kskowronski.views.payslips.PayslipsView;
 import pl.kskowronski.views.payslipscontract.PayslipsContractView;
 import pl.kskowronski.views.pit11.Pit11View;
 import pl.kskowronski.views.pit11list.Pit11listView;
+import pl.kskowronski.views.reports.ReportsView;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -169,6 +168,7 @@ public class MainLayout extends AppLayout {
                 new MenuItemInfo("Map", "la la-map", MapView.class), //
                 new MenuItemInfo("Pit 11 lista", "la la-list", Pit11listView.class), //
                 new MenuItemInfo("Admin(sk)", "la la-cog", SkForSupervisorView.class), //
+                new MenuItemInfo("Raporty", "la la-cog", ReportsView.class), //
                 new MenuItemInfo("Wyloguj", "la la-circle-thin", Logout.class), //
 
                 //new MenuItemInfo("About", "la la-file", AboutView.class), //

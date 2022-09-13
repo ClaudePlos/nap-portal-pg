@@ -19,7 +19,7 @@ import java.util.Optional;
 @PageTitle("Strona główna")
 @Route(value = "", layout = MainLayout.class)
 @RouteAlias(value = "", layout = MainLayout.class)
-@RolesAllowed({"admin","supervisor","user"})
+@RolesAllowed({"admin","supervisor","user","manager"})
 public class MainPageView extends HorizontalLayout {
 
     private UserService userService;

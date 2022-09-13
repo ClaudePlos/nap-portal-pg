@@ -1,7 +1,6 @@
 package pl.kskowronski.data.service.egeria.css;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -10,28 +9,27 @@ import pl.kskowronski.data.entity.admin.NppSkForSupervisor;
 import pl.kskowronski.data.entity.egeria.css.SK;
 import pl.kskowronski.data.service.admin.NppSkForSupervisorRepo;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 @Service
 public class SKService extends CrudService<SK, Integer> {
 
+    @PersistenceContext
+    private EntityManager em;
+
     @Autowired
     NppSkForSupervisorRepo nppSkForSupervisorRepo;
-
-    //private List<SK> list  = new ArrayList<>();
 
     private SKRepo repo;
 
     public SKService(@Autowired SKRepo repo) {
         this.repo = repo;
-
-//        SK sk = new SK(100725, "AINF","Dział Informatyczny");
-//        SK sk1 = new SK(108469,"AKCF","Kadry Cała Firma");
-//        list.add(sk);
-//        list.add(sk1);
     }
 
     @Override
@@ -90,6 +88,15 @@ public class SKService extends CrudService<SK, Integer> {
             sk.setSkKod(item.getSkKod());
             listSk.add(sk);
         });
+        return listSk;
+    }
+
+    public List<SK> findSkForManager(Integer prcId){
+        List<SK> listSk = new ArrayList<>();
+        String sql = "select sk_id, sk_kod from npp_kierownik_obiekt where prc_id = " + prcId + " order by sk_kod";
+        Optional<List<Object[]>> results = Optional.ofNullable(em.createNativeQuery(sql).getResultList());
+        if (results.isPresent())
+            results.get().forEach( item -> listSk.add( new SK(((BigDecimal) item[0]).intValue(), (String) item[1], null)) );
         return listSk;
     }
 

@@ -52,7 +52,7 @@ import java.util.Optional;
 
 @Route(value = "listPit11", layout = MainLayout.class)
 @PageTitle("Pit11 lista")
-@RolesAllowed({"admin","supervisor"})
+@RolesAllowed({"admin","supervisor","manager"})
 public class Pit11listView extends VerticalLayout {
 
     MapperDate mapperDate = new MapperDate();

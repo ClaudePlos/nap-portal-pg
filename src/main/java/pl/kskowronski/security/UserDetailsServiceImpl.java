@@ -33,43 +33,50 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private SKService skService;
 
+    public Optional<User> loggedUser = null;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = null;
+
         try {
-            user = Optional.ofNullable(userRepo.findByUsername(username));
-            user.get().setPassword(getMd5(user.get().getPassword()));
-            if (user.get().getPrcDgKodEk().equals("EK04")) {// check, maybe he is in EK04
-                user.get().setPassword("");
+            loggedUser = Optional.ofNullable(userRepo.findByUsername(username));
+            loggedUser.get().setPassword(getMd5(loggedUser.get().getPassword()));
+            if (loggedUser.get().getPrcDgKodEk().equals("EK04")) {// check, maybe he is in EK04
+                loggedUser.get().setPassword("");
             }
         } catch (Exception ex){
             Optional<NapUser> napUser = napUserRepo.findByUsername(username);
             if (napUser.isPresent()) {
-                user = userRepo.findById(napUser.get().getPrcId());
-                user.get().setPassword(napUser.get().getPassword());
+                loggedUser = userRepo.findById(napUser.get().getPrcId());
+                loggedUser.get().setPassword(napUser.get().getPassword());
             }
         }
 
-        if (user.get() == null) {
+        if (loggedUser.get() == null) {
             throw new UsernameNotFoundException("Could not find user with this username and pass");
         }
-        user.get().setRoles(Collections.singleton(Role.USER));
+        loggedUser.get().setRoles(Collections.singleton(Role.USER));
 
-        //TODO chack supervisor
-        if (  skService.findSkForSupervisor(user.get().getPrcId()).size() > 0 ) {
-            user.get().setRoles(Collections.singleton(Role.SUPERVISOR));
+        // SUPERVISOR - we use this only when manager want print Pit for workers
+        if (  skService.findSkForSupervisor(loggedUser.get().getPrcId()).size() > 0 ) {
+            loggedUser.get().setRoles(Collections.singleton(Role.SUPERVISOR));
         }
 
-        if (user.get().getPrcId() == 115442 || user.get().getPrcId() == 279069  || user.get().getPrcId() == 340372 ) {
-            user.get().setRoles(Collections.singleton(Role.ADMIN));
+        // MANAGER - we use this for special report for them
+        if (  skService.findSkForSupervisor(loggedUser.get().getPrcId()).size() > 0 ) {
+            loggedUser.get().setRoles(Collections.singleton(Role.MANAGER));
+        }
+
+        if (loggedUser.get().getPrcId() == 115442 || loggedUser.get().getPrcId() == 279069  || loggedUser.get().getPrcId() == 340372 ) {
+            loggedUser.get().setRoles(Collections.singleton(Role.ADMIN));
         }
 
 
 
         //return new MyUserDetails(user.get());
 
-        return new org.springframework.security.core.userdetails.User(user.get().getUsername(), user.get().getPassword(),
-                getAuthorities(user.get()));
+        return new org.springframework.security.core.userdetails.User(loggedUser.get().getUsername(), loggedUser.get().getPassword(),
+                getAuthorities(loggedUser.get()));
     }
 
     private static List<GrantedAuthority> getAuthorities(User user) {

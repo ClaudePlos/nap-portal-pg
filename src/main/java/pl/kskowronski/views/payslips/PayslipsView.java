@@ -49,7 +49,7 @@ import com.vaadin.flow.shared.Registration;
 
 @Route(value = "payslips", layout = MainLayout.class)
 @PageTitle("Paski")
-@RolesAllowed({"admin","supervisor","user"})
+@RolesAllowed({"admin","supervisor","user","manager"})
 public class PayslipsView extends VerticalLayout {
 
     private ZatrudnienieService zatrudnienieService;

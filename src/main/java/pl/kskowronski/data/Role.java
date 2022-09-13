@@ -1,7 +1,8 @@
 package pl.kskowronski.data;
 
 public enum Role {
-    USER("user"), ADMIN("admin"), SUPERVISOR("supervisor");
+    // SUPERVISOR - we use this only when manager want print Pit for workers
+    USER("user"), ADMIN("admin"), SUPERVISOR("supervisor"), MANAGER("manager");
 
     private String roleName;
 

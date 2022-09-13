@@ -30,7 +30,7 @@ import java.util.Optional;
 
 @Route(value = "absences", layout = MainLayout.class)
 @PageTitle("Twój urlop")
-@RolesAllowed({"admin","supervisor","user"})
+@RolesAllowed({"admin","supervisor","user","manager"})
 public class AllAboutAbsencesView extends VerticalLayout {
 
     private Grid<AbsenceLimitDTO> gridAbLimit;
