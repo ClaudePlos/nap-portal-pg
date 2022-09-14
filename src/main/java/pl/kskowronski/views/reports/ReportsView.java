@@ -24,8 +24,10 @@ public class ReportsView extends Div {
 
 
     public ReportsView(UserService userService, SKService skService, ReportService reportService) {
+        setSizeFull();
         HorizontalLayout h01 = new HorizontalLayout();
         ComboBox<String> comboRep = new ComboBox<>();
+        comboRep.setClassName("comboRep");
         comboRep.setItems(rep01,rep02,rep03);
         comboRep.setWidth("500px");
         comboRep.setLabel("Raporty");

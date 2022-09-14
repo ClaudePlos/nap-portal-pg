@@ -80,3 +80,6 @@ sudo docker build -t nap-portal-pg . << dot is important
 
 
 </pre>
+
+
+anna.pietrzak 79050515509

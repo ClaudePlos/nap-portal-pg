@@ -79,3 +79,27 @@ vaadin-button.buttonRun, vaadin-select.selectSK {
 vaadin-grid.gridContracts {
 
 }
+
+vaadin-grid.gridWorkers {
+      width: 1000px;
+      height: 900px;
+      grid-template-areas:
+        "header"
+        "nav"
+        "main"
+        "footer";
+}
+
+hTop {
+      display: block;
+}
+
+vaadin-combo-box.comboRep {
+      margin-left: 15px;
+}
+
+vaadin-text-field.searchField {
+      margin-left: 15px;
+}
+
+
