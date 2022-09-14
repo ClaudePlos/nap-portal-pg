@@ -3,6 +3,7 @@ package pl.kskowronski.views.reports.list;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.dataview.GridListDataView;
+import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -14,6 +15,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.vaadin.reports.PrintPreviewReport;
 import pl.kskowronski.data.entity.admin.User;
 import pl.kskowronski.data.entity.egeria.css.SK;
 import pl.kskowronski.data.service.UserService;
@@ -30,11 +32,13 @@ public class WorkerWithPassView extends Div {
     private HorizontalLayout hTop = new HorizontalLayout();
     private VerticalLayout vTop = new VerticalLayout();
     private List<SK> managerSkList;
+    private List<User> listWorkersOnSK;
 
     private Grid<User> grid;
     private GridListDataView<User> dataView;
     private TextField searchField;
-
+    private PrintPreviewReport report = new PrintPreviewReport(User.class, "prcNumer", "prcNazwisko", "prcImie", "password");
+    private Anchor aPdf = new Anchor( "","PDF");
 
     public WorkerWithPassView(UserService userService, SKService skService, ReportService reportService) {
         setHeightFull();
@@ -45,10 +49,19 @@ public class WorkerWithPassView extends Div {
         if (managerSkList.size() > 0) {
             addSelectSK();
         }
+
+
         var butGetData = new Button("Pobierz");
         butGetData.addClickListener( clickEvent -> {
-            var listWorkersOnSK = reportService.getWorkersListWithPassForSK(selectSK.getValue().getSkId());
+            listWorkersOnSK = reportService.getWorkersListWithPassForSK(selectSK.getValue().getSkId());
             dataView = grid.setItems(listWorkersOnSK);
+            var pdf = report.getStreamResource("pracownicy.pdf", () -> reportService.getWorkersListWithPassForSK(selectSK.getValue().getSkId()), PrintPreviewReport.Format.PDF);
+            hTop.remove(aPdf);
+            aPdf = new Anchor(pdf, "PDF");
+            aPdf.setClassName("anchorPDF");
+            aPdf.setTarget( "_blank" ) ;
+            hTop.add(aPdf);
+
             if (listWorkersOnSK.size() == 0) {
                 com.vaadin.flow.component.notification.Notification.show("Brak danych", 1000, Notification.Position.MIDDLE);
             } else {
