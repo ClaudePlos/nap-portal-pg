@@ -7,6 +7,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import pl.kskowronski.data.service.UserService;
 import pl.kskowronski.data.service.egeria.css.SKService;
+import pl.kskowronski.data.service.reports.ReportService;
 import pl.kskowronski.views.MainLayout;
 import pl.kskowronski.views.reports.list.WorkerWithPassView;
 
@@ -22,7 +23,7 @@ public class ReportsView extends Div {
     private String rep03 = "3. .....";
 
 
-    public ReportsView(UserService userService, SKService skService) {
+    public ReportsView(UserService userService, SKService skService, ReportService reportService) {
         HorizontalLayout h01 = new HorizontalLayout();
         ComboBox<String> comboRep = new ComboBox<>();
         comboRep.setItems(rep01,rep02,rep03);
@@ -32,7 +33,7 @@ public class ReportsView extends Div {
         comboRep.addValueChangeListener( event -> {
             h01.removeAll();
             if (event.getValue().equals(rep01)) {
-                WorkerWithPassView rep01View = new WorkerWithPassView(userService, skService);
+                WorkerWithPassView rep01View = new WorkerWithPassView(userService, skService, reportService);
                 h01.add(rep01View);
             }
 

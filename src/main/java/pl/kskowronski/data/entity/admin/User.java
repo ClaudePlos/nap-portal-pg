@@ -50,6 +50,13 @@ public class User {
     public User() {
     }
 
+    public User(Integer prcNumer, String password, String prcImie, String prcNazwisko) {
+        this.prcNumer = prcNumer;
+        this.password = password;
+        this.prcImie = prcImie;
+        this.prcNazwisko = prcNazwisko;
+    }
+
     public Integer getPrcId() {
         return prcId;
     }
