@@ -1,6 +1,10 @@
 package pl.kskowronski.views.reports.list;
 
+import ar.com.fdvs.dj.domain.AutoText;
+import ar.com.fdvs.dj.domain.constants.Font;
+import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.dataview.GridListDataView;
 import com.vaadin.flow.component.html.Anchor;
@@ -12,6 +16,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.renderer.NativeButtonRenderer;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +27,11 @@ import pl.kskowronski.data.service.UserService;
 import pl.kskowronski.data.service.egeria.css.SKService;
 import pl.kskowronski.data.service.reports.ReportService;
 
+import ar.com.fdvs.dj.domain.Style;
+import ar.com.fdvs.dj.domain.builders.StyleBuilder;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,11 +69,11 @@ public class WorkerWithPassView extends Div {
             hTop.remove(aPdf);
             aPdf = new Anchor(pdf, "PDF");
             aPdf.setClassName("anchorPDF");
-            aPdf.setTarget( "_blank" ) ;
+            aPdf.setTarget( "_blank" );
             hTop.add(aPdf);
 
             if (listWorkersOnSK.size() == 0) {
-                com.vaadin.flow.component.notification.Notification.show("Brak danych", 1000, Notification.Position.MIDDLE);
+                Notification.show("Brak danych", 1000, Notification.Position.MIDDLE);
             } else {
                 dataView.addFilter(user -> {
                     String searchTerm = searchField.getValue().trim();
@@ -100,6 +110,12 @@ public class WorkerWithPassView extends Div {
         grid.addColumn("prcNazwisko").setWidth("100px").setHeader("Nazwisko");
         grid.addColumn("prcImie").setWidth("300px").setHeader("Imię");
         grid.addColumn("password").setWidth("300px").setHeader("Hasło");
+        grid.addColumn(new NativeButtonRenderer<User>("Pdf",
+                item -> {
+                    addPdfForIndividualWorker(item);
+                }
+        ));
+
         vTop.add(hTop, grid);
 
         add(vTop);
@@ -115,6 +131,42 @@ public class WorkerWithPassView extends Div {
         if (managerSkList.size() > 0 )
             selectSK.setValue(managerSkList.get(0));
         hTop.add(selectSK);
+    }
+
+    private void addPdfForIndividualWorker( User item ) {
+        Dialog dialog = new Dialog();
+        dialog.setWidth("700px");
+        dialog.setHeight("900px");
+
+        List<User> list = new ArrayList<>();
+        list.add(item);
+
+//        AbstractColumn c01;
+
+        Style headerStyle = new StyleBuilder(true).setFont(Font.ARIAL_MEDIUM).build();
+//        Style groupStyle  = new StyleBuilder(true).setFont(Font.ARIAL_MEDIUM_BOLD).build();
+
+        PrintPreviewReport<User> report = new PrintPreviewReport<>(User.class, "prcNumer", "prcNazwisko", "prcImie", "password");
+        report.getReportBuilder()
+                .setMargins(20, 20, 40, 40)
+                .setTitle("Call report")
+                .addAutoText("For internal use only", AutoText.POSITION_HEADER, AutoText.ALIGMENT_LEFT, 200, headerStyle)
+                .addAutoText(LocalDateTime.now().toString(), AutoText.POSITION_HEADER, AutoText.ALIGNMENT_RIGHT, 200, headerStyle)
+                .addAutoText(AutoText.AUTOTEXT_PAGE_X_OF_Y, AutoText.POSITION_HEADER, AutoText.ALIGNMENT_RIGHT, 200, 10, headerStyle)
+                .setPrintBackgroundOnOddRows(true);
+//                            .addColumn(ColumnBuilder.getNew()
+//                                    .setColumnProperty("prcNazwisko", String.class)
+//                                    .setTitle("Nazwisko").build());
+
+        report.setItems(list);
+
+        var pdfUser = report.getStreamResource("pracownik.pdf", () -> list, PrintPreviewReport.Format.PDF);
+        Anchor anchPdfUser = new Anchor(pdfUser, "PDF");
+        anchPdfUser.setTarget( "_blank" );
+        dialog.add( anchPdfUser, report);
+
+        add(dialog);
+        dialog.open();
     }
 
     private boolean matchesTerm(String value, String searchTerm) {
