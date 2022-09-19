@@ -3,6 +3,7 @@ package pl.kskowronski.views.reports.list;
 import ar.com.fdvs.dj.domain.AutoText;
 import ar.com.fdvs.dj.domain.constants.Font;
 import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn;
+import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
@@ -35,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class WorkerWithPassView extends Div {
+public class WorkerWithPassView extends VerticalLayout {
 
     private Optional<User> loggedUser;
     private Select<SK> selectSK = new Select<>();
@@ -51,7 +52,7 @@ public class WorkerWithPassView extends Div {
     private Anchor aPdf = new Anchor( "","PDF");
 
     public WorkerWithPassView(UserService userService, SKService skService, ReportService reportService) {
-        setHeightFull();
+        setHeight("85%");
         hTop.setClassName("hTop");
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         loggedUser = userService.findByUsername(userDetails.getUsername());
@@ -105,6 +106,7 @@ public class WorkerWithPassView extends Div {
 
         this.grid = new Grid<>(User.class);
         grid.setClassName("gridWorkers");
+        grid.setHeight("800px");
         grid.setColumns();
         grid.addColumn("prcNumer").setWidth("100px").setHeader("Numer");
         grid.addColumn("prcNazwisko").setWidth("100px").setHeader("Nazwisko");
@@ -136,7 +138,7 @@ public class WorkerWithPassView extends Div {
     private void addPdfForIndividualWorker( User item ) {
         Dialog dialog = new Dialog();
         dialog.setWidth("700px");
-        dialog.setHeight("900px");
+        dialog.setHeight("950px");
 
         List<User> list = new ArrayList<>();
         list.add(item);
@@ -149,8 +151,8 @@ public class WorkerWithPassView extends Div {
         PrintPreviewReport<User> report = new PrintPreviewReport<>(User.class, "prcNumer", "prcNazwisko", "prcImie", "password");
         report.getReportBuilder()
                 .setMargins(20, 20, 40, 40)
-                .setTitle("Call report")
-                .addAutoText("For internal use only", AutoText.POSITION_HEADER, AutoText.ALIGMENT_LEFT, 200, headerStyle)
+                .setTitle("Hasło")
+                .addAutoText("Indywidualny wydruk dla pracownika", AutoText.POSITION_HEADER, AutoText.ALIGMENT_LEFT, 200, headerStyle)
                 .addAutoText(LocalDateTime.now().toString(), AutoText.POSITION_HEADER, AutoText.ALIGNMENT_RIGHT, 200, headerStyle)
                 .addAutoText(AutoText.AUTOTEXT_PAGE_X_OF_Y, AutoText.POSITION_HEADER, AutoText.ALIGNMENT_RIGHT, 200, 10, headerStyle)
                 .setPrintBackgroundOnOddRows(true);
@@ -161,9 +163,11 @@ public class WorkerWithPassView extends Div {
         report.setItems(list);
 
         var pdfUser = report.getStreamResource("pracownik.pdf", () -> list, PrintPreviewReport.Format.PDF);
-        Anchor anchPdfUser = new Anchor(pdfUser, "PDF");
+        Anchor anchPdfUser = new Anchor(pdfUser, "Drukuj");
         anchPdfUser.setTarget( "_blank" );
-        dialog.add( anchPdfUser, report);
+        var butClose = new Button("X", e -> dialog.close());
+        butClose.setClassName("butClosePrintView");
+        dialog.add( anchPdfUser, butClose, report);
 
         add(dialog);
         dialog.open();

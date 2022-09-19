@@ -103,4 +103,8 @@ vaadin-text-field.searchField {
       margin-right: 15px;
 }
 
+vaadin-button.butClosePrintView {
+      float: right;
+}
+
 

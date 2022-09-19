@@ -3,6 +3,7 @@ package pl.kskowronski.views.reports;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import pl.kskowronski.data.service.UserService;
@@ -16,7 +17,7 @@ import javax.annotation.security.RolesAllowed;
 @Route(value = "workers-and-pass", layout = MainLayout.class)
 @PageTitle("SkForSupervisorView")
 @RolesAllowed({"admin","manager"})
-public class ReportsView extends Div {
+public class ReportsView extends VerticalLayout {
 
     private String rep01 = "1. Wykaz pracowników z hasłami";
     private String rep02 = "2. .....";
@@ -24,7 +25,7 @@ public class ReportsView extends Div {
 
 
     public ReportsView(UserService userService, SKService skService, ReportService reportService) {
-        setSizeFull();
+        setHeight("85%");
         HorizontalLayout h01 = new HorizontalLayout();
         ComboBox<String> comboRep = new ComboBox<>();
         comboRep.setClassName("comboRep");
