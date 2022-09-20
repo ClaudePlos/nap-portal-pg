@@ -109,7 +109,7 @@ public class WorkerWithPassView extends VerticalLayout {
         grid.setHeight("800px");
         grid.setColumns();
         grid.addColumn("prcNumer").setWidth("100px").setHeader("Numer");
-        grid.addColumn("prcNazwisko").setWidth("100px").setHeader("Nazwisko");
+        grid.addColumn("prcNazwisko").setWidth("300px").setHeader("Nazwisko");
         grid.addColumn("prcImie").setWidth("300px").setHeader("Imię");
         grid.addColumn("password").setWidth("300px").setHeader("Hasło");
         grid.addColumn(new NativeButtonRenderer<User>("Pdf",

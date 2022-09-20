@@ -63,7 +63,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
 
         // MANAGER - we use this for special report for them
-        if (  skService.findSkForSupervisor(loggedUser.get().getPrcId()).size() > 0 ) {
+        if (  skService.findSkForManager(loggedUser.get().getPrcId()).size() > 0 ) {
             loggedUser.get().setRoles(Collections.singleton(Role.MANAGER));
         }
 
