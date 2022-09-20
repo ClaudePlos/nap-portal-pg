@@ -3,9 +3,7 @@ package pl.kskowronski.security;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -59,21 +57,26 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         // SUPERVISOR - we use this only when manager want print Pit for workers
         if (  skService.findSkForSupervisor(loggedUser.get().getPrcId()).size() > 0 ) {
-            loggedUser.get().setRoles(Collections.singleton(Role.SUPERVISOR));
+            Set<Role> roles = new HashSet<>();
+            loggedUser.get().getRoles().stream().forEach( item -> roles.add(item));
+            roles.add(Role.SUPERVISOR);
+            loggedUser.get().setRoles(roles);
         }
 
         // MANAGER - we use this for special report for them
         if (  skService.findSkForManager(loggedUser.get().getPrcId()).size() > 0 ) {
-            loggedUser.get().setRoles(Collections.singleton(Role.MANAGER));
+            Set<Role> roles = new HashSet<>();
+            loggedUser.get().getRoles().stream().forEach( item -> roles.add(item));
+            roles.add(Role.MANAGER);
+            loggedUser.get().setRoles(roles);
         }
 
         if (loggedUser.get().getPrcId() == 115442 || loggedUser.get().getPrcId() == 279069  || loggedUser.get().getPrcId() == 340372 ) {
-            loggedUser.get().setRoles(Collections.singleton(Role.ADMIN));
+            Set<Role> roles = new HashSet<>();
+            loggedUser.get().getRoles().stream().forEach( item -> roles.add(item));
+            roles.add(Role.ADMIN);
+            loggedUser.get().setRoles(roles);
         }
-
-
-
-        //return new MyUserDetails(user.get());
 
         return new org.springframework.security.core.userdetails.User(loggedUser.get().getUsername(), loggedUser.get().getPassword(),
                 getAuthorities(loggedUser.get()));
