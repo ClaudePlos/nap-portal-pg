@@ -26,6 +26,7 @@ import pl.kskowronski.data.service.UserService;
 import pl.kskowronski.data.service.egeria.ek.ZatrudnienieService;
 import pl.kskowronski.security.AuthenticatedUser;
 import pl.kskowronski.views.absences.AllAboutAbsencesView;
+import pl.kskowronski.views.admin.AdvertisementsView;
 import pl.kskowronski.views.admin.SkForSupervisorView;
 import pl.kskowronski.views.logout.Logout;
 import pl.kskowronski.views.mainpage.MainPageView;
@@ -169,6 +170,7 @@ public class MainLayout extends AppLayout {
                 new MenuItemInfo("Pit 11 lista", "la la-list", Pit11listView.class), //
                 new MenuItemInfo("Admin(sk)", "la la-cog", SkForSupervisorView.class), //
                 new MenuItemInfo("Raporty", "la la-cog", ReportsView.class), //
+                new MenuItemInfo("Ogłoszenia", "la la-cog", AdvertisementsView.class), //
                 new MenuItemInfo("Wyloguj", "la la-circle-thin", Logout.class), //
 
                 //new MenuItemInfo("About", "la la-file", AboutView.class), //
