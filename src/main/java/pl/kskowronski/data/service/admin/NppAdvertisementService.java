@@ -23,7 +23,7 @@ public class NppAdvertisementService extends CrudService<NppAdvertisement, Integ
         return repo;
     }
 
-    public List<NppAdvertisement> findAll() { return repo.findAll(Sort.by(Sort.Direction.ASC, "lp")); }
+    public List<NppAdvertisement> findAll() { return repo.findAll(Sort.by(Sort.Direction.DESC, "lp")); }
 
     public void save(NppAdvertisement nppAdvertisement) {
         repo.save(nppAdvertisement);

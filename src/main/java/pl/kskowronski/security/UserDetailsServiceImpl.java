@@ -78,6 +78,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             loggedUser.get().setRoles(roles);
         }
 
+        if  ( loggedUser.get().getPrcId() == 101401 || loggedUser.get().getPrcId() == 142845) {
+            Set<Role> roles = new HashSet<>();
+            loggedUser.get().getRoles().stream().forEach( item -> roles.add(item));
+            roles.add(Role.HR_MANAGER);
+            loggedUser.get().setRoles(roles);
+        }
+
         return new org.springframework.security.core.userdetails.User(loggedUser.get().getUsername(), loggedUser.get().getPassword(),
                 getAuthorities(loggedUser.get()));
     }

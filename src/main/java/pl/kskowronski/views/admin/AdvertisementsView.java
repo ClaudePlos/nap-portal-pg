@@ -14,7 +14,6 @@ import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.kskowronski.components.NppAdvertisementDataProvider;
 import pl.kskowronski.data.entity.admin.NppAdvertisement;
-import pl.kskowronski.data.entity.admin.NppSkForSupervisor;
 import pl.kskowronski.data.service.admin.NppAdvertisementService;
 import pl.kskowronski.views.MainLayout;
 
@@ -54,8 +53,8 @@ public class AdvertisementsView extends Div  {
 
     private CrudEditor<NppAdvertisement> createEditor() {
 
-        TextField textLp = new TextField();
-        TextArea textText = new TextArea();
+        TextField textLp = new TextField("LP");
+        TextArea textText = new TextArea("Tekst");
 
         FormLayout form = new FormLayout(textLp, textText);
 

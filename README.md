@@ -74,7 +74,7 @@ On production machine:
 1. If you want add adn build new image:
 sudo docker build -t nap-portal-pg . << dot is important
 
-2. sudo docker run -p 8182:8181 nap-portal-pg:latest
+2. sudo docker run --name portal-pg -d -p 8182:8181 nap-portal-pg:latest
 
 3. sudo docker container start ID (id from docker ps -a)
 

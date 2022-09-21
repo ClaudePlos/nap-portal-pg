@@ -13,10 +13,10 @@ public class NppAdvertisement {
     @Column(name = "ID")
     private Integer id;
 
-    @Column(name = "lp")
+    @Column(name = "LP")
     private String lp;
 
-    @Column(name = "text")
+    @Column(name = "TEXT")
     private String text;
 
     public NppAdvertisement() {
