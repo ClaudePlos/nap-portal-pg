@@ -106,7 +106,6 @@ public class WorkerWithPassView extends VerticalLayout {
 
         this.grid = new Grid<>(User.class);
         grid.setClassName("gridWorkers");
-        grid.setHeight("800px");
         grid.setColumns();
         grid.addColumn("prcNumer").setWidth("100px").setHeader("Numer");
         grid.addColumn("prcNazwisko").setWidth("300px").setHeader("Nazwisko");
