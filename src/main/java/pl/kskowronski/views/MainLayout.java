@@ -28,6 +28,7 @@ import pl.kskowronski.security.AuthenticatedUser;
 import pl.kskowronski.views.absences.AllAboutAbsencesView;
 import pl.kskowronski.views.admin.AdvertisementsView;
 import pl.kskowronski.views.admin.SkForSupervisorView;
+import pl.kskowronski.views.advancepayment.AdvancePaymentView;
 import pl.kskowronski.views.logout.Logout;
 import pl.kskowronski.views.mainpage.MainPageView;
 import pl.kskowronski.views.map.MapView;
@@ -163,6 +164,7 @@ public class MainLayout extends AppLayout {
         MenuItemInfo[] menuItems = new MenuItemInfo[]{ //
                 new MenuItemInfo("Strona główna", "la la-globe", MainPageView.class), //
                 new MenuItemInfo("Twój urlop", "la la-circle-thin", AllAboutAbsencesView.class), //
+                new MenuItemInfo("Twoje zaliczki", "la la-money", AdvancePaymentView.class), //
                 new MenuItemInfo("Pit 11", "la la-circle-thin", Pit11View.class), //
                 new MenuItemInfo("Paski", "la la-circle-thin", PayslipsView.class), //
                 new MenuItemInfo("Paski UZ", "la la-circle-thin", PayslipsContractView.class), //

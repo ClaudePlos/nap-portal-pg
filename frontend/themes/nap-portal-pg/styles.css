@@ -85,7 +85,7 @@ vaadin-grid.gridWorkers {
       height: 600px;
 }
 
-hTop {
+hTop, vaadin-horizontal-layout.h1AdvancePayment {
       display: block;
 }
 
@@ -93,7 +93,7 @@ vaadin-combo-box.comboRep {
       margin-left: 15px;
 }
 
-vaadin-text-field.searchField {
+vaadin-text-field.searchField, vaadin-checkbox.checkClearingAdvancePayment {
       margin-left: 15px;
       margin-right: 15px;
 }
@@ -101,5 +101,4 @@ vaadin-text-field.searchField {
 vaadin-button.butClosePrintView {
       float: right;
 }
-
 

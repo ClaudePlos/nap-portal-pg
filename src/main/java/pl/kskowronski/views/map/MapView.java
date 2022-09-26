@@ -16,7 +16,7 @@ import pl.kskowronski.views.MainLayout;
 
 @PageTitle("Map")
 @Route(value = "map", layout = MainLayout.class)
-@RolesAllowed({"admin"})
+@RolesAllowed({})
 public class MapView extends VerticalLayout {
 
     private LeafletMap map = new LeafletMap();
