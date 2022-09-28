@@ -71,7 +71,8 @@ public class AdvancePaymentView extends VerticalLayout {
         grid.setColumns();
         grid.addColumn("frmName").setWidth("200px").setHeader("Firma").setAutoWidth(true);
         grid.addColumn("creationDate").setWidth("100px").setHeader("Data utworzenia").setAutoWidth(true);
-        grid.addColumn("ctAmount").setWidth("150px").setHeader("Kwota").setAutoWidth(true);
+        grid.addColumn("dtAmount").setWidth("150px").setHeader("Kwota WN").setAutoWidth(true);
+        grid.addColumn("ctAmount").setWidth("150px").setHeader("Kwota MA").setAutoWidth(true);
         grid.addColumn(TemplateRenderer.<AdvancePaymentDTO> of(
                 "<div title='[[item.desc]]'>[[item.desc]]</div>")
                 .withProperty("desc", AdvancePaymentDTO::getDescription))
@@ -90,7 +91,7 @@ public class AdvancePaymentView extends VerticalLayout {
 
     private void onUserChangedYear(){
         List<AdvancePaymentDTO> advancePayments = advancePaymentService.getAdvancePaymentForUser(
-                loggedUser.get().getPrcNumer(), String.valueOf(yearField.getValue().intValue()), whetherClearing);
+                loggedUser.get().getPrcId(), String.valueOf(yearField.getValue().intValue()), whetherClearing);
         grid.setItems(advancePayments);
         if (advancePayments.size() == 0) {
             com.vaadin.flow.component.notification.Notification.show("Brak nierozliczonych zaliczek", 5000, Notification.Position.MIDDLE);

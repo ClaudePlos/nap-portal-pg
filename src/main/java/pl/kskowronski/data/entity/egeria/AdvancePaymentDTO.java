@@ -6,8 +6,9 @@ public class AdvancePaymentDTO {
 
     private String frmName;
     private String creationDate;
-    private BigDecimal ctAmount;
+    private String rozNumber;
     private BigDecimal dtAmount;
+    private BigDecimal ctAmount;
     private String description;
     private String clearingDate;
     private String whetherClearing;
@@ -28,12 +29,12 @@ public class AdvancePaymentDTO {
         this.creationDate = creationDate;
     }
 
-    public BigDecimal getCtAmount() {
-        return ctAmount;
+    public String getRozNumber() {
+        return rozNumber;
     }
 
-    public void setCtAmount(BigDecimal ctAmount) {
-        this.ctAmount = ctAmount;
+    public void setRozNumber(String rozNumber) {
+        this.rozNumber = rozNumber;
     }
 
     public BigDecimal getDtAmount() {
@@ -42,6 +43,14 @@ public class AdvancePaymentDTO {
 
     public void setDtAmount(BigDecimal dtAmount) {
         this.dtAmount = dtAmount;
+    }
+
+    public BigDecimal getCtAmount() {
+        return ctAmount;
+    }
+
+    public void setCtAmount(BigDecimal ctAmount) {
+        this.ctAmount = ctAmount;
     }
 
     public String getDescription() {

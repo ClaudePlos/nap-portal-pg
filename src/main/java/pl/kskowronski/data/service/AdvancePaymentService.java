@@ -23,29 +23,29 @@ public class AdvancePaymentService {
         this.eatFirmaService = eatFirmaService;
     }
 
-    public List<AdvancePaymentDTO> getAdvancePaymentForUser(Integer prcNumber, String period, String whetherClearing ){
+    public List<AdvancePaymentDTO> getAdvancePaymentForUser(Integer prcId, String year, String whetherClearing ){
         List<AdvancePaymentDTO> advancePayments = new ArrayList<>();
 
-        String sql = "select tab.* from (\n" +
-                "select pl_frm_id, pl_data, pl_kwota_wn, pl_kwota_ma, pl_opis, pl_data_zaplaty, spr_platnosci(pl_id) czRozliczone\n" +
-                "from kg_konta, nzt_platnosci p1\n" +
-                "where pl_knt_id = knt_id\n" +
-                "  and knt_pelny_numer like '234-" + prcNumber + "-02' \n" +
-                "  and to_char(pl_data,'YYYY') = '" + period + "' " +
-                "  and pl_kwota_ma != 0\n" +
-                "order by pl_data) tab\n" +
-                "where czRozliczone ='" + whetherClearing + "' ";
+        String sql = "SELECT pl_frm_id, pl_data, ROZ_NUMER\n" +
+                "     --,SUM(decode(rozl, 'N', decode(rozliczony, 'T', 0, 1 ), 1) * PL_KWOTA_WALUTY_WN) wn\n" +
+                "     , SUM(case rozl when 'N' then case rozliczony when 'T' then 0 else 1 end else 1 end * PL_KWOTA_WALUTY_WN) wn\n" +
+                "     , SUM(case rozl when 'N' then case rozliczony when 'T' then 0 else 1 end else 1 end * PL_KWOTA_WALUTY_MA) ma\n" +
+                "     --, MIN(case PL_F_ROZNICA_KURSOWA when 'N' then pl_f_rozliczona(pl_id,null,data.potw) else 'T' end) test\n" +
+                "     --,SUM(decode(rozl, 'N', decode(rozliczony, 'T', 0, 1 ), 1) * PL_KWOTA_WALUTY_MA) ma\n" +
+                "     , pl_opis, pl_data_zaplaty, MIN(rozliczony_na_dzis) rozliczone\n" +
+                "     --,SUM(decode(rozl, 'N', decode(rozliczony, 'T', 0, 1 ), 1) * PL_KWOTA_WN)\n" +
+                "     --,SUM(decode(rozl, 'N', decode(rozliczony, 'T', 0, 1 ), 1) * PL_KWOTA_MA)\n" +
+                "     --,SUM(PL_KWOTA_EURO_WN),SUM(PL_KWOTA_EURO_MA)\n" +
+                "     , MIN (rozliczony) FROM NZT_ROZRACHUNKI, NZT_PLATNOSCI,\n" +
+                "                             (SELECT to_date(to_char(CURRENT_TIMESTAMP, 'YYYY-MM-DD'),'YYYY-MM-DD') NA_DZIEN,'%' POTW,'X' rozl ) DATA,\n" +
+                "                             (SELECT r.pl_id rozl_pl_id\n" +
+                "                                   , CASE WHEN (to_date(to_char(CURRENT_TIMESTAMP, 'YYYY-MM-DD'),'YYYY-MM-DD') >= pl_data_zaplaty2(r.pl_id, '%') ) THEN case r.PL_F_ROZNICA_KURSOWA when 'N' then r.PL_F_ROZLICZONA else 'T' end ELSE  r.PL_F_ROZNICA_KURSOWA END rozliczony\n" +
+                "                                   , case r.PL_F_ROZNICA_KURSOWA when 'N' then  pl_f_rozliczona(r.pl_id,NULL,'%') else 'T' end rozliczony_na_dzis\n" +
+                "                              FROM nzt_rozrachunki, nzt_platnosci r where pl_roz_id = roz_id and roz_prc_id = " + prcId + "  AND  roz_rp_rok = " + year + ") rozl\n" +
+                "WHERE ( pl_roz_id = roz_id AND pl_f_anulowana = 'N' and rozl.rozl_pl_id = pl_id ) AND (((( roz_prc_id = " + prcId + "))  AND ( roz_rp_rok = " + year + ")))\n" +
+                "GROUP BY roz_numer, roz_kl_kod , pl_frm_id, pl_opis, pl_data_zaplaty, pl_data\n" +
+                "HAVING ( MIN(case PL_F_ROZNICA_KURSOWA when 'N' then pl_f_rozliczona(pl_id,null,data.potw) else 'N' end) = '" + whetherClearing + "' ) order by pl_data;";
 
-
-//        String sql2 = "select pl_frm_id, pl_data, pl_kwota_wn, pl_kwota_ma, pl_opis, pl_data_zaplaty, pl_f_rozliczona \n" +
-//                "from kg_konta, nzt_platnosci p1\n" +
-//                "where pl_knt_id = knt_id \n" +
-//                "and knt_pelny_numer like '234-" + prcNumber + "-02' \n" +
-//                "and to_char(pl_data,'YYYY') = '" + period + "' " +
-//                "and pl_kwota_ma != 0\n" +
-//                "and case when PL_F_ZA_BO = 'T' then (select pl_f_rozliczona from nzt_platnosci p2 where p2.pl_pl_id_bo = p1.pl_id) else pl_f_rozliczona end  = '" + whetherClearing + "' " +
-//                "and pl_f_rozliczona = '" + whetherClearing + "' " +
-//                "order by pl_data";
 
         List<Object[]> result = em.createNativeQuery(sql).getResultList();
 
@@ -53,11 +53,12 @@ public class AdvancePaymentService {
             AdvancePaymentDTO p = new AdvancePaymentDTO();
             p.setFrmName( eatFirmaService.findById( Integer.valueOf( ((BigDecimal) item[0]).toString() )).get().getFrmNazwa());
             p.setCreationDate( String.valueOf( (Date) item[1]) );
-            p.setDtAmount( (BigDecimal) item[2] );
-            p.setCtAmount( (BigDecimal) item[3] );
-            p.setDescription( (String) item[4] );
-            p.setClearingDate( String.valueOf( (Date) item[5] != null ? (Date) item[5] : "") );
-            p.setWhetherClearing( ((Character) item[6]).toString() );
+            p.setRozNumber( (String) item[2] );
+            p.setDtAmount( (BigDecimal) item[3] );
+            p.setCtAmount( (BigDecimal) item[4] );
+            p.setDescription( (String) item[5] );
+            p.setClearingDate( String.valueOf( (Date) item[6] != null ? (Date) item[6] : "") );
+            p.setWhetherClearing( ((Character) item[7]).toString() );
             advancePayments.add(p);
         }
 
