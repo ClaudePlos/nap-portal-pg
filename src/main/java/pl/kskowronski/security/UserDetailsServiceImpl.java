@@ -86,7 +86,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
 
         if  ( loggedUser.get().getPrcDgKodEk().equals("EK04")
-                //&& (loggedUser.get().getPrcId() == 101395 || loggedUser.get().getPrcId() == 115442 || loggedUser.get().getPrcId() == 279069)
+                && (loggedUser.get().getPrcId() == 101395 || loggedUser.get().getPrcId() == 115442 || loggedUser.get().getPrcId() == 279069)
         ) {
             Set<Role> roles = new HashSet<>();
             loggedUser.get().getRoles().stream().forEach( item -> roles.add(item));

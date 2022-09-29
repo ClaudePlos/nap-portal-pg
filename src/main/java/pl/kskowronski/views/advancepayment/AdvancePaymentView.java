@@ -69,14 +69,22 @@ public class AdvancePaymentView extends VerticalLayout {
         this.grid = new Grid<>(AdvancePaymentDTO.class);
         grid.setClassName("gridAdvancePayment");
         grid.setColumns();
-        grid.addColumn("frmName").setWidth("200px").setHeader("Firma").setAutoWidth(true);
+
+        grid.addColumn(TemplateRenderer.<AdvancePaymentDTO> of(
+                "<div title='[[item.fmrName]]'>[[item.fmrName]]</div>")
+                .withProperty("fmrName", AdvancePaymentDTO::getFrmName))
+                .setHeader("Firma").setWidth("150px");
+
+        grid.addColumn("rozNumber").setWidth("100px").setHeader("Rozrachunek").setAutoWidth(true);
         grid.addColumn("creationDate").setWidth("100px").setHeader("Data utworzenia").setAutoWidth(true);
         grid.addColumn("dtAmount").setWidth("150px").setHeader("Kwota WN").setAutoWidth(true);
         grid.addColumn("ctAmount").setWidth("150px").setHeader("Kwota MA").setAutoWidth(true);
+
         grid.addColumn(TemplateRenderer.<AdvancePaymentDTO> of(
                 "<div title='[[item.desc]]'>[[item.desc]]</div>")
                 .withProperty("desc", AdvancePaymentDTO::getDescription))
                 .setHeader("Opis").setWidth("400px");
+
         grid.addColumn("clearingDate").setWidth("100px").setHeader("Data rozliczenia").setAutoWidth(true);
         grid.addColumn("whetherClearing").setWidth("100px").setHeader("Czy rozliczone?").setAutoWidth(true);
         grid.setWidth("100%");
