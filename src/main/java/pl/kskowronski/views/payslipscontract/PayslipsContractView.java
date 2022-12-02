@@ -160,7 +160,7 @@ public class PayslipsContractView extends VerticalLayout {
 
     private Button createButtonPayslipLink(Zatrudnienie item) {
         Button button = new Button();
-        if ( !item.isSecondContractOnHours() || contracts.get().size() == 1){
+        //if ( !item.isSecondContractOnHours() || contracts.get().size() == 1){
             button = new Button("Pasek", clickEvent -> {
                 Date periodNow  = null;
                 Date periodParam = null;
@@ -187,7 +187,7 @@ public class PayslipsContractView extends VerticalLayout {
                     Notification.show("Pasek jeszcze niedostępny. Pasek za ostatni miesiąc będzie dostępny po 10 danego miesiąca.", 5000, Notification.Position.MIDDLE);
                 }
             });
-        }
+        //}
 
         return button;
     }
