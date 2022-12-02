@@ -15,7 +15,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import pl.kskowronski.data.MapperDate;
 import pl.kskowronski.data.entity.admin.User;
 import pl.kskowronski.data.entity.egeria.AdvancePaymentDTO;
-import pl.kskowronski.data.entity.egeria.eDek.EdktDeklaracjeDTO;
 import pl.kskowronski.data.service.AdvancePaymentService;
 import pl.kskowronski.data.service.UserService;
 import pl.kskowronski.views.MainLayout;
