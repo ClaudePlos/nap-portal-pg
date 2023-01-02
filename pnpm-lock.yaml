@@ -2,7 +2,7 @@ dependencies:
   '@polymer/iron-icon': 3.0.1
   '@polymer/iron-list': 3.1.0
   '@polymer/polymer': 3.2.0
-  '@types/leaflet': 1.7.6
+  '@types/leaflet': 1.9.0
   '@vaadin/accordion': 22.0.0
   '@vaadin/app-layout': 22.0.0
   '@vaadin/avatar': 22.0.0
@@ -104,7 +104,7 @@ dependencies:
   '@vaadin/virtual-list': 22.0.0
   construct-style-sheets-polyfill: 3.0.4
   date-fns: 2.23.0
-  leaflet: 1.7.1
+  leaflet: 1.9.3
   line-awesome: 1.3.0
   lit: 2.0.0
 devDependencies:
@@ -1502,10 +1502,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
-  /@types/geojson/7946.0.8:
+  /@types/geojson/7946.0.10:
     dev: false
     resolution:
-      integrity: sha512-1rkryxURpr6aWP7R786/UQOkJ3PcpQiWkAXBmdWc7ryFWqN6a4xfK7BtjXvFBKO9LjQ+MWQSWxYeZX1OApnArA==
+      integrity: sha512-Nmh0K3iWQJzniTuPRcJn5hxXkfB1T1pgB89SBig5PlJQU5yocazeu4jATJlaA0GYFKWMqDdvYemoSnF2pXgLVA==
   /@types/html-minifier-terser/5.1.2:
     dev: true
     resolution:
@@ -1520,12 +1520,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-qcUXuemtEu+E5wZSJHNxUXeCZhAfXKQ41D+duX+VYPde7xyEVZci+/oXKJL13tnRs9lR2pr4fod59GT6/X1/yQ==
-  /@types/leaflet/1.7.6:
+  /@types/leaflet/1.9.0:
     dependencies:
-      '@types/geojson': 7946.0.8
+      '@types/geojson': 7946.0.10
     dev: false
     resolution:
-      integrity: sha512-Emkz3V08QnlelSbpT46OEAx+TBZYTOX2r1yM7W+hWg5+djHtQ1GbEXBDRLaqQDOYcDI51Ss0ayoqoKD4CtLUDA==
+      integrity: sha512-7LeOSj7EloC5UcyOMo+1kc3S1UT3MjJxwqsMT1d2PTyvQz53w0Y0oSSk9nwZnOZubCmBvpSNGceucxiq+ZPEUw==
   /@types/node/16.11.12:
     dev: true
     resolution:
@@ -6195,10 +6195,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
-  /leaflet/1.7.1:
+  /leaflet/1.9.3:
     dev: false
     resolution:
-      integrity: sha512-/xwPEBidtg69Q3HlqPdU3DnrXQOvQU/CCHA1tcDQVzOwm91YMYaILjNp7L4Eaw5Z4sOYdbBz6koWyibppd8Zqw==
+      integrity: sha512-iB2cR9vAkDOu5l3HAay2obcUHZ7xwUBBjph8+PGtmW/2lYhbLizWtG7nTeYht36WfOslixQF9D/uSIzhZgGMfQ==
   /leven/3.1.0:
     dev: true
     engines:
