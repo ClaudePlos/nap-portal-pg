@@ -1,8 +1,12 @@
 package pl.kskowronski.views.mainpage;
 
 import com.vaadin.flow.component.Html;
+import com.vaadin.flow.component.board.Board;
+import com.vaadin.flow.component.board.Row;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -15,10 +19,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.kskowronski.data.entity.admin.NppAdvertisement;
 import pl.kskowronski.data.entity.admin.User;
+import pl.kskowronski.data.entity.egeria.ek.AbsenceLimitDTO;
 import pl.kskowronski.data.entity.log.LogEvent;
 import pl.kskowronski.data.entity.log.LogPit11;
 import pl.kskowronski.data.service.UserService;
 import pl.kskowronski.data.service.admin.NppAdvertisementService;
+import pl.kskowronski.data.service.egeria.ek.AbsenceLimitService;
 import pl.kskowronski.data.service.log.LogPit11Service;
 import pl.kskowronski.views.MainLayout;
 
@@ -39,19 +45,27 @@ public class MainPageView extends VerticalLayout {
     private VerticalLayout v01 = new VerticalLayout();
 
     private LogPit11Service logPit11Service;
+    private AbsenceLimitService absenceLimitService;
 
     private Optional<User> worker;
 
+    private Board board = new Board();
+    private Row rootRow = new Row();
+    private Row nestedRow = new Row();
+
     @Autowired
-    public MainPageView(UserService userService, NppAdvertisementService nppAdvertisementService, LogPit11Service logPit11Service) {
+    public MainPageView(UserService userService, NppAdvertisementService nppAdvertisementService, LogPit11Service logPit11Service, AbsenceLimitService absenceLimitService) {
         this.logPit11Service = logPit11Service;
+        this.absenceLimitService = absenceLimitService;
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         worker = userService.findByUsername(userDetails.getUsername());
 
         List<NppAdvertisement> adverts = nppAdvertisementService.findAll();
 
-        add(new Label("Witaj " + worker.get().getPrcImie() + " " + worker.get().getPrcNazwisko() + ". " ));
-        add(new Label("To jest strona przeznaczona dla Ciebie z dostępem do Twoich danych kadrowych."));
+
+
+        v01.add(new Html("<p style='font-size:24px;'><b>Witaj, " + worker.get().getPrcImie()  + " \uD83D\uDC4B</b></p>")); //+ " " + worker.get().getPrcNazwisko() + ". "
+        v01.add(new Label("To jest strona przeznaczona dla Ciebie z dostępem do Twoich danych kadrowych."));
         v01.add(new Label(""), new Html("<b>Ogłoszenia:</b>"));
 
 
@@ -61,11 +75,41 @@ public class MainPageView extends VerticalLayout {
             v01.add(new Label(item.getText()), new Html("<BR>"));
         });
 
-        add(v01);
+        rootRow.add(v01, 2);
+
+        Span spanMonthName = new Span( mappingMnthsToPL(LocalDate.now().getMonthValue()) );
+        spanMonthName.getElement().getThemeList().add("badge primary");
+        spanMonthName.getStyle().set("width","25px");
+        spanMonthName.getStyle().set("height","40px");
+        spanMonthName.getStyle().set("font-size","22px");
+        Span spanMonthNum = new Span(LocalDate.now().getDayOfMonth() + "");
+        spanMonthNum.getElement().getThemeList().add("badge contrast");
+        spanMonthNum.getStyle().set("width","25px");
+        spanMonthNum.getStyle().set("height","150px");
+        spanMonthNum.getStyle().set("font-size","64px");
+
+
+
+        nestedRow.add(spanMonthName);
+        nestedRow.add(spanMonthNum);
+        rootRow.addNestedRow(nestedRow);
+
+
+
+        board.add(rootRow);
+
+        add(board);
+        this.setClassName("board-nested");
 
         try {
             PrintStatement();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            printInformationAboutLimitFreeDayAtYear();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -88,7 +132,7 @@ public class MainPageView extends VerticalLayout {
             }).start();
         });
 
-        add(a, new Html("<p style='font-size: 12px; margin-top: -0.7em;'> *Pobranie dokumentu oznacza zapoznanie się z treścią.</p>") );
+        v01.add(a, new Html("<p style='font-size: 12px; margin-top: -0.7em;'> *Pobranie dokumentu oznacza zapoznanie się z treścią.</p>") );
 
 
     }
@@ -101,6 +145,51 @@ public class MainPageView extends VerticalLayout {
         logPit11.setAuditDc(new Date());
         logPit11.setDescription("Pobranie oświadczenia PPK");
         logPit11Service.save(logPit11);
+    }
+
+    private void printInformationAboutLimitFreeDayAtYear() throws Exception {
+        Optional<List<AbsenceLimitDTO>> listAbsencesLimits
+                = absenceLimitService.findAllAbsenceLimitForPrcIdAndYear(worker.get().getPrcId()
+                , LocalDate.now().getYear() + ""
+                , "'A_UR1'");
+
+        if (listAbsencesLimits.get().size() == 1 ) {
+            Span limitFreeDays = new Span(new Html("<center><p>" + listAbsencesLimits.get().get(0).getPozostaloUrlopu() + " dni <br>" +
+                    " <small> Urlopu wypoczynkowego do wykorzystania</small></p></center>"));
+            limitFreeDays.getElement().getThemeList().add("badge contrast");
+            limitFreeDays.getStyle().set("width","25px");
+            limitFreeDays.getStyle().set("height","150px");
+            limitFreeDays.getStyle().set("font-size","32px");
+            limitFreeDays.getStyle().set("margin-top","15px");
+            nestedRow.add(limitFreeDays);
+        }
+    }
+
+    private String mappingMnthsToPL( int value ) {
+        if ( value == 1 )
+            return "Styczeń";
+        if ( value == 2 )
+            return "Luty";
+        if ( value == 3 )
+            return "Marzec";
+        if ( value == 4 )
+            return "Kwiecień";
+        if ( value == 5 )
+            return "Maj";
+        if ( value == 6 )
+            return "Czerwiec";
+        if ( value == 7 )
+            return "Lipiec";
+        if ( value == 8 )
+            return "Sierpień";
+        if ( value == 9 )
+            return "Wrzesień";
+        if ( value == 10 )
+            return "Październik";
+        if ( value == 11 )
+            return "Listopad";
+        else
+            return "Grudzień";
     }
 
 }

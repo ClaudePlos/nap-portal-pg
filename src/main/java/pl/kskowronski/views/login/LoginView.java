@@ -35,7 +35,7 @@ public class LoginView extends LoginOverlay {
         i18n.getForm().setPassword("Hasło");
         i18n.getForm().setForgotPassword("");
         i18n.getForm().setTitle("");
-        i18n.setAdditionalInformation("v.2022");
+        i18n.setAdditionalInformation("v.2023");
         setI18n(i18n);
 
         LoginI18n.ErrorMessage i18nErrorMessage = i18n.getErrorMessage();
