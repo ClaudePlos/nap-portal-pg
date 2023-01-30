@@ -153,7 +153,7 @@ public class MainPageView extends VerticalLayout {
                 , LocalDate.now().getYear() + ""
                 , "'A_UR1'");
 
-        if (listAbsencesLimits.get().size() == 1 ) {
+        if (listAbsencesLimits.get().size() > 0 ) {
             Span limitFreeDays = new Span(new Html("<center><p>" + listAbsencesLimits.get().get(0).getPozostaloUrlopu() + " dni <br>" +
                     " <small> Urlopu wypoczynkowego do wykorzystania</small></p></center>"));
             limitFreeDays.getElement().getThemeList().add("badge contrast");
