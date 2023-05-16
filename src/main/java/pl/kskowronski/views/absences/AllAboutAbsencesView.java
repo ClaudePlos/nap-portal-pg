@@ -60,7 +60,7 @@ public class AllAboutAbsencesView extends VerticalLayout {
         Label labTitleGridLimit = new Label("Twojego urlopu w roku " + mapperDate.getCurrentlyYear() + " zostało:");
         add(labTitleGridLimit);
         this.gridAbLimit = new Grid<>(AbsenceLimitDTO.class);
-        gridAbLimit.setColumns("nazwaWymiaru", "kodUrlopu", "ldOd", "ldDo", "zaleglyUrlop", "pozostaloUrlopu", "frmNazwa");
+        gridAbLimit.setColumns("nazwaWymiaru", "kodUrlopu", "ldOd", "ldDo", "pozostaloUrlopu", "frmNazwa"); //, "zaleglyUrlop"
 
         // For mobile
         gridAbLimit.addComponentColumn(item -> {
