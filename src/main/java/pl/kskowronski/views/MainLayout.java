@@ -29,7 +29,6 @@ import pl.kskowronski.views.absences.AllAboutAbsencesView;
 import pl.kskowronski.views.admin.AdvertisementsView;
 import pl.kskowronski.views.admin.SkForSupervisorView;
 import pl.kskowronski.views.advancepayment.AdvancePaymentView;
-import pl.kskowronski.views.api.ApiView;
 import pl.kskowronski.views.documents.DocumentsView;
 import pl.kskowronski.views.logout.Logout;
 import pl.kskowronski.views.mainpage.MainPageView;
@@ -166,7 +165,7 @@ public class MainLayout extends AppLayout {
         MenuItemInfo[] menuItems = new MenuItemInfo[]{ //
                 new MenuItemInfo("Strona główna", "la la-globe", MainPageView.class), //
                 new MenuItemInfo("Twój urlop", "la la-circle-thin", AllAboutAbsencesView.class), //
-                new MenuItemInfo("Twóe dokumenty", "la la-circle-thin", DocumentsView.class), //
+                new MenuItemInfo("Twoje dokumenty", "la la-circle-thin", DocumentsView.class), //
                 new MenuItemInfo("Twoje zaliczki", "la la-money", AdvancePaymentView.class), //
                 new MenuItemInfo("Pit 11", "la la-circle-thin", Pit11View.class), //
                 new MenuItemInfo("Paski", "la la-circle-thin", PayslipsView.class), //
@@ -176,7 +175,6 @@ public class MainLayout extends AppLayout {
                 new MenuItemInfo("Admin(sk)", "la la-cog", SkForSupervisorView.class), //
                 new MenuItemInfo("Raporty", "la la-cog", ReportsView.class), //
                 new MenuItemInfo("Ogłoszenia", "la la-cog", AdvertisementsView.class), //
-                new MenuItemInfo("Api", "la la-circle-thin", ApiView.class), //
                 new MenuItemInfo("Wyloguj", "la la-circle-thin", Logout.class), //
 
                 //new MenuItemInfo("About", "la la-file", AboutView.class), //

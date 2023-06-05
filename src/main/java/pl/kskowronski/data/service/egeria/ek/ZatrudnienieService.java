@@ -324,4 +324,8 @@ public class ZatrudnienieService extends CrudService<Zatrudnienie, Integer> {
         return listaAktPracNaSk;
     }
 
+    public Optional<List<Zatrudnienie>> getAllContractsForWorker(Integer prcId) {
+        return repo.findAllByPrcId(prcId);
+    }
+
 }

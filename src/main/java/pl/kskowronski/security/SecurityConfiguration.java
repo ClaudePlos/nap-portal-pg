@@ -39,25 +39,6 @@ public class SecurityConfiguration extends VaadinWebSecurityConfigurerAdapter {
         };
     }
 
-    /**
-     * ONLY FOR /api/**
-     * all api requests will have "Authorization" header which I can use to authenticate, if valid. no login needed
-     */
-    @Configuration
-    @Order(1)
-    public static class RestSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http.cors().and().csrf().disable()
-                    // make sure to only make rules for /api/**  - everything else will be defined in WebSecurityConfigurationAdapter
-                    .antMatcher("/document/**").authorizeRequests().anyRequest().authenticated();
-
-                    // these requests come with an "Authorization" header with a token
-                    // Use this token to create an Authentication for this request.
-                    //.and().addFilterBefore(new JWTAuthenticationFilt(), UsernamePasswordAuthenticationFilter.class);
-        }
-    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
