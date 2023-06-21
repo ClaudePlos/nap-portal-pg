@@ -325,7 +325,12 @@ public class ZatrudnienieService extends CrudService<Zatrudnienie, Integer> {
     }
 
     public Optional<List<Zatrudnienie>> getAllContractsForWorker(Integer prcId) {
-        return repo.findAllByPrcId(prcId);
+        Optional<List<Zatrudnienie>> zats = repo.findAllByPrcId(prcId);
+        zats.get().forEach( z -> {
+            WymiarEtatu wymEtatu = wymiarEtatuRepo.findById(z.getZatWymiar().toString()).get();
+            z.setWymiarEtatu(wymEtatu);
+        });
+        return zats;
     }
 
 }

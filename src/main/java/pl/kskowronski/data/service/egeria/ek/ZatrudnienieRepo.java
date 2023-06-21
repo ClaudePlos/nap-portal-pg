@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public interface ZatrudnienieRepo extends JpaRepository<Zatrudnienie, Integer> {
 
-    @Query("select z from Zatrudnienie z where z.zatPrcId = :prcId " +
+    @Query("select z from Zatrudnienie z where z.zatPrcId = :prcId and z.zatTypUmowy = 0 " +
             "order by z.zatDataZmiany desc")
     Optional<List<Zatrudnienie>> findAllByPrcId(@Param("prcId") Integer prcId);
 
