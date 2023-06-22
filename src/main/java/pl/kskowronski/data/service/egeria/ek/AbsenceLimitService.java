@@ -30,7 +30,7 @@ public class AbsenceLimitService {
 
         //consolidationService.setConsolidateCompany();
 
-        String sql = "select la_prc_id, la_rok, ld_od, ld_do, ld_pozostalo, la_dg_kod, la_frm_id" +
+        String sql = "select la_prc_id, la_rok, ld_od, ld_do, ld_pozostalo, la_dg_kod, la_frm_id, ld_wymiar" +
                 " from ek_limity_absencji, ek_limity_dane" +
                 " where ld_la_id=la_id" +
                 " and la_prc_id = " + prcId +
@@ -56,6 +56,7 @@ public class AbsenceLimitService {
         absenceLimit.setKodUrlopu((String) ob[5]);
         absenceLimit.setFrmNazwa(eatFirmaRepo.findById( ((BigDecimal) ob[6]).intValue() ).get().getFrmNazwa());
         absenceLimit.setNazwaWymiaru(rodzajWymiaruRepo.findByRwyDgKod((String) ob[5]).get().getRwyNazwa());
+        absenceLimit.setLdWymiar((BigDecimal) ob[7]);
         return absenceLimit;
     }
 

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.vaadin.artur.helpers.CrudService;
 import pl.kskowronski.data.entity.egeria.global.EatFirma;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,5 +23,9 @@ public class EatFirmaService extends CrudService<EatFirma, Integer> {
     }
 
     public Optional<EatFirma> findById(Integer frmId){ return repo.findById(frmId);}
+
+    public List<EatFirma> findAllF() {
+        return null;
+    }
 
 }

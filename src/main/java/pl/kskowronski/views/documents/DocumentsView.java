@@ -8,24 +8,28 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.JavaScript;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.renderer.TemplateRenderer;
+import com.vaadin.flow.function.SerializableSupplier;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.StreamResource;
 import com.vaadin.flow.server.VaadinSession;
 import org.vaadin.reports.PrintPreviewReport;
 import pl.kskowronski.data.entity.admin.User;
+import pl.kskowronski.data.entity.egeria.ek.AbsenceLimitDTO;
 import pl.kskowronski.data.entity.egeria.ek.Zatrudnienie;
 import pl.kskowronski.data.entity.egeria.global.EatFirma;
-import pl.kskowronski.data.service.egeria.ek.EkPlanyPracyService;
-import pl.kskowronski.data.service.egeria.ek.EkSystemyPracyService;
-import pl.kskowronski.data.service.egeria.ek.ZatrudnienieService;
+import pl.kskowronski.data.service.egeria.ek.*;
 import pl.kskowronski.data.service.egeria.global.EatFirmaService;
 import pl.kskowronski.views.MainLayout;
+import pl.kskowronski.views.reports.ReportsView;
 
 import javax.annotation.security.RolesAllowed;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -41,17 +45,20 @@ public class DocumentsView extends VerticalLayout {
     private EatFirmaService eatFirmaService;
     private EkSystemyPracyService ekSystemyPracyService;
     private EkPlanyPracyService ekPlanyPracyService;
+    private AbsenceLimitService absenceLimitService;
     User worker;
     private Grid<Zatrudnienie> gridContracts;
 
     Style headerStyle = new StyleBuilder(true).setFont(Font.ARIAL_MEDIUM).build();
     Style groupStyle = new StyleBuilder(true).setFont(Font.ARIAL_MEDIUM_BOLD).build();
 
-    public DocumentsView(ZatrudnienieService zatrudnienieService, EatFirmaService eatFirmaService, EkSystemyPracyService ekSystemyPracyService, EkPlanyPracyService ekPlanyPracyService) throws ParseException {
+    public DocumentsView(ZatrudnienieService zatrudnienieService, EatFirmaService eatFirmaService
+            , EkSystemyPracyService ekSystemyPracyService, EkPlanyPracyService ekPlanyPracyService, AbsenceLimitService absenceLimitService) throws ParseException {
         this.zatrudnienieService = zatrudnienieService;
         this.eatFirmaService = eatFirmaService;
         this.ekSystemyPracyService = ekSystemyPracyService;
         this.ekPlanyPracyService = ekPlanyPracyService;
+        this.absenceLimitService = absenceLimitService;
         generateGridContract();
         getCotractForPeriod();
     }
@@ -85,12 +92,16 @@ public class DocumentsView extends VerticalLayout {
 
     private Button createButtonDocument(Zatrudnienie zat) {
         Button button = new Button("Dokument", clickEvent -> {
-            genPDF(zat);
+            try {
+                genPDF(zat);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
         return button;
     }
 
-    private void genPDF(Zatrudnienie zat){
+    private void genPDF(Zatrudnienie zat) throws Exception {
 
         Optional<EatFirma> company = eatFirmaService.findById(zat.getFrmId());
 
@@ -98,19 +109,31 @@ public class DocumentsView extends VerticalLayout {
         Double tygodniowaNorma = ekSystemyPracyService.getNormaTygodniowaForSpId( ekPlanyPracyService.getSpId(zat.getPpId()) );
         String npKod = zat.getZatStatus().toString().substring(zat.getZatStatus().toString().length()-1);
 
+        Optional<List< AbsenceLimitDTO >> listAbsencesLimits = absenceLimitService.findAllAbsenceLimitForPrcIdAndYear(zat.getZatPrcId()
+                , zat.getZatDataZmiany().toString().substring(0,4) + ""
+                , "'A_UR1'");
+
         String przerwaPracaNP1 = "";
         String przerwaPracaNP2 = "";
         String dodUrlopNP1 = "";
         String dodUrlopNP2 = "";
         if ( Integer.parseInt(npKod) > 0 ) {
+
+            Optional<List< AbsenceLimitDTO >> listAbsencesLimitsAdding = absenceLimitService.findAllAbsenceLimitForPrcIdAndYear(zat.getZatPrcId()
+                    , zat.getZatDataZmiany().toString().substring(0,4) + ""
+                    , "'UR91'");
+
             przerwaPracaNP1 = "  - dodatkowa przerwa z tytułu posiadania orzeczenia o stopniu niepełnosprawności: 15 min (dla osób ";
             przerwaPracaNP2 = "niepełnosprawnych po kodzie ubezpieczenia z umowy)";
-            dodUrlopNP1 = "Wymiar przysługującego Ci urlopu dodatkowego: ……………………(tylko dla NP. po kodzie ubezpieczenia)";
-            dodUrlopNP2 = "Ilość dni do wykorzystania w 20… roku: …………………";
+            dodUrlopNP1 = "Wymiar przysługującego Ci urlopu dodatkowego: " + listAbsencesLimitsAdding.get().get(0).getLdWymiar();
+            dodUrlopNP2 = "Ilość dni do wykorzystania w " + zat.getZatDataZmiany().toString().substring(0,4) + " roku: " + listAbsencesLimitsAdding.get().get(0).getPozostaloUrlopu();
         }
 
         List<User> list = new ArrayList<>();
         list.add(worker);
+
+
+        var report = new PrintPreviewReport<>();
 
         Dialog dialog = new Dialog();
         dialog.setWidth("700px");
@@ -122,10 +145,10 @@ public class DocumentsView extends VerticalLayout {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         String zatDataDo =  zat.getZatDataDo() == null ? " czas nieokreślony" : zat.getZatDataDo().toString();
 
-        var report = new PrintPreviewReport<>();
+
         report.getReportBuilder().setMargins(20, 3, 40, 40)
                 .setTitle("")
-                .addAutoText( worker.getNazwImie() + " " + npKod, AutoText.POSITION_HEADER, AutoText.ALIGMENT_LEFT, 200, headerStyle)
+                .addAutoText( worker.getNazwImie(), AutoText.POSITION_HEADER, AutoText.ALIGMENT_LEFT, 200, headerStyle)
                 .addAutoText("Data: " + LocalDateTime.now().format(formatter), AutoText.POSITION_HEADER, AutoText.ALIGNMENT_RIGHT, 200, headerStyle)
                 //.addAutoText(AutoText.AUTOTEXT_PAGE_X_OF_Y, AutoText.POSITION_HEADER, AutoText.ALIGNMENT_RIGHT, 200, 10, headerStyle)
 
@@ -154,26 +177,32 @@ public class DocumentsView extends VerticalLayout {
                 .addAutoText(przerwaPracaNP2, AutoText.POSITION_HEADER, AutoText.ALIGMENT_LEFT, 500, headerStyle)
 
 
-
                 .addAutoText("", AutoText.POSITION_HEADER, AutoText.ALIGMENT_LEFT, 500, headerStyle)
                 .addAutoText("", AutoText.POSITION_HEADER, AutoText.ALIGMENT_LEFT, 500, headerStyle)
-                .addAutoText("Wymiar przysługującego Ci urlopu wypoczynkowego: …………………………… ( z zakładki okresy)", AutoText.POSITION_HEADER, AutoText.ALIGMENT_LEFT, 500, headerStyle)
-                .addAutoText("Ilość dni do wykorzystania w 20… roku: …………", AutoText.POSITION_HEADER, AutoText.ALIGMENT_LEFT, 500, headerStyle)
+                .addAutoText("Wymiar przysługującego Ci urlopu wypoczynkowego: " + listAbsencesLimits.get().get(0).getLdWymiar(), AutoText.POSITION_HEADER, AutoText.ALIGMENT_LEFT, 500, headerStyle)
+                .addAutoText("Ilość dni do wykorzystania w " + zat.getZatDataZmiany().toString().substring(0,4) +" roku: " + listAbsencesLimits.get().get(0).getPozostaloUrlopu(), AutoText.POSITION_HEADER, AutoText.ALIGMENT_LEFT, 500, headerStyle)
 
 
                 .addAutoText("", AutoText.POSITION_HEADER, AutoText.ALIGMENT_LEFT, 500, headerStyle)
                 .addAutoText(dodUrlopNP1, AutoText.POSITION_HEADER, AutoText.ALIGMENT_LEFT, 500, headerStyle)
                 .addAutoText(dodUrlopNP2, AutoText.POSITION_HEADER, AutoText.ALIGMENT_LEFT, 500, headerStyle)
 
-                .setPrintBackgroundOnOddRows(true);
+                .setDetailHeight(0).setDetailHeight(100).setFooterVariablesHeight(100);
+
 
 
 
         report.setItems(null);
 
+        var pdf = report.getStreamResource("doc.pdf", eatFirmaService::findAllF, PrintPreviewReport.Format.PDF);
+
+        //report.getElement().setAttribute("height","400px");
+
         //report.getReportBuilder().addAutoText("Jesteś zatrudniony w ramach", AutoText.POSITION_HEADER, AutoText.ALIGMENT_LEFT, 200, headerStyle);
 
-        dialog.add( butClose, report );
+        var an = new Anchor(pdf,"Drukuj" );
+        an.setTarget( "_blank" );
+        dialog.add( an, butClose,report );
 
         dialog.open();
 

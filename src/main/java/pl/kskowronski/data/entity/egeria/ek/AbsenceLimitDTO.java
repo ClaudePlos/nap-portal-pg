@@ -1,5 +1,7 @@
 package pl.kskowronski.data.entity.egeria.ek;
 
+import java.math.BigDecimal;
+
 public class AbsenceLimitDTO {
 
     private Integer prcId;
@@ -11,6 +13,7 @@ public class AbsenceLimitDTO {
     private String nazwaWymiaru;
     private Integer frmId;
     private String frmNazwa;
+    private BigDecimal ldWymiar;
 
     public AbsenceLimitDTO() {
     }
@@ -85,5 +88,13 @@ public class AbsenceLimitDTO {
 
     public void setNazwaWymiaru(String nazwaWymiaru) {
         this.nazwaWymiaru = nazwaWymiaru;
+    }
+
+    public BigDecimal getLdWymiar() {
+        return ldWymiar;
+    }
+
+    public void setLdWymiar(BigDecimal ldWymiar) {
+        this.ldWymiar = ldWymiar;
     }
 }
