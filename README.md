@@ -83,3 +83,11 @@ sudo docker build -t nap-portal-pg . << dot is important
 
 
 anna.pietrzak 79050515509
+
+bład: .jasperreports.engine.util.JRFontNotFoundException: Font "Arial" is not available to the JVM. See the Javadoc for more details.
+2023.06.22 Dodałem do dockera jeszcze: 
+# Skopiuj plik czcionki Arial do obrazu
+# w folderze msttcore są wszyskie Fonty Windowsa i wrzuca to do dockera do /usr/share/fonts/msttcore/
+ADD msttcore /usr/share/fonts/msttcore/
+# Zaktualizuj cache czcionek
+RUN fc-cache -f -v
