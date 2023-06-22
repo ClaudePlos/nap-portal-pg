@@ -329,6 +329,7 @@ public class ZatrudnienieService extends CrudService<Zatrudnienie, Integer> {
         zats.get().forEach( z -> {
             WymiarEtatu wymEtatu = wymiarEtatuRepo.findById(z.getZatWymiar().toString()).get();
             z.setWymiarEtatu(wymEtatu);
+            z.setFrmNazwa( eatFirmaService.findById(z.getFrmId()).get().getFrmNazwa());
         });
         return zats;
     }

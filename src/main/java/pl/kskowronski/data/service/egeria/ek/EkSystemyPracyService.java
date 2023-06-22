@@ -12,4 +12,12 @@ public class EkSystemyPracyService {
         this.repo = repo;
     }
 
+    public Double getNormaDobowaForSpId( Integer spId ) {
+        return repo.getById(spId).getSpDCzasWartosc();
+    }
+
+    public Double getNormaTygodniowaForSpId( Integer spId ) {
+        return repo.getById(spId).getSpTCzasWartosc();
+    }
+
 }

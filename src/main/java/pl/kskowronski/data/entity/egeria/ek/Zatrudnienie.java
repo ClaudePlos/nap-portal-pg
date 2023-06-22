@@ -109,6 +109,9 @@ public class Zatrudnienie {
     @Column(name="zat_wymiar")
     private Integer zatWymiar;
 
+    @Column(name = "zat_status")
+    private Integer zatStatus;
+
     @Transient
     private WymiarEtatu wymiarEtatu;
 
@@ -430,5 +433,13 @@ public class Zatrudnienie {
 
     public void setJoName(String joName) {
         this.joName = joName;
+    }
+
+    public Integer getZatStatus() {
+        return zatStatus;
+    }
+
+    public void setZatStatus(Integer zatStatus) {
+        this.zatStatus = zatStatus;
     }
 }
