@@ -37,6 +37,7 @@ import pl.kskowronski.views.payslips.PayslipsView;
 import pl.kskowronski.views.payslipscontract.PayslipsContractView;
 import pl.kskowronski.views.pit11.Pit11View;
 import pl.kskowronski.views.pit11list.Pit11listView;
+import pl.kskowronski.views.regulations.RegulationsView;
 import pl.kskowronski.views.reports.ReportsView;
 
 /**
@@ -165,6 +166,7 @@ public class MainLayout extends AppLayout {
         MenuItemInfo[] menuItems = new MenuItemInfo[]{ //
                 new MenuItemInfo("Strona główna", "la la-globe", MainPageView.class), //
                 new MenuItemInfo("Twój urlop", "la la-circle-thin", AllAboutAbsencesView.class), //
+                new MenuItemInfo("Regulamin pracy", "la la-circle-thin", RegulationsView.class), //
                 new MenuItemInfo("Twoje dokumenty", "la la-circle-thin", DocumentsView.class), //
                 new MenuItemInfo("Twoje zaliczki", "la la-money", AdvancePaymentView.class), //
                 new MenuItemInfo("Pit 11", "la la-circle-thin", Pit11View.class), //
