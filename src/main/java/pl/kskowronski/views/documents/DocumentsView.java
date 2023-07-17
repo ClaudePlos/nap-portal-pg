@@ -4,19 +4,15 @@ import ar.com.fdvs.dj.domain.AutoText;
 import ar.com.fdvs.dj.domain.Style;
 import ar.com.fdvs.dj.domain.builders.StyleBuilder;
 import ar.com.fdvs.dj.domain.constants.Font;
-import com.itextpdf.text.pdf.BaseFont;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.dependency.JavaScript;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.renderer.TemplateRenderer;
-import com.vaadin.flow.function.SerializableSupplier;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.StreamResource;
 import com.vaadin.flow.server.VaadinSession;
 import org.vaadin.reports.PrintPreviewReport;
 import pl.kskowronski.data.entity.admin.User;
@@ -26,7 +22,6 @@ import pl.kskowronski.data.entity.egeria.global.EatFirma;
 import pl.kskowronski.data.service.egeria.ek.*;
 import pl.kskowronski.data.service.egeria.global.EatFirmaService;
 import pl.kskowronski.views.MainLayout;
-import pl.kskowronski.views.reports.ReportsView;
 
 import javax.annotation.security.RolesAllowed;
 import java.text.ParseException;
@@ -52,6 +47,8 @@ public class DocumentsView extends VerticalLayout {
 
     Style headerStyle = new StyleBuilder(true).setFont(Font.ARIAL_MEDIUM).build();
     Style groupStyle = new StyleBuilder(true).setFont(Font.ARIAL_MEDIUM_BOLD).build();
+
+    DateTimeFormatter formYYYYMM = DateTimeFormatter.ofPattern("yyyy-MM");
 
     public DocumentsView(ZatrudnienieService zatrudnienieService, EatFirmaService eatFirmaService
             , EkSystemyPracyService ekSystemyPracyService, EkPlanyPracyService ekPlanyPracyService, AbsenceLimitService absenceLimitService) throws ParseException {
@@ -83,7 +80,7 @@ public class DocumentsView extends VerticalLayout {
     private void getCotractForPeriod() throws ParseException {
         VaadinSession session = VaadinSession.getCurrent();
         worker = session.getAttribute(User.class);
-        Optional<List<Zatrudnienie>> contracts = zatrudnienieService.getAllContractsForWorker(worker.getPrcId());
+        Optional<List<Zatrudnienie>> contracts = zatrudnienieService.getActualContractForWorker(worker.getPrcId(), LocalDate.now().format(formYYYYMM));
         if (!contracts.isPresent()){
             Notification.show("Brak umów w danym okresie", 3000, Notification.Position.MIDDLE);
         }
@@ -115,7 +112,6 @@ public class DocumentsView extends VerticalLayout {
                 , "'A_UR1'");
 
         String przerwaPracaNP1 = "";
-        String przerwaPracaNP2 = "";
         String dodUrlopNP1 = "";
         String dodUrlopNP2 = "";
         if ( Integer.parseInt(npKod) > 0 ) {
@@ -124,8 +120,7 @@ public class DocumentsView extends VerticalLayout {
                     , zat.getZatDataZmiany().toString().substring(0,4) + ""
                     , "'UR91'");
 
-            przerwaPracaNP1 = "  - dodatkowa przerwa z tytułu posiadania orzeczenia o stopniu niepełnosprawności: 15 min (dla osób ";
-            przerwaPracaNP2 = "niepełnosprawnych po kodzie ubezpieczenia z umowy)";
+            przerwaPracaNP1 = "  - dodatkowa przerwa z tytułu posiadania orzeczenia o stopniu niepełnosprawności: 15 min ";
             dodUrlopNP1 = "Wymiar przysługującego Ci urlopu dodatkowego: " + listAbsencesLimitsAdding.get().get(0).getLdWymiar();
             dodUrlopNP2 = "Ilość dni do wykorzystania w " + zat.getZatDataZmiany().toString().substring(0,4) + " roku: " + listAbsencesLimitsAdding.get().get(0).getPozostaloUrlopu();
         }
@@ -175,7 +170,6 @@ public class DocumentsView extends VerticalLayout {
 
 
                 .addAutoText(przerwaPracaNP1, AutoText.POSITION_HEADER, AutoText.ALIGMENT_LEFT, 500, headerStyle)
-                .addAutoText(przerwaPracaNP2, AutoText.POSITION_HEADER, AutoText.ALIGMENT_LEFT, 500, headerStyle)
 
 
                 .addAutoText("", AutoText.POSITION_HEADER, AutoText.ALIGMENT_LEFT, 500, headerStyle)
