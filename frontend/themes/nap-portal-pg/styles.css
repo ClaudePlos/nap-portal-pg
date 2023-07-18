@@ -85,6 +85,11 @@ vaadin-grid.gridWorkers {
       height: 600px;
 }
 
+vaadin-grid.gridLog {
+      width: 1000px;
+      height: 600px;
+}
+
 hTop, vaadin-horizontal-layout.h1AdvancePayment {
       display: block;
 }
