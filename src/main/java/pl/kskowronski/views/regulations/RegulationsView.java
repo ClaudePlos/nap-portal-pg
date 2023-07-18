@@ -50,13 +50,16 @@ public class RegulationsView extends VerticalLayout {
                 e.printStackTrace();
             }
         }
-        this.add(new Label("Regulamin pracy:"), v01);
+
 
         worker.get().getZatrudnienia().stream().forEach( z -> {
             try {
-                String fileName = getPathForRegulation(z.getFrmId());
-                String path = "/pdf/regulations2023/" + fileName;
-                generateRegulations(path, fileName);
+                if (z.getFrmId() != 300319 || z.getFrmId() != 300170) {
+                    this.add(new Html("<b style=\"color:red;font-size:20px;\"> Uwaga!!! Nowy regulamin pracy, zapoznaj się:</b>"), v01);
+                    String fileName = getPathForRegulation(z.getFrmId());
+                    String path = "/pdf/regulations2023/" + fileName;
+                    generateRegulations(path, fileName);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }

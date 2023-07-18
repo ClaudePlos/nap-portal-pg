@@ -31,6 +31,7 @@ public class WorkersRegulationWhoGotView extends VerticalLayout {
         grid.addColumn("surname").setWidth("100px").setHeader("Imię");
         grid.addColumn("auditDc").setWidth("100px").setHeader("Data");
         grid.addColumn("description").setWidth("200px").setHeader("Opis");
+        grid.addColumn("event").setWidth("200px").setHeader("Zdarzenie");
 
         add(grid);
 

@@ -25,8 +25,11 @@ import pl.kskowronski.data.entity.log.LogPit11;
 import pl.kskowronski.data.service.UserService;
 import pl.kskowronski.data.service.admin.NppAdvertisementService;
 import pl.kskowronski.data.service.egeria.ek.AbsenceLimitService;
+import pl.kskowronski.data.service.egeria.ek.ZatrudnienieService;
 import pl.kskowronski.data.service.log.LogPit11Service;
+import pl.kskowronski.data.service.log.LogService;
 import pl.kskowronski.views.MainLayout;
+import pl.kskowronski.views.regulations.RegulationsView;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -54,7 +57,7 @@ public class MainPageView extends VerticalLayout {
     private Row nestedRow = new Row();
 
     @Autowired
-    public MainPageView(UserService userService, NppAdvertisementService nppAdvertisementService, LogPit11Service logPit11Service, AbsenceLimitService absenceLimitService) {
+    public MainPageView(UserService userService, NppAdvertisementService nppAdvertisementService, LogPit11Service logPit11Service, AbsenceLimitService absenceLimitService, LogService logService, ZatrudnienieService zatrudnienieService) {
         this.logPit11Service = logPit11Service;
         this.absenceLimitService = absenceLimitService;
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -68,8 +71,10 @@ public class MainPageView extends VerticalLayout {
         v01.add(new Label("To jest strona przeznaczona dla Ciebie z dostępem do Twoich danych kadrowych."));
         v01.add(new Label(""), new Html("<b>Ogłoszenia:</b>"));
 
+        RegulationsView reg = new RegulationsView(logService, userService, zatrudnienieService);
+        v01.add(reg);
 
-
+        v01.add(new Label(""),new Label(""),new Label(""));
 
         adverts.stream().forEach( item -> {
             v01.add(new Label(item.getText()), new Html("<BR>"));
