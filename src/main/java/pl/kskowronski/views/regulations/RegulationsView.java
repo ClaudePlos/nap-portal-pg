@@ -2,6 +2,7 @@ package pl.kskowronski.views.regulations;
 
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.html.Anchor;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -12,6 +13,7 @@ import pl.kskowronski.data.entity.admin.User;
 import pl.kskowronski.data.entity.log.Log;
 import pl.kskowronski.data.entity.log.LogEvent;
 import pl.kskowronski.data.service.UserService;
+import pl.kskowronski.data.service.egeria.ek.ZatrudnienieService;
 import pl.kskowronski.data.service.log.LogService;
 import pl.kskowronski.views.MainLayout;
 
@@ -19,6 +21,9 @@ import javax.annotation.security.RolesAllowed;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Optional;
 
@@ -30,48 +35,75 @@ public class RegulationsView extends VerticalLayout {
     private VerticalLayout v01 = new VerticalLayout();
 
     private LogService logService;
-    private UserService userService;
     private Optional<User> worker;
 
-    public RegulationsView(LogService logService, UserService userService) {
+    DateTimeFormatter formYYYYMM = DateTimeFormatter.ofPattern("yyyy-MM");
+
+    public RegulationsView(LogService logService, UserService userService, ZatrudnienieService zatrudnienieService) {
         this.logService = logService;
-        this.userService = userService;
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         worker = userService.findByUsername(userDetails.getUsername());
-        this.add(v01);
-
-        try {
-            generateRegulations();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (worker.isPresent()) {
+            try {
+                worker.get().setZatrudnienia(zatrudnienieService.getActualContractForWorker(worker.get().getPrcId(), LocalDate.now().format(formYYYYMM)).get());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
+        this.add(new Label("Regulamin pracy:"), v01);
+
+        worker.get().getZatrudnienia().stream().forEach( z -> {
+            try {
+                String fileName = getPathForRegulation(z.getFrmId());
+                String path = "/pdf/regulations2023/" + fileName;
+                generateRegulations(path, fileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
     }
 
-    private void generateRegulations() throws IOException {
-        InputStream employeeReportStream = getClass().getResourceAsStream("/pdf/oswiadczenie_ppk.pdf");
+    private String getPathForRegulation( Integer frmId ) {
+        String fileName = "";
+        if ( frmId == 300201 ) {
+            fileName = "regulamin N. Service.pdf";
+        } else if ( frmId == 300000 ) {
+            fileName = "regulamin IZAN+.pdf";
+        } else if ( frmId == 300313 ) {
+            fileName = "regulamin JOL-MARK.pdf";
+        } else {
+            fileName = "Brak dostepu.pdf";
+        }
+        return fileName;
+    }
+
+    private void generateRegulations(String path, String fileName) throws IOException {
+
+        InputStream employeeReportStream = getClass().getResourceAsStream(path);
         byte[] pdfBytes = employeeReportStream.readAllBytes();
 
-        StreamResource res = new StreamResource("oswiadczenie_ppk.pdf", () -> new ByteArrayInputStream(pdfBytes));
-        String reportName = "oswiadczenie ppk";
-        Anchor a = new Anchor(res, " Regulamin pracowinczy");
+        StreamResource res = new StreamResource(fileName, () -> new ByteArrayInputStream(pdfBytes));
+        String reportName = fileName;
+        Anchor a = new Anchor(res, fileName);
 
         a.setId(reportName);
         a.setTarget( "_blank" );
         a.getElement().addEventListener("click", event -> {
             new Thread(() -> { // asynchronous
-                saveLog();
+                saveLog(fileName);
             }).start();
         });
 
         v01.add(a, new Html("<p style='font-size: 12px; margin-top: -0.7em;'> *Pobranie dokumentu oznacza zapoznanie się z treścią.</p>") );
     }
 
-    private void saveLog(){
+    private void saveLog( String desc){
         Log log = new Log();
         log.setPrcId(worker.get().getPrcId());
         log.setEvent(LogEvent.DOWNLOAD_THE_REGULATION_2023.toString());
         log.setAuditDc(new Date());
-        log.setDescription("Pobranie regualminu pracowniczego 2023");
+        log.setDescription("Pobranie " + desc);
         logService.save(log);
     }
 
