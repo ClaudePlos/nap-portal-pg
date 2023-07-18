@@ -25,15 +25,23 @@ public class Log {
     @Column(name = "DESCRIPTION")
     private String description;
 
+    @Column(name = "SK")
+    private String sk;
+
+    @Column(name = "COMPANY")
+    private String company;
+
     public Log() {
     }
 
-    public Log(Integer id, Integer prcId, String event, Date auditDc, String description) {
+    public Log(Integer id, Integer prcId, String event, Date auditDc, String description, String sk, String company) {
         this.id = id;
         this.prcId = prcId;
         this.event = event;
         this.auditDc = auditDc;
         this.description = description;
+        this.sk = sk;
+        this.company = company;
     }
 
     public Integer getId() {
@@ -74,5 +82,21 @@ public class Log {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getSk() {
+        return sk;
+    }
+
+    public void setSk(String sk) {
+        this.sk = sk;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 }

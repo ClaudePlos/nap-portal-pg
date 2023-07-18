@@ -13,7 +13,9 @@ import pl.kskowronski.data.entity.admin.User;
 import pl.kskowronski.data.entity.log.Log;
 import pl.kskowronski.data.entity.log.LogEvent;
 import pl.kskowronski.data.service.UserService;
+import pl.kskowronski.data.service.egeria.css.SKService;
 import pl.kskowronski.data.service.egeria.ek.ZatrudnienieService;
+import pl.kskowronski.data.service.egeria.global.EatFirmaService;
 import pl.kskowronski.data.service.log.LogService;
 import pl.kskowronski.views.MainLayout;
 
@@ -39,7 +41,7 @@ public class RegulationsView extends VerticalLayout {
 
     DateTimeFormatter formYYYYMM = DateTimeFormatter.ofPattern("yyyy-MM");
 
-    public RegulationsView(LogService logService, UserService userService, ZatrudnienieService zatrudnienieService) {
+    public RegulationsView(LogService logService, UserService userService, ZatrudnienieService zatrudnienieService, SKService skService, EatFirmaService eatFirmaService) {
         this.logService = logService;
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         worker = userService.findByUsername(userDetails.getUsername());
@@ -58,7 +60,7 @@ public class RegulationsView extends VerticalLayout {
                     this.add(new Html("<b style=\"color:red;font-size:20px;\"> Uwaga!!! Nowy regulamin pracy, zapoznaj się:</b>"), v01);
                     String fileName = getPathForRegulation(z.getFrmId());
                     String path = "/pdf/regulations2023/" + fileName;
-                    generateRegulations(path, fileName);
+                    generateRegulations(path, fileName, skService.findSkKodForSkId(z.getZatSkId()), eatFirmaService.findById(z.getFrmId()).get().getFrmNazwa() );
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -96,7 +98,7 @@ public class RegulationsView extends VerticalLayout {
         return fileName;
     }
 
-    private void generateRegulations(String path, String fileName) throws IOException {
+    private void generateRegulations(String path, String fileName, String sk, String company) throws IOException {
 
         InputStream employeeReportStream = getClass().getResourceAsStream(path);
         byte[] pdfBytes = employeeReportStream.readAllBytes();
@@ -109,19 +111,21 @@ public class RegulationsView extends VerticalLayout {
         a.setTarget( "_blank" );
         a.getElement().addEventListener("click", event -> {
             new Thread(() -> { // asynchronous
-                saveLog(fileName);
+                saveLog(fileName, sk, company);
             }).start();
         });
 
         v01.add(a, new Html("<p style='font-size: 12px; margin-top: -0.7em;'> *Pobranie dokumentu oznacza zapoznanie się z treścią.</p>") );
     }
 
-    private void saveLog( String desc){
+    private void saveLog( String desc, String sk, String company){
         Log log = new Log();
         log.setPrcId(worker.get().getPrcId());
         log.setEvent(LogEvent.DOWNLOAD_THE_REGULATION_2023.toString());
         log.setAuditDc(new Date());
         log.setDescription("Pobranie " + desc);
+        log.setSk(sk);
+        log.setCompany(company);
         logService.save(log);
     }
 

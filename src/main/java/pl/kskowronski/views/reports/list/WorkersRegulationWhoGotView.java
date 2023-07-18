@@ -26,6 +26,8 @@ public class WorkersRegulationWhoGotView extends VerticalLayout {
         this.grid = new Grid<>(LogDTO.class);
         grid.setClassName("gridLog");
         grid.setColumns();
+        grid.addColumn("company").setWidth("30px").setHeader("Firma");
+        grid.addColumn("sk").setWidth("30px").setHeader("Sk");
         grid.addColumn("prcNumber").setWidth("30px").setHeader("Numer");
         grid.addColumn("name").setWidth("100px").setHeader("Nazwisko");
         grid.addColumn("surname").setWidth("100px").setHeader("Imię");
@@ -40,9 +42,11 @@ public class WorkersRegulationWhoGotView extends VerticalLayout {
             LogDTO l = new LogDTO();
             l.setId( log.getId() );
             l.setAuditDc( log.getAuditDc() );
-            l.setDescription( log.getDescription() );
-            l.setPrcId( log.getPrcId());
-            l.setEvent( log.getEvent());
+            l.setDescription(log.getDescription() );
+            l.setPrcId(log.getPrcId());
+            l.setEvent(log.getEvent());
+            l.setSk(log.getSk());
+            l.setCompany(log.getCompany());
 
             Optional<User> u = userService.findById(log.getPrcId());
             if (u.isPresent()) {
@@ -68,6 +72,8 @@ public class WorkersRegulationWhoGotView extends VerticalLayout {
         private String event;
         private Date auditDc;
         private String description;
+        private String sk;
+        private String company;
 
         public LogDTO() {
         }
@@ -134,6 +140,22 @@ public class WorkersRegulationWhoGotView extends VerticalLayout {
 
         public void setSurname(String surname) {
             this.surname = surname;
+        }
+
+        public String getSk() {
+            return sk;
+        }
+
+        public void setSk(String sk) {
+            this.sk = sk;
+        }
+
+        public String getCompany() {
+            return company;
+        }
+
+        public void setCompany(String company) {
+            this.company = company;
         }
     }
 }

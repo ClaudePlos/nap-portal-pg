@@ -75,8 +75,11 @@ public class SKService extends CrudService<SK, Integer> {
         return list;
     }
     public SK findBySkKod( String skKod){
-       // return list.stream().filter( item -> item.getSkKod().equals(skKod)).collect(Collectors.toList()).get(0);
         return repo.findBySkKod(skKod);
+    }
+
+    public String findSkKodForSkId( Integer skId){
+        return repo.getById(skId).getSkKod();
     }
 
     public List<SK> findSkForSupervisor(Integer prcId){

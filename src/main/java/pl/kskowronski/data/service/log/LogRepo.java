@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface LogRepo extends JpaRepository<Log, Integer> {
 
-    @Query("select new pl.kskowronski.data.entity.log.Log(max(l.id), l.prcId, l.event, max(l.auditDc), l.description) from Log l group by l.prcId, l.event, l.description")
+    @Query("select new pl.kskowronski.data.entity.log.Log(max(l.id), l.prcId, l.event, max(l.auditDc), l.description, l.sk, l.company) from Log l group by l.prcId, l.event, l.description, l.sk, l.company")
     List<Log> findAllGroupByPrcId();
 
 }
