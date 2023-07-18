@@ -72,7 +72,22 @@ public class RegulationsView extends VerticalLayout {
             fileName = "regulamin IZAN+.pdf";
         } else if ( frmId == 300313 ) {
             fileName = "regulamin JOL-MARK.pdf";
-        } else {
+        } else if ( frmId == 300322 ) {
+            fileName = "regulamin N. Catering.pdf";
+        } else if ( frmId == 300203 ) {
+            fileName = "regulamin N. Hospital.pdf";
+        } else if ( frmId == 300304 ) {
+            fileName = "regulamin N. Inwestycje.pdf";
+        } else if ( frmId == 300305 ) {
+            fileName = "regulamin N. Marketing.pdf";
+        } else if ( frmId == 300315 ) {
+            fileName = "regulamin Rekeep FM.pdf";
+        } else if ( frmId == 300317 ) {
+            fileName = "regulamin Triomed.pdf";
+        }
+
+
+        else {
             fileName = "Brak dostepu.pdf";
         }
         return fileName;
