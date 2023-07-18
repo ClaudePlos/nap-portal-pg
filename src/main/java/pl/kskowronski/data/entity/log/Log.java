@@ -28,6 +28,14 @@ public class Log {
     public Log() {
     }
 
+    public Log(Integer id, Integer prcId, String event, Date auditDc, String description) {
+        this.id = id;
+        this.prcId = prcId;
+        this.event = event;
+        this.auditDc = auditDc;
+        this.description = description;
+    }
+
     public Integer getId() {
         return id;
     }

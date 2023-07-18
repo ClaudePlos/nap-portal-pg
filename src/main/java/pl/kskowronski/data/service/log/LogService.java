@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.vaadin.artur.helpers.CrudService;
 import pl.kskowronski.data.entity.log.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,6 +23,10 @@ public class LogService extends CrudService<Log, Integer> {
     }
 
     public List<Log> findAll() { return repo.findAll(); }
+
+    public List<Log> findAllGroupByPrcId() {
+        return repo.findAllGroupByPrcId();
+    }
 
     public void save(Log log){ repo.save(log);}
 }

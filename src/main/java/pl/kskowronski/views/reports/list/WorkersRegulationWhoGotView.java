@@ -34,7 +34,7 @@ public class WorkersRegulationWhoGotView extends VerticalLayout {
 
         add(grid);
 
-        List<Log> logs = logService.findAll();
+        List<Log> logs = logService.findAllGroupByPrcId();
         logs.stream().forEach( log -> {
             LogDTO l = new LogDTO();
             l.setId( log.getId() );
