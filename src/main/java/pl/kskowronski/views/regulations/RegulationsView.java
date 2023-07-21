@@ -89,9 +89,9 @@ public class RegulationsView extends VerticalLayout {
             fileName = "regulamin Rekeep FM.pdf";
         } else if ( frmId == 300317 ) {
             fileName = "regulamin Triomed.pdf";
+        } else if ( frmId == 300319 ) {
+            fileName = "CATERMED_REGULAMIN_PRACY.pdf";
         }
-
-
         else {
             fileName = "Brak dostepu.pdf";
         }

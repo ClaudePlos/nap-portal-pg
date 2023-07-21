@@ -21,13 +21,11 @@ public class WorkersRegulationWhoGotView extends VerticalLayout {
     private List<LogDTO> listLog = new ArrayList<>();
 
     public WorkersRegulationWhoGotView(LogService logService, UserService userService) {
-        setHeight("85%");
-
         this.grid = new Grid<>(LogDTO.class);
         grid.setClassName("gridLog");
         grid.setColumns();
-        grid.addColumn("company").setWidth("30px").setHeader("Firma");
-        grid.addColumn("sk").setWidth("30px").setHeader("Sk");
+        grid.addColumn("company").setWidth("100px").setHeader("Firma");
+        grid.addColumn("sk").setWidth("100px").setHeader("Sk");
         grid.addColumn("prcNumber").setWidth("30px").setHeader("Numer");
         grid.addColumn("name").setWidth("100px").setHeader("Nazwisko");
         grid.addColumn("surname").setWidth("100px").setHeader("Imię");
