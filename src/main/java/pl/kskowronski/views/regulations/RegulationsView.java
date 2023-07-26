@@ -56,12 +56,10 @@ public class RegulationsView extends VerticalLayout {
 
         worker.get().getZatrudnienia().stream().forEach( z -> {
             try {
-                if (z.getFrmId() != 300319 || z.getFrmId() != 300170) {
                     this.add(new Html("<b style=\"color:red;font-size:20px;\"> Uwaga!!! Nowy regulamin pracy, zapoznaj się:</b>"), v01);
                     String fileName = getPathForRegulation(z.getFrmId());
                     String path = "/pdf/regulations2023/" + fileName;
                     generateRegulations(path, fileName, skService.findSkKodForSkId(z.getZatSkId()), eatFirmaService.findById(z.getFrmId()).get().getFrmNazwa() );
-                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -91,6 +89,8 @@ public class RegulationsView extends VerticalLayout {
             fileName = "regulamin Triomed.pdf";
         } else if ( frmId == 300319 ) {
             fileName = "CATERMED_REGULAMIN_PRACY.pdf";
+        } else if ( frmId == 300170 ) {
+            fileName = "Regulamin Rekeep Polska.pdf";
         }
         else {
             fileName = "Brak dostepu.pdf";
