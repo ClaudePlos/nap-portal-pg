@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class AbsenceLimitService {
@@ -25,7 +26,7 @@ public class AbsenceLimitService {
 
     MapperDate mapperDate = new MapperDate();
 
-    public Optional<List<AbsenceLimitDTO>> findAllAbsenceLimitForPrcIdAndYear(Integer prcId, String year, String codeHoliday) throws Exception {
+    public Optional<List<AbsenceLimitDTO>> findAllAbsenceLimitForPrcIdAndYear(Integer prcId, String year, String codeHoliday, String prcDgKodEk) throws Exception {
         Optional<List<AbsenceLimitDTO>> listAbLimit = Optional.of(new ArrayList<>());
 
         //consolidationService.setConsolidateCompany();
@@ -42,6 +43,13 @@ public class AbsenceLimitService {
         Optional<List<Object[]>> results = Optional.ofNullable(em.createNativeQuery(sql).getResultList());
         if (results.isPresent())
             results.get().forEach( item -> listAbLimit.get().add(mapperAbsenceLimit((Object[]) item)));
+
+        if ( codeHoliday.contains("L_PZO") ) {
+            if (!prcDgKodEk.equals("EK04")) {
+               return  Optional.of(listAbLimit.get().stream().filter( x -> !x.getKodUrlopu().equals("L_PZO")).collect(Collectors.toList()));
+            }
+        }
+
         return listAbLimit;
     }
 

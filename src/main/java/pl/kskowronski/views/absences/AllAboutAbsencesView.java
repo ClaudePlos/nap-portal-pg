@@ -52,7 +52,7 @@ public class AllAboutAbsencesView extends VerticalLayout {
         Optional<List<AbsenceLimitDTO>> listAbsencesLimits
                 = absenceLimitService.findAllAbsenceLimitForPrcIdAndYear(worker.getPrcId()
                 , mapperDate.getCurrentlyYear()
-                , "'A_UR1','UR91','UR31','UOG','UR3','L_PZO'"); // ,'A_UR11' na zadanie
+                , "'A_UR1','UR91','UR31','UOG','UR3','L_PZO'", worker.getPrcDgKodEk()); // ,'A_UR11' na zadanie
         if (listAbsencesLimits.get().size() == 0){
             Notification.show("Brak limitów urlopowych w roku: " + mapperDate.getCurrentlyYear(), 3000, Notification.Position.MIDDLE);
         }

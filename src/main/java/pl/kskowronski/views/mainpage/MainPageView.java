@@ -159,7 +159,7 @@ public class MainPageView extends VerticalLayout {
         Optional<List<AbsenceLimitDTO>> listAbsencesLimits
                 = absenceLimitService.findAllAbsenceLimitForPrcIdAndYear(worker.get().getPrcId()
                 , LocalDate.now().getYear() + ""
-                , "'A_UR1'");
+                , "'A_UR1'", null);
 
         if (listAbsencesLimits.get().size() > 0 ) {
             Span limitFreeDays = new Span(new Html("<center><p>" + listAbsencesLimits.get().get(0).getPozostaloUrlopu() + " dni <br>" +

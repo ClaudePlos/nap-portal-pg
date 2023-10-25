@@ -109,7 +109,7 @@ public class DocumentsView extends VerticalLayout {
 
         Optional<List< AbsenceLimitDTO >> listAbsencesLimits = absenceLimitService.findAllAbsenceLimitForPrcIdAndYear(zat.getZatPrcId()
                 , zat.getZatDataZmiany().toString().substring(0,4) + ""
-                , "'A_UR1'");
+                , "'A_UR1'", null);
 
         String przerwaPracaNP1 = "";
         String dodUrlopNP1 = "";
@@ -118,7 +118,7 @@ public class DocumentsView extends VerticalLayout {
 
             Optional<List< AbsenceLimitDTO >> listAbsencesLimitsAdding = absenceLimitService.findAllAbsenceLimitForPrcIdAndYear(zat.getZatPrcId()
                     , zat.getZatDataZmiany().toString().substring(0,4) + ""
-                    , "'UR91'");
+                    , "'UR91'", null);
 
             przerwaPracaNP1 = "  - dodatkowa przerwa z tytułu posiadania orzeczenia o stopniu niepełnosprawności: 15 min ";
             dodUrlopNP1 = "Wymiar przysługującego Ci urlopu dodatkowego: " + listAbsencesLimitsAdding.get().get(0).getLdWymiar();
