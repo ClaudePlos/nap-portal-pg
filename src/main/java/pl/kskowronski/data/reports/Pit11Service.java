@@ -105,6 +105,8 @@ public class Pit11Service {
             return "/pit11/v27/pit11_27.jrxml";
         if (year.equals("2022"))
             return "/pit11/v29/PIT11_29.jrxml";
+        if (year.equals("2023"))
+            return "/pit11/v29/PIT11_29.jrxml";
         return "-";
 
     }
