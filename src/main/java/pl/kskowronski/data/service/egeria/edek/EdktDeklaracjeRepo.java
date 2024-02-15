@@ -13,6 +13,7 @@ public interface EdktDeklaracjeRepo extends JpaRepository<EdktDeklaracje, Intege
 
     Optional<EdktDeklaracje> findByDklId(Integer dklId);
 
+
     @Query("select e from EdktDeklaracje e where e.dklPrcId = :prcId and e.dklDataOd>= :dateFrom and e.dklDataDo <= :dateTo " +
             "and e.dklStatus in (50) " +
             "order by e.dklDataOd desc")
