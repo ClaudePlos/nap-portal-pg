@@ -41,16 +41,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             loggedUser.get().setPassword(getMd5(loggedUser.get().getPassword()));
 
             // opcja na logowanie przez i.naprzod
-//            if (loggedUser.get().getPrcDgKodEk().equals("EK04")) {// check, maybe he is in EK04
-//                loggedUser.get().setPassword("");
-//            }
+            if (loggedUser.get().getPrcDgKodEk().equals("EK04")) {// check, maybe he is in EK04
+                loggedUser.get().setPassword("");
+            }
         } catch (Exception ex){
-            throw new UsernameNotFoundException("Could not find user with this username and pass");
-//            Optional<NapUser> napUser = napUserRepo.findByUsername(username);
-//            if (napUser.isPresent()) {
-//                loggedUser = userRepo.findById(napUser.get().getPrcId());
-//                loggedUser.get().setPassword(napUser.get().getPassword());
-//            }
+            Optional<NapUser> napUser = napUserRepo.findByUsername(username);
+            if (napUser.isPresent()) {
+                loggedUser = userRepo.findById(napUser.get().getPrcId());
+                loggedUser.get().setPassword(napUser.get().getPassword());
+            }
         }
 
         if (loggedUser.get() == null) {
